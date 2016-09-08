@@ -20,7 +20,11 @@
     "reactjs",
     "redux notifications"
   ],
-  "author": "Deeptesh Chagan",
+  "author": "Deeptesh Chagan <deepteshchagan@gmail.com> (http://github.com/deep-c)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/deep-c/react-redux-notify.git"
+  },
   "license": "MIT",
   "devDependencies": {
     "babel": "^6.5.2",
@@ -52,5 +56,12 @@
     "react": ">= 15.0.0 < 16.0.0",
     "react-redux": ">= 4.0.0 < 6.0.0",
     "redux": ">= 3.0.0 < 4.0.0"
-  }  
+  },
+  "bugs": {
+    "url" : "https://github.com/deep-c/react-redux-notify/issues"
+  },
+  "files": [
+    "lib",
+    "dist"
+  ]        
 }

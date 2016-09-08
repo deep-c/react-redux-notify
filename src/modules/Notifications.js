@@ -9,7 +9,7 @@ export const REMOVE_NOTIFICATION = 'REMOVE_NOTIFICATION';
 export const REMOVE_ALL_NOTIFICATIONS = 'REMOVE_ALL_NOTIFICATIONS';
 
 // Action Creators
-export function addNotification({ message, type, duration, canDismiss, acceptBtn, denyBtn }){
+export function createNotification({ message, type, duration, canDismiss, acceptBtn, denyBtn }){
   var id = Date.now();
   var duration = (duration>=0) ? duration: NOTIFICATION_DURATION;
   var canDismiss = (typeof canDismiss !== 'undefined') ? canDismiss: true;
