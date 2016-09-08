@@ -1,0 +1,212 @@
+$text-color-info: #5293d8;
+$text-color-success: #1fe977;
+$text-color-warning: #f78a46;
+$text-color-error: #c00;
+$background-color-info: #0098ff;
+$background-color-success: #17ca65;
+$background-color-warning: #ff4800;
+$background-color-error: #c00;
+$width: 300px;
+$max-height: 150px;
+
+@mixin notification($txt, $bg) {
+  float: right;
+  clear: right;
+  position: relative;
+  word-wrap: break-word;
+  pointer-events: auto;
+  width: $width;
+  border-radius: 5px;
+  background: lighten($bg, 25%);
+  padding-left: 30px;
+  overflow: hidden;
+  z-index: 20;
+  margin-bottom: 2px;
+  max-height: $max-height;
+
+  .icon {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    padding-top: 10px;
+    box-sizing: border-box;
+    width: 30px;
+    text-align: center;
+    background: $bg;
+    color: lighten($txt, 36%);
+  }
+
+  .content {
+    border-radius: 0 2px 2px 0;
+    color: darken($txt, 40%);
+    background-color: lighten($bg, 25%);
+  }
+
+  .item {
+    padding: 10px;
+    font-weight: 900;
+    font-family: 'Lato', sans-serif;
+    border-top: 1px solid hsla(0,0%,0%,.1);
+    -webkit-font-smoothing: antialiased;
+    &--message {
+      @extend .item;
+      font-size: 0.9rem;
+      max-height: $max-height;
+      overflow-y: auto;
+      border-top: none;
+      p:last-child {
+        margin-bottom: 0;
+      }
+    }
+    &--btnBar {
+      @extend .item;
+      margin-top: 10px;
+      padding: 0;
+    }
+  }
+
+  .actionBtn {
+    box-sizing: border-box;
+    background: none;
+    font-size: 0.9rem;
+    font-family: 'Lato', sans-serif;
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+    color: fade-out(darken($txt, 40%), 0.4);
+    text-shadow: none;
+    cursor: pointer;
+    display: inline-block;
+    width: 50%;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+
+    &:hover {
+      background: none;
+      color: darken($txt, 40%);
+    }
+
+    &:last-child {
+      border-right: none;
+    }
+
+    i {
+      margin-right: 7px;
+    }
+  }
+
+  .close-all {
+    position: absolute;
+    top: 7px;
+    right: 38px;
+    background: none;
+    font-size: 0.9rem;
+    font-family: 'Lato', sans-serif;
+    border: 1px solid fade-out(darken($txt, 40%), 0.7);
+    color: fade-out(darken($txt, 40%), 0.4);
+    text-shadow: none;
+    padding: 1px 5px;
+    border-radius: 3px;
+    cursor: pointer;
+
+    &:hover {
+      background: none;
+      border-color: fade-out(darken($txt, 40%), 0.2);
+      color: darken($txt, 40%);
+    }
+  }
+
+  .close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 38px;
+    height: 38px;
+    line-height: 38px;
+    text-align: center;
+    font-size: 16px;
+    text-shadow: none;
+    color: black;
+    opacity: .4;
+    cursor: pointer;
+    &:hover, &:focus {
+      opacity: 1;
+    }
+    &:active {
+      opacity: .2;
+    }
+    &:before {
+      margin: 0;
+    }
+  }
+
+  &.no-close .item--message {
+    padding-right: 10px
+  }
+
+  &.has-close-all--noDismiss .close-all {
+    @extend .close-all;
+    right: 8px;
+  }
+
+  &.has-close-all--noDismiss .item--message {
+    padding-right: 10px + 71px;
+  }
+
+  &.has-close-all .item--message {
+    padding-right: 10px * 2 + 95px; // space for icon and button
+  }
+
+  &.has-close .item--message {
+    padding-right: 10px + 24px; // space for icon
+  }
+}
+
+.notification--info {
+  @include notification($text-color-info, $background-color-info);
+  .icon:before {
+    content: '\f129';
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+    vertical-align: top;
+  }
+}
+
+.notification--success {
+  @include notification($text-color-success, $background-color-success);
+  .icon:before {
+    content: '\f00c';
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+    vertical-align: top;
+  }
+}
+
+.notification--warning {
+  @include notification($text-color-warning, $background-color-warning);
+  .icon:before {
+    content: '\f071';
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+    vertical-align: top;
+  }
+}
+
+.notification--error {
+  @include notification($text-color-error, $background-color-error);
+  .icon:before {
+    content: '\f06d';
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+    vertical-align: top;
+  }
+}

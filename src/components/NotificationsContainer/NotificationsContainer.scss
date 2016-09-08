@@ -1,0 +1,52 @@
+$width: 300px;
+$max-height: 150px;
+
+.container {
+  display: block;
+  z-index: 20;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  padding: 10px;
+  font-size: 1.2em;
+  overflow-x: hidden;
+  overflow-y: auto;
+  pointer-events: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.enter {
+  animation: notification-show .16s cubic-bezier(0.175, 0.885, 0.32, 1.27499);
+}
+
+.leave {
+  animation: notification-hide   .24s      cubic-bezier(0.33859, -0.42, 1, -0.22),
+             notification-shrink .24s .24s cubic-bezier(0.5, 0, 0, 1);
+}
+
+@-webkit-keyframes notification-show {
+    0% { opacity: 0; transform: perspective($width) translate(0, -30px) rotateX(90deg); }
+  100% { opacity: 1; transform: perspective($width) translate(0, 0) rotateX( 0deg); }
+}
+
+@-webkit-keyframes notification-hide {
+    0% { opacity: 1; transform: scale( 1); }
+  100% { opacity: 0; transform: scale(.8); }
+}
+
+@-webkit-keyframes notification-shrink {
+    0% {  opacity: 0; max-height: $max-height; transform: scale(.8); }
+  100% {  opacity: 0; max-height: 0;           transform: scale(.8); }
+}
+
+@-webkit-keyframes notification-shake {
+    0% { transform: translateX(   0); }
+    2% { transform: translateX(-4px); }
+    4% { transform: translateX( 8px); }
+    6% { transform: translateX(-4px); }
+    8% { transform: translateX(   0); }
+  100% { transform: translateX(   0); }
+}
