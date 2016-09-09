@@ -6,9 +6,9 @@
   "scripts": {
     "build": "npm run build:lib && npm run build:umd && npm run build:umd:min",
     "build:umd": "webpack src/index.js dist/ReactReduxNotify.js",
-    "build:umd:min": "cross-env NODE_ENV=production webpack src/index.js dist/ReactReduxNotify.min.js",    
+    "build:umd:min": "cross-env NODE_ENV=production webpack src/index.js dist/ReactReduxNotify.min.js",
     "build:lib": "babel src --out-dir lib",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "clean": "rimraf dist lib",
     "prepublish": "npm run clean && npm run build"
   },
@@ -29,6 +29,7 @@
   "devDependencies": {
     "babel": "^6.5.2",
     "babel-cli": "^6.14.0",
+    "babel-jest": "^15.0.0",
     "babel-loader": "^6.2.5",
     "babel-plugin-transform-class-properties": "^6.11.5",
     "babel-plugin-transform-react-remove-prop-types": "^0.2.9",
@@ -38,15 +39,19 @@
     "classnames": "^2.2.5",
     "css-loader": "^0.25.0",
     "extract-text-webpack-plugin": "^1.0.1",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^15.1.1",
     "node-sass": "^3.9.3",
     "react": "^15.3.1",
     "react-addons-css-transition-group": "^15.3.1",
     "react-css-modules": "^3.7.10",
     "react-redux": "^4.4.5",
+    "react-test-renderer": "^15.3.1",
     "redux": "^3.6.0",
     "rimraf": "^2.5.4",
     "sass-loader": "^4.0.1",
     "style-loader": "^0.13.1",
+    "timekeeper": "^0.1.1",
     "webpack": "^1.13.2"
   },
   "dependencies": {
@@ -58,10 +63,25 @@
     "redux": ">= 3.0.0 < 4.0.0"
   },
   "bugs": {
-    "url" : "https://github.com/deep-c/react-redux-notify/issues"
+    "url": "https://github.com/deep-c/react-redux-notify/issues"
   },
   "files": [
     "lib",
     "dist"
-  ]        
+  ],
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "jsx"
+    ],
+    "moduleDirectories": [
+      "src",
+      "node_modules"
+    ],
+    "moduleNameMapper": {
+      "^.+\\.(css|scss)$": "<rootDir>/scripts/test/styleMock.js"
+    },
+    "coverageDirectory": "coverage",
+    "collectCoverage": true
+  }
 }

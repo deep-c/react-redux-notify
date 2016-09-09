@@ -3,7 +3,7 @@ export const NOTIFICATION_TYPE_SUCCESS = 'SUCCESS'
 export const NOTIFICATION_TYPE_WARNING = 'WARNING'
 export const NOTIFICATION_TYPE_INFO = 'INFO'
 export const NOTIFICATION_TYPE_ERROR = 'ERROR'
-export const NOTIFICATION_DURATION = 2000;
+export const NOTIFICATION_DEFAULT_DURATION = 2000;
 export const ADD_NOTIFICATION = 'ADD_NOTIFICATION';
 export const REMOVE_NOTIFICATION = 'REMOVE_NOTIFICATION';
 export const REMOVE_ALL_NOTIFICATIONS = 'REMOVE_ALL_NOTIFICATIONS';
@@ -11,8 +11,8 @@ export const REMOVE_ALL_NOTIFICATIONS = 'REMOVE_ALL_NOTIFICATIONS';
 // Action Creators
 export function createNotification({ message, type, duration, canDismiss, acceptBtn, denyBtn }){
   var id = Date.now();
-  var duration = (duration>=0) ? duration: NOTIFICATION_DURATION;
-  var canDismiss = (typeof canDismiss !== 'undefined') ? canDismiss: true;
+  var duration = (duration >= 0) ? parseInt(duration, 10): NOTIFICATION_DEFAULT_DURATION;
+  var canDismiss = (canDismiss === false) ? canDismiss: true;
   var acceptBtn = (acceptBtn) ? acceptBtn : null;
   var denyBtn = (denyBtn) ? denyBtn : null;
   return {
