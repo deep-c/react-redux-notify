@@ -27,22 +27,22 @@ $max-height: 150px;
              notification-shrink .24s .24s cubic-bezier(0.5, 0, 0, 1);
 }
 
-@-webkit-keyframes notification-show {
+@keyframes notification-show {
     0% { opacity: 0; transform: perspective($width) translate(0, -30px) rotateX(90deg); }
   100% { opacity: 1; transform: perspective($width) translate(0, 0) rotateX( 0deg); }
 }
 
-@-webkit-keyframes notification-hide {
+@keyframes notification-hide {
     0% { opacity: 1; transform: scale( 1); }
   100% { opacity: 0; transform: scale(.8); }
 }
 
-@-webkit-keyframes notification-shrink {
+@keyframes notification-shrink {
     0% {  opacity: 0; max-height: $max-height; transform: scale(.8); }
   100% {  opacity: 0; max-height: 0;           transform: scale(.8); }
 }
 
-@-webkit-keyframes notification-shake {
+@keyframes notification-shake {
     0% { transform: translateX(   0); }
     2% { transform: translateX(-4px); }
     4% { transform: translateX( 8px); }
