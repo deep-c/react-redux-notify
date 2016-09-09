@@ -10,6 +10,13 @@ import Notification from 'components/Notification/Notification'
 
 export class Notifications extends React.Component {
 
+  static propTypes = {
+    notifications: React.PropTypes.array.isRequired,
+    removeNotification: React.PropTypes.func.isRequired,
+    removeAllNotifications: React.PropTypes.func.isRequired,
+    styles: React.PropTypes.object.isRequired,    
+  }
+
   handleOnDismiss(notification){
     let { removeNotification } = this.props;
     removeNotification(notification.id);

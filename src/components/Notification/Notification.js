@@ -11,10 +11,11 @@ const cx = classNames.bind(styles);
 export class Notification extends React.Component {
 
   static propTypes = {
-    notification: React.PropTypes.object,
-    isFirst: React.PropTypes.bool,
-    onDismiss: React.PropTypes.func,
-    onDismissAll: React.PropTypes.func,
+    notification: React.PropTypes.object.isRequired,
+    isFirst: React.PropTypes.bool.isRequired,
+    onDismiss: React.PropTypes.func.isRequired,
+    onDismissAll: React.PropTypes.func.isRequired,
+    styles: React.PropTypes.object.isRequired,
   }
 
   componentDidMount() {
@@ -45,8 +46,16 @@ export class Notification extends React.Component {
             <div styleName="item--message">{message}</div>
             { (!canDismiss) ?
                 <div styleName="item--btnBar">
-                  <div styleName="actionBtn" onClick={(e) => {acceptBtn.handler(); onDismiss(notification)}}><i className="fa fa-thumbs-o-up" />{acceptBtn.title}</div>
-                  <div styleName="actionBtn" onClick={(e) => {denyBtn.handler(); onDismiss(notification)}}><i className="fa fa-thumbs-o-down" />{denyBtn.title}</div>
+                  <div styleName="actionBtn" 
+                    onClick={(e) => {acceptBtn.handler(); onDismiss(notification)}}>
+                    <i className="fa fa-thumbs-o-up" />
+                    {acceptBtn.title}
+                  </div>
+                  <div styleName="actionBtn" 
+                    onClick={(e) => {denyBtn.handler(); onDismiss(notification)}}>
+                    <i className="fa fa-thumbs-o-down" />
+                    {denyBtn.title}
+                  </div>
                 </div>
                 :
                 false
