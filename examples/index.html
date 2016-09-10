@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://use.fontawesome.com/13f77c8bf7.js"></script>
+    <link rel="stylesheet" href="../dist/styles.css"/>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+    <title>React Redux Notify</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="../node_modules/react/dist/react-with-addons.js"></script>
+    <script src="../node_modules/react-dom/dist/react-dom.js"></script>
+    <script src="../node_modules/redux/dist/redux.js"></script>
+    <script src="../node_modules/react-redux/dist/react-redux.js"></script>    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.35.1/es6-sham.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.js"></script>
+    <script src="../dist/ReactReduxNotify.js"></script>
+    <script type="text/babel">
+        'use strict';
+        const { createStore, combineReducers } = Redux
+        const { Provider, connect } = ReactRedux
+        const { reducer, Notifications, createNotification, removeNotification, removeAllNotifications } = ReactReduxNotify
+        const reducers = combineReducers({ notifications: reducer })
+        const store = createStore(reducers, {})
+
+        class ExampleNotifications extends React.Component {
+            constructor(props){
+                super(props);
+                this.state = {                    
+                    message: 'Hello There!',
+                    type: 'ERROR',
+                    duration: 0,
+                    canDismiss: true,
+                    acceptBtn: null,
+                    denyBtn: null
+                }
+                this.createNotification = this._createNotification.bind(this);
+                this.handleFieldChange =  this._handleFieldChange.bind(this);
+            }
+
+            _handleFieldChange(field){
+                return (e) => {
+                    if (field == 'canDismiss'){
+                        this.setState({[field]: e.target.checked});
+                    } else {
+                        this.setState({[field]: e.target.value});
+                    }                    
+                }
+            }
+
+            _createNotification(e){
+                e.preventDefault();
+                const {createNotification} = this.props;
+                createNotification(this.state);
+            }
+
+            render(){
+                return (
+                    <div style={{width: '100%', height: '100%'}}>
+                        <form className="pure-form pure-form-stacked" style={
+                            {width: '200px', height: '500px', top:'50%', left:'50%', position: 'relative', transform: 'translate3d(-50%, 50%, 0)'}}>
+
+                            <label>Message</label>
+                            <input type="text" value={this.state.message} onChange={this.handleFieldChange('message')} />
+
+                            <label>Duration</label>
+                            <input type="number" value={this.state.duration} onChange={this.handleFieldChange('duration')} />
+
+                            <label>Type</label>
+                            <input type="radio" value={'SUCCESS'} checked={this.state.type=='SUCCESS'} onChange={this.handleFieldChange('type')} /> Success <br />
+                            <input type="radio" value={'WARNING'} checked={this.state.type=='WARNING'} onChange={this.handleFieldChange('type')} /> Warning <br />
+                            <input type="radio" value={'ERROR'} checked={this.state.type=='ERROR'} onChange={this.handleFieldChange('type')} /> Error <br />
+                            <input type="radio" value={'INFO'} checked={this.state.type=='INFO'} onChange={this.handleFieldChange('type')} /> Info <br />
+
+                            <label>Can Dismiss
+                            <input type="checkbox" defaultChecked={this.state.canDismiss} onChange={this.handleFieldChange('canDismiss')} />
+                            </label>
+
+                            <div>
+                                <button onClick={(e) => this.createNotification(e)} 
+                                    style={{margin: '0 auto'}}
+                                    className="pure-button pure-button-primary">
+                                    Create Notification!
+                                </button>
+                            </div>
+                        </form>                        
+
+                        <Notifications />
+                    </div>
+                )
+            }
+        }
+
+        const mapDispatchToProps = (dispatch) => {
+            return {
+                createNotification: (config) => {
+                    dispatch(createNotification(config))
+                },
+                removeNotification: (id) => {
+                    dispatch(removeNotification(id))
+                },
+                removeAllNotifications: () => {
+                    dispatch(removeAllNotifications())
+                }
+            }
+        }
+
+        ExampleNotifications = connect(
+            null,
+            mapDispatchToProps
+        )(ExampleNotifications)
+
+
+        class App extends React.Component {
+            render(){
+                return (
+                    <Provider store={store}>
+                        <ExampleNotifications />
+                    </Provider>
+                )
+            }
+        }
+
+        ReactDOM.render(
+            <App />,
+            document.getElementById('root')
+        );
+    </script>        
+  </body>
+</html>

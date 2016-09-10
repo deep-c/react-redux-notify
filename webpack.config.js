@@ -26,12 +26,19 @@ var reactReduxExternal = {
     amd: 'react-redux'
 }
 
+var ReactCSSTransitionGroupExternal = {
+    root: ['React','addons','CSSTransitionGroup'],
+    commonjs2: 'react-addons-css-transition-group',
+    commonjs: 'react-addons-css-transition-group',
+    amd: 'react-addons-css-transition-group'    
+}
+
 var config = {
     externals: {
         'react': reactExternal,
         'redux': reduxExternal,
         'react-redux': reactReduxExternal,
-        'react/lib/ReactCSSTransitionGroup': 'React.addons.CSSTransitionGroup'
+        'react-addons-css-transition-group': ReactCSSTransitionGroupExternal
     },
     resolve: {
         root: [

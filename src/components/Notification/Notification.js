@@ -15,7 +15,7 @@ export class Notification extends React.Component {
     isFirst: React.PropTypes.bool.isRequired,
     onDismiss: React.PropTypes.func.isRequired,
     onDismissAll: React.PropTypes.func.isRequired,
-    styles: React.PropTypes.object.isRequired,
+    styles: React.PropTypes.object,
   }
 
   componentDidMount() {
@@ -44,18 +44,25 @@ export class Notification extends React.Component {
         <i styleName="icon" />
           <div styleName="content">
             <div styleName="item--message">{message}</div>
-            { (!canDismiss) ?
+            { (!canDismiss && (acceptBtn || denyBtn)) ?
                 <div styleName="item--btnBar">
+                  { (acceptBtn) ?
                   <div styleName="actionBtn" 
                     onClick={(e) => {acceptBtn.handler(); onDismiss(notification)}}>
                     <i className="fa fa-thumbs-o-up" />
                     {acceptBtn.title}
                   </div>
+                  : false
+                  }
+                  {(denyBtn) ? 
                   <div styleName="actionBtn" 
                     onClick={(e) => {denyBtn.handler(); onDismiss(notification)}}>
                     <i className="fa fa-thumbs-o-down" />
                     {denyBtn.title}
                   </div>
+                  :
+                  false
+                  }
                 </div>
                 :
                 false

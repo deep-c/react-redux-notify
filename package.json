@@ -8,7 +8,7 @@
     "build:umd": "webpack src/index.js dist/ReactReduxNotify.js",
     "build:umd:min": "cross-env NODE_ENV=production webpack src/index.js dist/ReactReduxNotify.min.js",
     "build:lib": "babel src --out-dir lib",
-    "test": "jest",
+    "test": "cross-env NODE_ENV=test jest",
     "clean": "rimraf dist lib",
     "prepublish": "npm run clean && npm run build"
   },
@@ -45,6 +45,7 @@
     "react": "^15.3.1",
     "react-addons-css-transition-group": "^15.3.1",
     "react-css-modules": "^3.7.10",
+    "react-dom": "^15.3.1",
     "react-redux": "^4.4.5",
     "react-test-renderer": "^15.3.1",
     "redux": "^3.6.0",

@@ -90,7 +90,7 @@ describe('actions', () => {
     })       
 });
 
-describe('notifications reducer', () => {
+describe('reducer', () => {
     it('should return the initial state', () => {
         expect(
             reducer(undefined, {})

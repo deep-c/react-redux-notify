@@ -14,7 +14,7 @@ export class Notifications extends React.Component {
     notifications: React.PropTypes.array.isRequired,
     removeNotification: React.PropTypes.func.isRequired,
     removeAllNotifications: React.PropTypes.func.isRequired,
-    styles: React.PropTypes.object.isRequired,    
+    styles: React.PropTypes.object,    
   }
 
   handleOnDismiss(notification){
@@ -29,6 +29,7 @@ export class Notifications extends React.Component {
 
   render() {
     let { notifications, styles } = this.props;
+
     return (
         <ReactCSSTransitionGroup
             component="div"

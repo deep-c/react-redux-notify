@@ -9,4 +9,4 @@ export {
     removeAllNotifications    
 }
 
-export default Notifications
+export default reducer
