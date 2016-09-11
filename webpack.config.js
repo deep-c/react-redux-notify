@@ -2,6 +2,8 @@
 var path = require('path')
 var webpack = require('webpack')
 var ExtractTextPlugin = require("extract-text-webpack-plugin")
+var precss = require('precss');
+var autoprefixer = require('autoprefixer');
 
 var env = process.env.NODE_ENV || 'development'
 
@@ -70,7 +72,7 @@ var config = {
                 test: /\.scss$/,
                 loader: ExtractTextPlugin.extract(
                     'style-loader', 
-                    'css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!sass?sourceMap'
+                    'css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss-loader!sass?sourceMap'
                     )
             },
             {
@@ -78,7 +80,10 @@ var config = {
                 loader: ExtractTextPlugin.extract('style-loader', 'css')
             },        
         ]
-    }, 
+    },
+    postcss: function () {
+        return [precss, autoprefixer];
+    },     
     plugins: [
         new webpack.optimize.OccurenceOrderPlugin(),
         new webpack.DefinePlugin({

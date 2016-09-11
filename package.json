@@ -28,6 +28,7 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "autoprefixer": "^6.4.1",
     "babel": "^6.5.2",
     "babel-cli": "^6.14.0",
     "babel-jest": "^15.0.0",
@@ -45,6 +46,8 @@
     "identity-obj-proxy": "^3.0.0",
     "jest": "^15.1.1",
     "node-sass": "^3.9.3",
+    "postcss-loader": "^0.13.0",
+    "precss": "^1.4.0",
     "react": "^15.3.1",
     "react-addons-css-transition-group": "^15.3.1",
     "react-css-modules": "^3.7.10",
