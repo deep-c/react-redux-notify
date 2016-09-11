@@ -22,7 +22,8 @@
         const { createStore, combineReducers } = Redux
         const { Provider, connect } = ReactRedux
         const { reducer, Notifications, createNotification, removeNotification, removeAllNotifications, 
-            NOTIFICATION_TYPE_SUCCESS, NOTIFICATION_TYPE_WARNING, NOTIFICATION_TYPE_INFO, NOTIFICATION_TYPE_ERROR } = ReactReduxNotify
+            NOTIFICATION_TYPE_SUCCESS, NOTIFICATION_TYPE_WARNING, NOTIFICATION_TYPE_INFO, NOTIFICATION_TYPE_ERROR,
+            NOTIFICATIONS_POS_TOP_RIGHT, NOTIFICATIONS_POS_BOT_RIGHT, NOTIFICATIONS_POS_BOT_LEFT, NOTIFICATIONS_POS_TOP_LEFT } = ReactReduxNotify
         const reducers = combineReducers({ notifications: reducer })
         const store = createStore(reducers, {})
         const icons = {
@@ -30,7 +31,7 @@
             [NOTIFICATION_TYPE_SUCCESS]: <i className="fa fa-check" />,
             [NOTIFICATION_TYPE_INFO]: <i className="fa fa-info" />,
             [NOTIFICATION_TYPE_WARNING]: <i className="fa fa-warning" />,
-        }
+        }        
 
         const MyCustomNotificationComponent = ({notification, isFirst, onDismiss, onDismissAll}) => {
             let styles = {                  
@@ -61,7 +62,8 @@
                     canDismiss: true,
                     acceptBtn: null,
                     denyBtn: null,
-                    globalCustomNotification: false, 
+                    globalCustomNotification: false,
+                    position: NOTIFICATIONS_POS_TOP_RIGHT, 
                 }
                 this.createNotification = this._createNotification.bind(this);
                 this.handleFieldChange =  this._handleFieldChange.bind(this);
@@ -94,17 +96,20 @@
 
                 return (
                     <div>
-                        <Notifications NotificationComponent={NotificationComponentProp} />
+                        <Notifications 
+                            NotificationComponent={NotificationComponentProp}
+                            position={this.state.position} />
+
                         <form className="pure-form pure-form-stacked" style={
                             {width: '300px', height: '500px', top:'50%', left:'50%', position: 'relative', transform: 'translate3d(-50%, 50%, 0)', textAlign: 'center'}}>
 
-                            <label>Message</label>
+                            <label>Message: </label>
                             <input style={{display:'inline-block'}} type="text" value={this.state.message} onChange={this.handleFieldChange('message')} />
 
-                            <label>Duration</label>
+                            <label>Duration: </label>
                             <input style={{display:'inline-block'}} type="number" value={this.state.duration} onChange={this.handleFieldChange('duration')} />
 
-                            <label>Type</label>
+                            <label>Type: </label>
                             <input type="radio" value={NOTIFICATION_TYPE_SUCCESS} checked={this.state.type==NOTIFICATION_TYPE_SUCCESS} onChange={this.handleFieldChange('type')} /> Success <br />
                             <input type="radio" value={NOTIFICATION_TYPE_WARNING} checked={this.state.type==NOTIFICATION_TYPE_WARNING} onChange={this.handleFieldChange('type')} /> Warning <br />
                             <input type="radio" value={NOTIFICATION_TYPE_ERROR} checked={this.state.type==NOTIFICATION_TYPE_ERROR} onChange={this.handleFieldChange('type')} /> Error <br />
@@ -118,6 +123,12 @@
 
                             <label>Custom Notification Component: </label>
                             <input type="checkbox" defaultChecked={false} onChange={this.handleFieldChange('customComponent')} />
+
+                            <label>Container Position: </label>
+                            <input type="radio" value={NOTIFICATIONS_POS_TOP_RIGHT} checked={this.state.position==NOTIFICATIONS_POS_TOP_RIGHT} onChange={this.handleFieldChange('position')} /> Top Right <br />
+                            <input type="radio" value={NOTIFICATIONS_POS_BOT_RIGHT} checked={this.state.position==NOTIFICATIONS_POS_BOT_RIGHT} onChange={this.handleFieldChange('position')} /> Bottom Right <br />
+                            <input type="radio" value={NOTIFICATIONS_POS_BOT_LEFT} checked={this.state.position==NOTIFICATIONS_POS_BOT_LEFT} onChange={this.handleFieldChange('position')} /> Bottom Left <br />
+                            <input type="radio" value={NOTIFICATIONS_POS_TOP_LEFT} checked={this.state.position==NOTIFICATIONS_POS_TOP_LEFT} onChange={this.handleFieldChange('position')} /> Top Left <br />                            
                             
 
                             <div>

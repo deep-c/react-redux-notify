@@ -1,4 +1,8 @@
 // Constants
+export const NOTIFICATIONS_POS_TOP_RIGHT = 'TopRight'
+export const NOTIFICATIONS_POS_BOT_RIGHT = 'BottomRight'
+export const NOTIFICATIONS_POS_BOT_LEFT = 'BottomLeft'
+export const NOTIFICATIONS_POS_TOP_LEFT = 'TopLeft'
 export const NOTIFICATION_TYPE_SUCCESS = 'SUCCESS'
 export const NOTIFICATION_TYPE_WARNING = 'WARNING'
 export const NOTIFICATION_TYPE_INFO = 'INFO'

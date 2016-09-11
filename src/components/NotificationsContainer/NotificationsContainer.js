@@ -3,7 +3,7 @@ import CSSModules from 'react-css-modules'
 import styles from './NotificationsContainer.scss'
 import { connect } from 'react-redux'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
-import { removeNotification, removeAllNotifications } from 'modules/Notifications'
+import { removeNotification, removeAllNotifications, NOTIFICATIONS_POS_TOP_RIGHT } from 'modules/Notifications'
 import Notification from 'components/Notification/Notification'
 
 
@@ -19,7 +19,8 @@ export class Notifications extends React.Component {
     transitionDurations: React.PropTypes.shape({
       enter: React.PropTypes.number,
       leave: React.PropTypes.number
-    })    
+    }),
+    position: React.PropTypes.string,  
   }
 
   static defaultProps = {
@@ -27,7 +28,8 @@ export class Notifications extends React.Component {
     transitionDurations: {
       enter: 160,
       leave: 400
-    }
+    },
+    position: NOTIFICATIONS_POS_TOP_RIGHT,
   }
 
   constructor(props){
@@ -47,33 +49,36 @@ export class Notifications extends React.Component {
   }
 
   render() {
-    let { notifications, styles, customStyles, NotificationComponent, transitionDurations } = this.props;
-    styles = Object.assign({}, styles, customStyles); 
+    let { notifications, styles, customStyles, NotificationComponent, transitionDurations, position } = this.props;
+    styles = Object.assign({}, styles, customStyles);
+    let notificationsContainerClass = styles[`container${position}`]
 
     return (
-        <ReactCSSTransitionGroup
-            component="div"
-            className={styles.container}
-            transitionName={ {  enter: styles.enter,
-                                leave: styles.leave,
-                            } }
-            transitionEnterTimeout={transitionDurations.enter}
-            transitionLeaveTimeout={transitionDurations.leave}>
-          {
-            notifications.map((notification, i) => {
-              let Notification = notification.customComponent || NotificationComponent
-              return (
-                <Notification
-                  key={notification.id}
-                  notification={notification}
-                  isFirst={(i===0 && notifications.length > 1)}
-                  onDismiss={this.handleOnDismiss}
-                  onDismissAll={this.handleOnDismissAll}
-                />
-              )
-            })
-          }
-        </ReactCSSTransitionGroup>
+        <div className={notificationsContainerClass}>
+          <ReactCSSTransitionGroup
+              component="div"
+              className={styles.wrapper}
+              transitionName={ {  enter: styles.enter,
+                                  leave: styles.leave,
+                              } }
+              transitionEnterTimeout={transitionDurations.enter}
+              transitionLeaveTimeout={transitionDurations.leave}>
+            {
+              notifications.map((notification, i) => {
+                let Notification = notification.customComponent || NotificationComponent
+                return (
+                  <Notification
+                    key={notification.id}
+                    notification={notification}
+                    isFirst={(i===0 && notifications.length > 1)}
+                    onDismiss={this.handleOnDismiss}
+                    onDismissAll={this.handleOnDismissAll}
+                  />
+                )
+              })
+            }
+          </ReactCSSTransitionGroup>
+        </div>
     )
   }
 }

@@ -2,7 +2,7 @@ import React from 'react'
 import CSSModules from 'react-css-modules'
 import styles from './Notification.scss'
 import classNames from 'classnames/bind'
-const cx = classNames.bind(styles);
+
 
 export class Notification extends React.Component {
 
@@ -26,6 +26,7 @@ export class Notification extends React.Component {
     let { onDismiss, onDismissAll, notification, isFirst, styles } = this.props;
     let { message, type, canDismiss, acceptBtn, denyBtn, icon, customStyles } = notification;
     styles = Object.assign({}, styles, customStyles);
+    const cx = classNames.bind(styles);
     let containerTypeClass = cx({
       'has-close': !isFirst && canDismiss,
       'no-close': !isFirst && !canDismiss,

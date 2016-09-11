@@ -1,2 +1,2 @@
 # react-redux-notify
-A simple notifications component built for use with React and Redux.
+A simple and flexible notifications component built for use with React and Redux.

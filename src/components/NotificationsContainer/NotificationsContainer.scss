@@ -1,30 +1,14 @@
 $width: 300px;
 $max-height: 150px;
 
-.container {
-  display: block;
-  z-index: 20;
+@mixin container {
+  z-index: 1;
   position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  padding: 10px;
-  font-size: 1.2em;
-  overflow-x: hidden;
   overflow-y: auto;
   max-height: 100vh;
   &::-webkit-scrollbar {
     display: none;
-  }
-}
-
-.enter {
-  animation: notification-show .16s cubic-bezier(0.175, 0.885, 0.32, 1.27499);
-}
-
-.leave {
-  animation: notification-hide   .24s      cubic-bezier(0.33859, -0.42, 1, -0.22),
-             notification-shrink .24s .24s cubic-bezier(0.5, 0, 0, 1);
+  }     
 }
 
 @keyframes notification-show {
@@ -41,3 +25,56 @@ $max-height: 150px;
     0% {  opacity: 0; max-height: $max-height; transform: scale(.8); }
   100% {  opacity: 0; max-height: 0;           transform: scale(.8); }
 }
+
+.wrapper {
+  display: flex;  
+  padding: 10px;
+  font-size: 1.2em;
+  min-height: 0;       
+}
+
+.containerTopRight {
+  @include container;
+  top: 0;
+  right: 0;
+  .wrapper {
+    flex-direction: column;
+  }  
+}
+
+.containerBottomRight {
+  @include container;
+  right: 0;
+  bottom: 0;
+  .wrapper {
+    flex-direction: column-reverse;
+  } 
+}
+
+.containerBottomLeft {
+  @include container;
+  left: 0;
+  bottom: 0;
+  .wrapper {
+    flex-direction: column-reverse;
+  } 
+}
+
+.containerTopLeft {
+  @include container;
+  top: 0;
+  left: 0;
+  .wrapper {
+    flex-direction: column;
+  } 
+}
+
+.enter {
+  animation: notification-show .16s cubic-bezier(0.175, 0.885, 0.32, 1.27499);
+}
+
+.leave {
+  animation: notification-hide   .24s      cubic-bezier(0.33859, -0.42, 1, -0.22),
+             notification-shrink .24s .24s cubic-bezier(0.5, 0, 0, 1);
+}
+

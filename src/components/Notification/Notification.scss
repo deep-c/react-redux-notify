@@ -10,8 +10,6 @@ $width: 300px;
 $max-height: 150px;
 
 @mixin notification($txt, $bg) {
-  float: right;
-  clear: right;
   position: relative;
   word-wrap: break-word;
   pointer-events: auto;
@@ -20,7 +18,7 @@ $max-height: 150px;
   background: lighten($bg, 25%);
   padding-left: 30px;
   overflow: hidden;
-  z-index: 20;
+  z-index: 200;
   margin-bottom: 2px;
   max-height: $max-height;
 
