@@ -12,7 +12,7 @@ $max-height: 150px;
   font-size: 1.2em;
   overflow-x: hidden;
   overflow-y: auto;
-  pointer-events: none;
+  max-height: 100vh;
   &::-webkit-scrollbar {
     display: none;
   }
@@ -40,13 +40,4 @@ $max-height: 150px;
 @keyframes notification-shrink {
     0% {  opacity: 0; max-height: $max-height; transform: scale(.8); }
   100% {  opacity: 0; max-height: 0;           transform: scale(.8); }
-}
-
-@keyframes notification-shake {
-    0% { transform: translateX(   0); }
-    2% { transform: translateX(-4px); }
-    4% { transform: translateX( 8px); }
-    6% { transform: translateX(-4px); }
-    8% { transform: translateX(   0); }
-  100% { transform: translateX(   0); }
 }

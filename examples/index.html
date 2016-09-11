@@ -21,20 +21,47 @@
         'use strict';
         const { createStore, combineReducers } = Redux
         const { Provider, connect } = ReactRedux
-        const { reducer, Notifications, createNotification, removeNotification, removeAllNotifications } = ReactReduxNotify
+        const { reducer, Notifications, createNotification, removeNotification, removeAllNotifications, 
+            NOTIFICATION_TYPE_SUCCESS, NOTIFICATION_TYPE_WARNING, NOTIFICATION_TYPE_INFO, NOTIFICATION_TYPE_ERROR } = ReactReduxNotify
         const reducers = combineReducers({ notifications: reducer })
         const store = createStore(reducers, {})
+        const icons = {
+            [NOTIFICATION_TYPE_ERROR]: <i className="fa fa-fire" />,
+            [NOTIFICATION_TYPE_SUCCESS]: <i className="fa fa-check" />,
+            [NOTIFICATION_TYPE_INFO]: <i className="fa fa-info" />,
+            [NOTIFICATION_TYPE_WARNING]: <i className="fa fa-warning" />,
+        }
+
+        const MyCustomNotificationComponent = ({notification, isFirst, onDismiss, onDismissAll}) => {
+            let styles = {                  
+                margin:'5px', 
+                padding: '2px 5px', 
+                border: '1px solid #333', 
+                float:'right', 
+                clear: 'right',
+            }
+            if (notification.canDismiss) {                
+                styles = Object.assign({}, styles, {cursor: 'pointer'})
+            }
+            return (                 
+                <div onClick={(e)=>{if(notification.canDismiss){onDismiss(notification)}}} style={styles}>
+                    {notification.message}
+                </div>
+            )
+        }
 
         class ExampleNotifications extends React.Component {
             constructor(props){
                 super(props);
                 this.state = {                    
                     message: 'Hello There!',
-                    type: 'ERROR',
+                    type: NOTIFICATION_TYPE_ERROR,
+                    icon: icons[NOTIFICATION_TYPE_ERROR],
                     duration: 0,
                     canDismiss: true,
                     acceptBtn: null,
-                    denyBtn: null
+                    denyBtn: null,
+                    globalCustomNotification: false, 
                 }
                 this.createNotification = this._createNotification.bind(this);
                 this.handleFieldChange =  this._handleFieldChange.bind(this);
@@ -42,11 +69,17 @@
 
             _handleFieldChange(field){
                 return (e) => {
-                    if (field == 'canDismiss'){
+                    if (field == 'canDismiss' || field == 'globalCustomNotification'){
                         this.setState({[field]: e.target.checked});
+                    } else if (field == 'customComponent') {
+                        const componentToUse = (e.target.checked) ? MyCustomNotificationComponent: undefined
+                        this.setState({[field]: componentToUse});                     
                     } else {
+                        if (field == 'type'){
+                            this.setState({icon: icons[e.target.value]});
+                        }
                         this.setState({[field]: e.target.value});
-                    }                    
+                    }                                        
                 }
             }
 
@@ -57,26 +90,35 @@
             }
 
             render(){
+                const NotificationComponentProp = this.state.globalCustomNotification ? MyCustomNotificationComponent:undefined;
+
                 return (
-                    <div style={{width: '100%', height: '100%'}}>
+                    <div>
+                        <Notifications NotificationComponent={NotificationComponentProp} />
                         <form className="pure-form pure-form-stacked" style={
-                            {width: '200px', height: '500px', top:'50%', left:'50%', position: 'relative', transform: 'translate3d(-50%, 50%, 0)'}}>
+                            {width: '300px', height: '500px', top:'50%', left:'50%', position: 'relative', transform: 'translate3d(-50%, 50%, 0)', textAlign: 'center'}}>
 
                             <label>Message</label>
-                            <input type="text" value={this.state.message} onChange={this.handleFieldChange('message')} />
+                            <input style={{display:'inline-block'}} type="text" value={this.state.message} onChange={this.handleFieldChange('message')} />
 
                             <label>Duration</label>
-                            <input type="number" value={this.state.duration} onChange={this.handleFieldChange('duration')} />
+                            <input style={{display:'inline-block'}} type="number" value={this.state.duration} onChange={this.handleFieldChange('duration')} />
 
                             <label>Type</label>
-                            <input type="radio" value={'SUCCESS'} checked={this.state.type=='SUCCESS'} onChange={this.handleFieldChange('type')} /> Success <br />
-                            <input type="radio" value={'WARNING'} checked={this.state.type=='WARNING'} onChange={this.handleFieldChange('type')} /> Warning <br />
-                            <input type="radio" value={'ERROR'} checked={this.state.type=='ERROR'} onChange={this.handleFieldChange('type')} /> Error <br />
-                            <input type="radio" value={'INFO'} checked={this.state.type=='INFO'} onChange={this.handleFieldChange('type')} /> Info <br />
+                            <input type="radio" value={NOTIFICATION_TYPE_SUCCESS} checked={this.state.type==NOTIFICATION_TYPE_SUCCESS} onChange={this.handleFieldChange('type')} /> Success <br />
+                            <input type="radio" value={NOTIFICATION_TYPE_WARNING} checked={this.state.type==NOTIFICATION_TYPE_WARNING} onChange={this.handleFieldChange('type')} /> Warning <br />
+                            <input type="radio" value={NOTIFICATION_TYPE_ERROR} checked={this.state.type==NOTIFICATION_TYPE_ERROR} onChange={this.handleFieldChange('type')} /> Error <br />
+                            <input type="radio" value={NOTIFICATION_TYPE_INFO} checked={this.state.type==NOTIFICATION_TYPE_INFO} onChange={this.handleFieldChange('type')} /> Info <br />
 
-                            <label>Can Dismiss
-                            <input type="checkbox" defaultChecked={this.state.canDismiss} onChange={this.handleFieldChange('canDismiss')} />
-                            </label>
+                            <label>Can Dismiss: </label>
+                            <input type="checkbox" defaultChecked={this.state.canDismiss} onChange={this.handleFieldChange('canDismiss')} />                            
+
+                            <label>Custom Global Notification Component: </label>
+                            <input type="checkbox" defaultChecked={this.state.globalCustomNotification} onChange={this.handleFieldChange('globalCustomNotification')} />
+
+                            <label>Custom Notification Component: </label>
+                            <input type="checkbox" defaultChecked={false} onChange={this.handleFieldChange('customComponent')} />
+                            
 
                             <div>
                                 <button onClick={(e) => this.createNotification(e)} 
@@ -85,9 +127,7 @@
                                     Create Notification!
                                 </button>
                             </div>
-                        </form>                        
-
-                        <Notifications />
+                        </form>                                                
                     </div>
                 )
             }

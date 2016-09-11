@@ -9,12 +9,10 @@ export const REMOVE_NOTIFICATION = 'REMOVE_NOTIFICATION';
 export const REMOVE_ALL_NOTIFICATIONS = 'REMOVE_ALL_NOTIFICATIONS';
 
 // Action Creators
-export function createNotification({ message, type, duration, canDismiss, acceptBtn, denyBtn }){
-  var id = Date.now();
-  var duration = (duration >= 0) ? parseInt(duration, 10): NOTIFICATION_DEFAULT_DURATION;
-  var canDismiss = (canDismiss === false) ? canDismiss: true;
-  var acceptBtn = (acceptBtn) ? acceptBtn : null;
-  var denyBtn = (denyBtn) ? denyBtn : null;
+export function createNotification({ message, type, duration, canDismiss, acceptBtn, denyBtn, customComponent, icon, ...other }){
+  const id = Date.now();
+  duration = (duration >= 0) ? parseInt(duration, 10): NOTIFICATION_DEFAULT_DURATION;
+  canDismiss = (canDismiss === false) ? canDismiss: true;
   return {
     type: ADD_NOTIFICATION,
     notification: {
@@ -25,6 +23,9 @@ export function createNotification({ message, type, duration, canDismiss, accept
       canDismiss,
       acceptBtn,
       denyBtn,
+      customComponent,
+      icon,
+      ...other,
     }
   }
 }

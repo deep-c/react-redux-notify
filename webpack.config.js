@@ -57,7 +57,7 @@ var config = {
                 loader  : 'babel',
                 query   : {
                     cacheDirectory : true,
-                    plugins        : ['transform-runtime', 'transform-class-properties'],
+                    plugins        : ['transform-runtime', 'transform-class-properties', 'transform-es2015-destructuring', 'transform-object-rest-spread'],
                     presets        : ['es2015', 'react'],
                     env            : {
                         production : {

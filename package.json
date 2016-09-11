@@ -10,7 +10,8 @@
     "build:lib": "babel src --out-dir lib",
     "test": "cross-env NODE_ENV=test jest",
     "clean": "rimraf dist lib",
-    "prepublish": "npm run clean && npm run build"
+    "prepublish": "npm run clean && npm run build",
+    "start": "webpack src/index.js dist/ReactReduxNotify.js --watch"
   },
   "keywords": [
     "react-component",
@@ -32,6 +33,8 @@
     "babel-jest": "^15.0.0",
     "babel-loader": "^6.2.5",
     "babel-plugin-transform-class-properties": "^6.11.5",
+    "babel-plugin-transform-es2015-destructuring": "^6.9.0",
+    "babel-plugin-transform-object-rest-spread": "^6.8.0",
     "babel-plugin-transform-react-remove-prop-types": "^0.2.9",
     "babel-plugin-transform-runtime": "^6.15.0",
     "babel-preset-es2015": "^6.14.0",

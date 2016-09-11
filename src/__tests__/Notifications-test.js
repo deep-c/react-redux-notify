@@ -38,7 +38,8 @@ describe('actions', () => {
             duration: 3000,
             canDismiss: false,
             acceptBtn: jest.fn(),
-            denyBtn: jest.fn()
+            denyBtn: jest.fn(),
+            customComponent: jest.fn(),
         }
         const expectedAction = {
             type: ADD_NOTIFICATION,
@@ -49,7 +50,8 @@ describe('actions', () => {
                 duration: config.duration,
                 canDismiss: config.canDismiss,
                 acceptBtn: config.acceptBtn,
-                denyBtn: config.denyBtn
+                denyBtn: config.denyBtn,
+                customComponent: config.customComponent,
             }
         }
         expect(createNotification(config)).toEqual(expectedAction);
@@ -64,7 +66,7 @@ describe('actions', () => {
             type: NOTIFICATION_TYPE_ERROR,
             duration: -1,
             acceptBtn: null,
-            denyBtn: null
+            denyBtn: null,
         }
         const expectedAction = {
             type: ADD_NOTIFICATION,
@@ -75,7 +77,8 @@ describe('actions', () => {
                 duration: NOTIFICATION_DEFAULT_DURATION,
                 canDismiss: true,
                 acceptBtn: config.acceptBtn,
-                denyBtn: config.denyBtn
+                denyBtn: config.denyBtn,
+                customComponent: undefined
             }
         }
         expect(createNotification(config)).toEqual(expectedAction);
@@ -107,7 +110,7 @@ describe('reducer', () => {
             duration: 3000,
             canDismiss: false,
             acceptBtn: jest.fn(),
-            denyBtn: jest.fn()
+            denyBtn: jest.fn(),
         }
         const notification2 = {
             id: id2, 
@@ -116,7 +119,8 @@ describe('reducer', () => {
             duration: NOTIFICATION_DEFAULT_DURATION,
             canDismiss: true,
             acceptBtn: jest.fn(),
-            denyBtn: jest.fn()
+            denyBtn: jest.fn(),
+            customComponent: jest.fn(),
         }
         const action = {
             type: ADD_NOTIFICATION,
@@ -138,7 +142,7 @@ describe('reducer', () => {
             duration: NOTIFICATION_DEFAULT_DURATION,
             canDismiss: true,
             acceptBtn: jest.fn(),
-            denyBtn: jest.fn()         
+            denyBtn: jest.fn(),      
         }
         const action = {
             type: REMOVE_NOTIFICATION,

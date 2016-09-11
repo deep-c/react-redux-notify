@@ -165,48 +165,16 @@ $max-height: 150px;
 
 .notification--info {
   @include notification($text-color-info, $background-color-info);
-  .icon:before {
-    content: '\f129';
-    font-family: FontAwesome;
-    font-style: normal;
-    font-weight: normal;
-    text-decoration: inherit;
-    vertical-align: top;
-  }
 }
 
 .notification--success {
   @include notification($text-color-success, $background-color-success);
-  .icon:before {
-    content: '\f00c';
-    font-family: FontAwesome;
-    font-style: normal;
-    font-weight: normal;
-    text-decoration: inherit;
-    vertical-align: top;
-  }
 }
 
 .notification--warning {
   @include notification($text-color-warning, $background-color-warning);
-  .icon:before {
-    content: '\f071';
-    font-family: FontAwesome;
-    font-style: normal;
-    font-weight: normal;
-    text-decoration: inherit;
-    vertical-align: top;
-  }
 }
 
 .notification--error {
   @include notification($text-color-error, $background-color-error);
-  .icon:before {
-    content: '\f06d';
-    font-family: FontAwesome;
-    font-style: normal;
-    font-weight: normal;
-    text-decoration: inherit;
-    vertical-align: top;
-  }
 }
