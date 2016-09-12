@@ -1,7 +1,7 @@
-import Notifications from 'components/NotificationsContainer/NotificationsContainer'
-import reducer, 
-    {createNotification, 
-    removeNotification, 
+import { default as Notify } from 'components/Notify';
+import reducer,
+    { createNotification,
+    removeNotification,
     removeAllNotifications,
     NOTIFICATION_TYPE_SUCCESS,
     NOTIFICATION_TYPE_WARNING,
@@ -10,11 +10,14 @@ import reducer,
     NOTIFICATIONS_POS_TOP_RIGHT,
     NOTIFICATIONS_POS_BOT_RIGHT,
     NOTIFICATIONS_POS_BOT_LEFT,
-    NOTIFICATIONS_POS_TOP_LEFT} from 'modules/Notifications'
+    NOTIFICATIONS_POS_TOP_LEFT,
+    ADD_NOTIFICATION,
+    REMOVE_NOTIFICATION,
+    REMOVE_ALL_NOTIFICATIONS } from 'modules/Notifications';
 
 export {
     reducer,
-    Notifications,
+    Notify,
     createNotification,
     removeNotification,
     removeAllNotifications,
@@ -25,7 +28,10 @@ export {
     NOTIFICATIONS_POS_TOP_RIGHT,
     NOTIFICATIONS_POS_BOT_RIGHT,
     NOTIFICATIONS_POS_BOT_LEFT,
-    NOTIFICATIONS_POS_TOP_LEFT             
-}
+    NOTIFICATIONS_POS_TOP_LEFT,
+    ADD_NOTIFICATION,
+    REMOVE_NOTIFICATION,
+    REMOVE_ALL_NOTIFICATIONS,
+};
 
-export default reducer
+export default reducer;

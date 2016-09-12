@@ -1,2 +1,3 @@
-var idObj = require('identity-obj-proxy');
+const idObj = require('identity-obj-proxy');
+
 module.exports = idObj;

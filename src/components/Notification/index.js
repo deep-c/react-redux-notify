@@ -1,7 +1,7 @@
-import React from 'react'
-import CSSModules from 'react-css-modules'
-import styles from './Notification.scss'
-import classNames from 'classnames/bind'
+import React from 'react';
+import CSSModules from 'react-css-modules';
+import classNames from 'classnames/bind';
+import styleMap from './styles.scss';
 
 
 export class Notification extends React.Component {
@@ -11,23 +11,28 @@ export class Notification extends React.Component {
     isFirst: React.PropTypes.bool.isRequired,
     onDismiss: React.PropTypes.func.isRequired,
     onDismissAll: React.PropTypes.func.isRequired,
-    styles: React.PropTypes.object,
+    styles: React.PropTypes.object.isRequired,
+  }
+
+  static defaultProps = {
+    styles: styleMap,
   }
 
   componentDidMount() {
-    let { onDismiss, notification } = this.props;
-    let { duration } = notification;
+    const { onDismiss, notification } = this.props;
+    const { duration } = notification;
     if (duration !== 0) {
-        setTimeout(() => { onDismiss(notification) }, duration);
+      setTimeout(() => { onDismiss(notification); }, duration);
     }
   }
 
-  render () {
-    let { onDismiss, onDismissAll, notification, isFirst, styles } = this.props;
-    let { message, type, canDismiss, acceptBtn, denyBtn, icon, customStyles } = notification;
+  render() {
+    const { onDismiss, onDismissAll, notification, isFirst } = this.props;
+    let { styles } = this.props;
+    const { message, type, canDismiss, acceptBtn, denyBtn, icon, customStyles } = notification;
     styles = Object.assign({}, styles, customStyles);
     const cx = classNames.bind(styles);
-    let containerTypeClass = cx({
+    const containerTypeClass = cx({
       'has-close': !isFirst && canDismiss,
       'no-close': !isFirst && !canDismiss,
       'has-close-all': isFirst && canDismiss,
@@ -43,16 +48,16 @@ export class Notification extends React.Component {
           { (!canDismiss && (acceptBtn || denyBtn)) ?
               <div styleName="item--btnBar">
                 { (acceptBtn) ?
-                <div styleName="actionBtn" 
-                  onClick={(e) => {acceptBtn.handler(); onDismiss(notification)}}>
+                <div styleName="actionBtn"
+                  onClick={() => { acceptBtn.handler(); onDismiss(notification); }}>
                   <i className="fa fa-thumbs-o-up" />
                   {acceptBtn.title}
                 </div>
                 : false
                 }
-                {(denyBtn) ? 
-                <div styleName="actionBtn" 
-                  onClick={(e) => {denyBtn.handler(); onDismiss(notification)}}>
+                {(denyBtn) ?
+                <div styleName="actionBtn"
+                  onClick={() => { denyBtn.handler(); onDismiss(notification); }}>
                   <i className="fa fa-thumbs-o-down" />
                   {denyBtn.title}
                 </div>
@@ -64,13 +69,11 @@ export class Notification extends React.Component {
               false
           }
         </div>
-        { (canDismiss) ? <div className="fa fa-close" styleName="close" onClick={(e) => onDismiss(notification)}></div> : false }
-        { (isFirst && canDismiss) ? <div styleName="close-all" onClick={(e) => onDismissAll()}>Close All</div> : false }
+        { (canDismiss) ? <div className="fa fa-close" styleName="close" onClick={() => onDismiss(notification)}></div> : false }
+        { (isFirst && canDismiss) ? <div styleName="close-all" onClick={() => onDismissAll()}>Close All</div> : false }
       </div>
-    )
+    );
   }
 }
 
-Notification = CSSModules(Notification, styles);
-
-export default Notification
+export default CSSModules(Notification, styleMap);

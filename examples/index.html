@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://use.fontawesome.com/13f77c8bf7.js"></script>
-    <link rel="stylesheet" href="../dist/styles.css"/>
+    <link rel="stylesheet" href="../dist/ReactReduxNotify.css"/>
     <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
     <title>React Redux Notify</title>
   </head>
@@ -21,7 +21,7 @@
         'use strict';
         const { createStore, combineReducers } = Redux
         const { Provider, connect } = ReactRedux
-        const { reducer, Notifications, createNotification, removeNotification, removeAllNotifications, 
+        const { reducer, Notify, createNotification, removeNotification, removeAllNotifications, 
             NOTIFICATION_TYPE_SUCCESS, NOTIFICATION_TYPE_WARNING, NOTIFICATION_TYPE_INFO, NOTIFICATION_TYPE_ERROR,
             NOTIFICATIONS_POS_TOP_RIGHT, NOTIFICATIONS_POS_BOT_RIGHT, NOTIFICATIONS_POS_BOT_LEFT, NOTIFICATIONS_POS_TOP_LEFT } = ReactReduxNotify
         const reducers = combineReducers({ notifications: reducer })
@@ -35,11 +35,13 @@
 
         const MyCustomNotificationComponent = ({notification, isFirst, onDismiss, onDismissAll}) => {
             let styles = {                  
-                margin:'5px', 
+                margin:'5px 0', 
                 padding: '2px 5px', 
                 border: '1px solid #333', 
                 float:'right', 
                 clear: 'right',
+                width: '330px',
+                boxSizing: 'border-box',
             }
             if (notification.canDismiss) {                
                 styles = Object.assign({}, styles, {cursor: 'pointer'})
@@ -96,7 +98,7 @@
 
                 return (
                     <div>
-                        <Notifications 
+                        <Notify 
                             NotificationComponent={NotificationComponentProp}
                             position={this.state.position} />
 
