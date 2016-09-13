@@ -3,6 +3,7 @@ A simple and flexible notifications component built for use with React and Redux
 
 ![A quick look.](http://i.giphy.com/26gJzFSGpRBCd57y0.gif)
 
+
 ## Overview and Install
 React redux notify is a simple yet flexible component for displaying notifications. You can simply include the component within your app and use the default settings or you can choose to customize it in many different ways. Easiest way to get up and running is to install it via npm.
 
@@ -21,6 +22,9 @@ You can also use the standalone build by including the following css and js file
 <script src="dist/ReactReduxNotify.min.js"></script>
 <link rel="stylesheet" href="dist/ReactReduxNotify.min.css">
 ```
+
+## Demo and Example
+An example can be seen by opening the `examples/index.html` file in your browser.
 
 ## Usage
 Import the reducer and add it to your redux store as key `notifications`.
@@ -129,8 +133,8 @@ The default notification component has the following configuration options which
 | icon | `string`, `element` |  | The text or node to be rendered as the notification icon.
 | customStyles | `object` |   | A custom styles object that gets merged into the default styles and allows for the overriding or creation of individual styles using your own classes.
 | customComponent | `element` |   | A custom component that will be used for notification. It will get passed all these props as well as any custom object properties you choose to add to the notification configuration object.
-| acceptBtn | `object` Requires the following options : `{ handler: function, icon: element or string` |   | A function that will get called upon clicking the rendered accept button.
-| denyButton | `object` Requires the following options : `{ handler: function, icon: element or string` |   | A function that will get called upon clicking the rendered deny button.
+| acceptBtn | `object` Requires the following properties : `{ handler: function, icon: element or string` |   | A function that will get called upon clicking the rendered accept button.
+| denyButton | `object` Requires the following properties : `{ handler: function, icon: element or string` |   | A function that will get called upon clicking the rendered deny button.
 
 #### Notification Component Styles
 This is the default style mapping created. You can choose to override these with your own classes using the `customStyles` prop explained above. You can view what these CSS classes do by default in the `src/components/Notification/` folder for `react-redux-notify` in the `node_modules` directory.
@@ -139,3 +143,21 @@ This is the default style mapping created. You can choose to override these with
  add: later
 }
 ```
+
+## Contributing and Development
+Changes and new ideas are always welcome.
+```javascript
+npm install react-redux-notify
+npm start
+opn ./examples/index.html
+```
+This is currently just a crude no js server solution for development.
+
+## To Do
+* Finish writing tests for Notify and Notification Components
+* Use proper webpack setup for development
+* Update Gif with example of notifications with buttons
+* Remove hardcoded dismiss call on button clicks.
+
+## License
+MIT Licensed. Copyright (c) Deeptesh Chagan 2016.
