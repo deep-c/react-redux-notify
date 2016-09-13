@@ -161,6 +161,8 @@ This is currently just a crude no js server solution for development.
 * Implement CI and versioning.
 * Allow mounting reducer at custom key.
 * Refactor Notification css to reduce file size.
+* Have an online demo page
+* Use Jekyll or mkDocs for docs instead? (pretty small project not sure if worth)
 
 ## License
 MIT Licensed. Copyright (c) Deeptesh Chagan 2016.
