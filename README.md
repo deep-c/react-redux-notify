@@ -158,6 +158,7 @@ This is currently just a crude no js server solution for development.
 * Use proper webpack setup for development.
 * Update Gif with example of notifications with buttons.
 * Remove hardcoded dismiss call on button clicks.
+* Implement CI and versioning.
 * Allow mounting reducer at custom key.
 * Refactor Notification css to reduce file size.
 
