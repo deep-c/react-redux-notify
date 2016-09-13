@@ -82,7 +82,7 @@ export default connect(null, mapDispatchToProps)(MyComponent)
 
 There are a number of options that can be used to change the look and behaviour of both the `Notify` component as well as the `Notification` component itself.
 
-### Notify Component
+### Notify Container Component
 | Property | Type | Default | Default Options | Description |
 | -------- | ---- | ------- | --------------- | ----------- |
 | styles | `object` | CSSModules created mapping (see below) |  | The default styles created and mapped through CSSModules for the component. 
@@ -120,6 +120,15 @@ const myCustomStyles = {
 }
 <Notify customStyles={myCustomStyles} position={'CustomBottomPosition'}/>
 ```
+
+#### Action creators
+There are 3 action creators available which are all able to be imported from `react-redux-notify`.
+
+| Action | Args | Description |
+| ------ | ---- | ----------- |
+| createNotification | Takes a single `object` as its only argument. (see Notification Component below) | The action creator to use when creating a new notification.
+| removeNotification | Takes a `number` as its only argument | Removes the notification with the corresponding ID.
+| removeAllNotifications |   | Removes all notifications. 
 
 ### Notification Component
 The default notification component has the following configuration options which get passed when creating your notification object.
