@@ -154,10 +154,12 @@ opn ./examples/index.html
 This is currently just a crude no js server solution for development.
 
 ## To Do
-* Finish writing tests for Notify and Notification Components
-* Use proper webpack setup for development
-* Update Gif with example of notifications with buttons
+* Finish writing tests for Notify and Notification Components.
+* Use proper webpack setup for development.
+* Update Gif with example of notifications with buttons.
 * Remove hardcoded dismiss call on button clicks.
+* Allow mounting reducer at custom key.
+* Refactor Notification css to reduce file size.
 
 ## License
 MIT Licensed. Copyright (c) Deeptesh Chagan 2016.
