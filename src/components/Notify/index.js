@@ -2,6 +2,7 @@ import React from 'react';
 import CSSModules from 'react-css-modules';
 import { connect } from 'react-redux';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import PureRenderMixin from 'react-addons-pure-render-mixin';
 import { removeNotification as remove, removeAllNotifications as removeAll, NOTIFICATIONS_POS_TOP_RIGHT } from 'modules/Notifications';
 import { default as Notification } from 'components/Notification';
 import styleMap from './styles.scss';
@@ -35,13 +36,14 @@ export class Notify extends React.Component {
 
   constructor(props) {
     super(props);
+    this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
     this.handleOnDismiss = this._handleOnDismiss.bind(this);
     this.handleOnDismissAll = this._handleOnDismissAll.bind(this);
   }
 
-  _handleOnDismiss(notification) {
+  _handleOnDismiss(id) {
     const { removeNotification } = this.props;
-    removeNotification(notification.id);
+    removeNotification(id);
   }
 
   _handleOnDismissAll() {

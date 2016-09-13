@@ -1,6 +1,7 @@
 import React from 'react';
 import CSSModules from 'react-css-modules';
 import classNames from 'classnames/bind';
+import PureRenderMixin from 'react-addons-pure-render-mixin';
 import styleMap from './styles.scss';
 
 
@@ -18,11 +19,15 @@ export class Notification extends React.Component {
     styles: styleMap,
   }
 
+  constructor(props) {
+    super(props);
+    this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
+  }
+
   componentDidMount() {
-    const { onDismiss, notification } = this.props;
-    const { duration } = notification;
+    const { onDismiss, notification: { id, duration } } = this.props;
     if (duration !== 0) {
-      setTimeout(() => { onDismiss(notification); }, duration);
+      setTimeout(() => { onDismiss(id); }, duration);
     }
   }
 
@@ -32,6 +37,7 @@ export class Notification extends React.Component {
     const { message, type, canDismiss, acceptBtn, denyBtn, icon, customStyles } = notification;
     styles = Object.assign({}, styles, customStyles);
     const cx = classNames.bind(styles);
+    const options = { notification, onDismiss, onDismissAll };
     const containerTypeClass = cx({
       'has-close': !isFirst && canDismiss,
       'no-close': !isFirst && !canDismiss,
@@ -47,29 +53,41 @@ export class Notification extends React.Component {
           <div styleName="item--message">{message}</div>
           { (!canDismiss && (acceptBtn || denyBtn)) ?
               <div styleName="item--btnBar">
-                { (acceptBtn) ?
-                <div styleName="actionBtn"
-                  onClick={() => { acceptBtn.handler(); onDismiss(notification); }}>
-                  <i className="fa fa-thumbs-o-up" />
-                  {acceptBtn.title}
-                </div>
-                : false
+                {(acceptBtn) ?
+                  <div styleName="actionBtn"
+                    onClick={(e) => {
+                      acceptBtn.handler(e, options);
+                    }}>
+                    {(acceptBtn.icon && typeof acceptBtn.icon === 'string') ?
+                      <i className={acceptBtn.icon} />
+                      :
+                      acceptBtn.icon
+                    }
+                    {acceptBtn.title}
+                  </div>
+                  : false
                 }
                 {(denyBtn) ?
-                <div styleName="actionBtn"
-                  onClick={() => { denyBtn.handler(); onDismiss(notification); }}>
-                  <i className="fa fa-thumbs-o-down" />
-                  {denyBtn.title}
-                </div>
-                :
-                false
+                  <div styleName="actionBtn"
+                    onClick={(e) => {
+                      denyBtn.handler(e, options);
+                    }}>
+                    {(denyBtn.icon && typeof denyBtn.icon === 'string') ?
+                      <i className={denyBtn.icon} />
+                      :
+                      denyBtn.icon
+                    }
+                    {denyBtn.title}
+                  </div>
+                  :
+                  false
                 }
               </div>
               :
               false
           }
         </div>
-        { (canDismiss) ? <div className="fa fa-close" styleName="close" onClick={() => onDismiss(notification)}></div> : false }
+        { (canDismiss) ? <div className="fa fa-close" styleName="close" onClick={() => onDismiss(notification.id)}></div> : false }
         { (isFirst && canDismiss) ? <div styleName="close-all" onClick={() => onDismissAll()}>Close All</div> : false }
       </div>
     );

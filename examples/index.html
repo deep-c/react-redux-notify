@@ -47,7 +47,7 @@
                 styles = Object.assign({}, styles, {cursor: 'pointer'})
             }
             return (                 
-                <div onClick={(e)=>{if(notification.canDismiss){onDismiss(notification)}}} style={styles}>
+                <div onClick={(e)=>{if(notification.canDismiss){onDismiss(notification.id)}}} style={styles}>
                     {notification.message}
                 </div>
             )
@@ -61,9 +61,22 @@
                     type: NOTIFICATION_TYPE_ERROR,
                     icon: icons[NOTIFICATION_TYPE_ERROR],
                     duration: 0,
+                    acceptBtn: {
+                        handler: (e, options) => {
+                            alert('Ayyyyy :)');
+                            options.onDismiss(options.notification.id);
+                        },
+                        title: 'Accept'
+                    },
+                    denyBtn: {
+                        handler: (e, options) => {
+                            alert('Get Lost. -.-');
+                            options.onDismiss(options.notification.id);
+                        },
+                        title: 'Deny',
+                        icon: 'fa fa-thumbs-down'
+                    },                    
                     canDismiss: true,
-                    acceptBtn: null,
-                    denyBtn: null,
                     globalCustomNotification: false,
                     position: NOTIFICATIONS_POS_TOP_RIGHT, 
                 }

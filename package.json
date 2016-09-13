@@ -13,7 +13,7 @@
     "lint:fix": "eslint . --fix",
     "clean": "rimraf dist lib coverage npm-debug.log",
     "prepublish": "npm run clean && npm run build",
-    "start": "webpack src/index.js dist/ReactReduxNotify.js --watch"
+    "start": "opener chrome ./examples/index.html && webpack src/index.js dist/ReactReduxNotify.js --watch"
   },
   "keywords": [
     "react-component",
@@ -51,6 +51,7 @@
     "eslint-plugin-react": "^6.2.0",
     "jest": "^15.1.1",
     "node-sass": "^3.9.3",
+    "opener": "^1.4.2",
     "postcss-loader": "^0.13.0",
     "react": "^15.3.1",
     "react-dom": "^15.3.1",
@@ -69,6 +70,7 @@
     "identity-obj-proxy": "^3.0.0",
     "precss": "^1.4.0",
     "react-addons-css-transition-group": "^15.3.1",
+    "react-addons-pure-render-mixin": "^15.3.1",
     "react-css-modules": "^3.7.10",
     "timekeeper": "^0.1.1",
     "webpack": "^1.13.2"

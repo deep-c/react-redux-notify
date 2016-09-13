@@ -34,12 +34,20 @@ const ReactCSSTransitionGroupExternal = {
   amd: 'react-addons-css-transition-group',
 };
 
+const ReactPureRenderMixinExternal = {
+  root: ['React', 'addons', 'PureRenderMixin'],
+  commonjs2: 'react-addons-pure-render-mixin',
+  commonjs: 'react-addons-pure-render-mixin',
+  amd: 'react-addons-pure-render-mixin',
+};
+
 const config = {
   externals: {
     react: reactExternal,
     redux: reduxExternal,
     'react-redux': reactReduxExternal,
     'react-addons-css-transition-group': ReactCSSTransitionGroupExternal,
+    'react-addons-pure-render-mixin': ReactPureRenderMixinExternal,
   },
   resolve: {
     root: [

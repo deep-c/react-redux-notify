@@ -1,5 +1,5 @@
 # react-redux-notify
-A simple and flexible notifications component built for use with React and Redux.
+A simple and flexible notifications component built with and for React and Redux, inspired by Atom Editor's Notifications.
 
 ![A quick look.](http://i.giphy.com/26gJzFSGpRBCd57y0.gif)
 
@@ -34,14 +34,14 @@ import notifyReducer from 'react-redux-notify';
 const reducers = combineReducers({ notifications: notifyReducer });
 const store = createStore(reducers);
 ```
-Add the notify component to your application. There are a number of props you can pass into the `Notify` component that allow you to customize it (see Options below).
+Add the Notify component to your application. There are a number of props you can pass into the `Notify` component that allow you to customize it (see Options below).
 ```javascript
 import {Notify} from 'react-redux-notify';
 
 <Notify />
 ```
 
-To create a notification import the `createNotification` action creator and dispatch it with your notification configuration obejct. The notification configuration is just a plain object whose keys are passed along to the `Notification` component. By default there are 4 types of notifications `SUCCESS`, `WARNING`, `ERROR` and `INFO`. 
+To create a notification import the `createNotification` action creator and dispatch it with your notification configuration obejct. The notification configuration object is just a plain object whose keys are passed along to the `Notification` component. By default there are 4 types of notifications `SUCCESS`, `WARNING`, `ERROR` and `INFO`. 
 ```javascript
 import { connect } from 'react-redux';
 import {createNotification, NOTIFICATION_TYPE_SUCCESS} from 'react-redux-notifications';
@@ -139,17 +139,31 @@ The default notification component has the following configuration options which
 | type | `string` |   | A string that describes the type of notification wanting to be created. By default there are 4 types which can be used `SUCCESS`, `ERROR`, `WARNING`, `INFO`. These can also be imported as constants `NOTIFICATION_TYPE_${TYPE}`.
 | canDimiss | `boolean` | true | Whether the notification allows the user to close the notification.
 | duration | `number` | 2000 | Duration until the notification automatically closes. If set to 0 the notification will not close automatically.
-| icon | `string`, `element` |  | The text or node to be rendered as the notification icon.
+| icon | `node` |  | A node to be rendered as the notification icon.
 | customStyles | `object` |   | A custom styles object that gets merged into the default styles and allows for the overriding or creation of individual styles using your own classes.
-| customComponent | `element` |   | A custom component that will be used for notification. It will get passed all these props as well as any custom object properties you choose to add to the notification configuration object.
-| acceptBtn | `object` Requires the following properties : `{ handler: function, icon: element or string` |   | A function that will get called upon clicking the rendered accept button.
-| denyButton | `object` Requires the following properties : `{ handler: function, icon: element or string` |   | A function that will get called upon clicking the rendered deny button.
+| customComponent | `element` |   | A custom component that will be used as the Notification. It will get passed all these props as well as any custom object properties you choose to add to the notification configuration object.
+| acceptBtn, denyBtn | `object` : `{` <br/> `handler: function(event, object),` <br> `icon: node,`<br> `title: node` <br> `}` |   | **`handler`** must be a function, it gets passed the `event` as well as an object containing `{notification, onDismiss, onDimissAll}` properties.<br> **`icon`** is optional and if passed as a `string` will be used as the button's icon's className else if type is anything else it will get rendered as is.<br> **`title`** is rendered as is.
 
 #### Notification Component Styles
 This is the default style mapping created. You can choose to override these with your own classes using the `customStyles` prop explained above. You can view what these CSS classes do by default in the `src/components/Notification/` folder for `react-redux-notify` in the `node_modules` directory.
 ```javascript
 {
- add: later
+  actionBtn:
+  close:
+  close-all:
+  content:
+  has-close:
+  has-close-all:
+  has-close-all--noDismiss:
+  icon:
+  item:
+  item--btnBar:
+  item--message:
+  no-close:
+  notification--error:
+  notification--info:
+  notification--success:
+  notification--warning:
 }
 ```
 
@@ -158,23 +172,16 @@ Changes and new ideas are always welcome.
 ```javascript
 npm install react-redux-notify
 npm start
-opn ./examples/index.html
 ```
-This is currently just a crude no js server solution for development.
 
 ## To Do
-* Avoid reconciling the DOM when props arent changed. PureRenderMixin and/or Immutable.js?
-* Allow button icons to be configurable.
-* Finishing writing docs (Notification styles).
+* Remove hardcoded canDismiss icon.
 * Finish writing tests for Notify and Notification Components.
-* Use proper webpack setup for development.
 * Update Gif with example of notifications with buttons.
-* Remove hardcoded dismiss call on button clicks.
 * Implement CI and versioning.
 * Allow mounting reducer at custom key.
-* Refactor Notification css to reduce file size.
+* Refactor Notification css/js to reduce file size.
 * Have an online demo page
-* Use Jekyll or mkDocs for docs instead? (pretty small project not sure if worth)
 
 ## License
-MIT Licensed. Copyright (c) Deeptesh Chagan 2016.
+MIT Copyright (c) 2016 Deeptesh Chagan
