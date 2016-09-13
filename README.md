@@ -80,11 +80,11 @@ There are a number of options that can be used to change the look and behaviour 
 
 ### Notify Component
 | Property | Type | Default | Default Options | Description |
-| -------- | ---- | ------- | ------- | ----------- |
-| styles | object | CSSModules created mapping (see below) | --- | The default styles created and mapped through CSSModules for the component. 
-| customStyles | object | undefined | --- | A custom styles object that gets merged into styles and allows for the overriding or creation of individual styles using your own classes.
-| transitionDurations | object | `{ enter : 160, leave: 400 }` | --- | React CSS Transition Group timeout values for enter and leave events. If you change the transition classes then you can use these to change the timeout values for your animation.
-| position | string | 'TopRight' | `'TopRight', 'BottomRight', 'BottomLeft', 'TopLeft'` | Default options for where the Notify container will be positioned to render you components. Again this can be extended/customised through your own classes and this prop.
+| -------- | ---- | ------- | --------------- | ----------- |
+| styles | `object` | CSSModules created mapping (see below) |  | The default styles created and mapped through CSSModules for the component. 
+| customStyles | `object` | undefined |  | A custom styles object that gets merged into the default styles and allows for the overriding or creation of individual styles using your own classes.
+| transitionDurations | `object` | `{ enter : 160, leave: 400 }` |  | React CSS Transition Group timeout values for enter and leave events. If you change the transition classes then you can use these to change the timeout values for your animation.
+| position | `string` | 'TopRight' | `'TopRight', 'BottomRight', 'BottomLeft', 'TopLeft'` | Default options for where the Notify container will be positioned to render you components. Again this can be extended/customised through your own classes and this prop.
 
 #### Notify Components Styles
 This is the default style mapping created. You can choose to override these with your own classes using the `customStyles` prop explained above. You can view what these CSS classes do by default in the `src/components/Notify/` folder for `react-redux-notify` in the `node_modules` directory.
@@ -115,4 +115,27 @@ const myCustomStyles = {
   containerCustomBottomPosition: 'CustomBottomPosition'
 }
 <Notify customStyles={myCustomStyles} position={'CustomBottomPosition'}/>
+```
+
+### Notification Component
+The default notification component has the following configuration options which get passed when creating your notification object.
+
+| Property | Type | Default | Description |
+| -------- | ---- | ------- | ----------- |
+| id | `number` | `Date.now()` | The unique identifier for each notification. **This cannot be changed**.
+| type | `string` |   | A string that describes the type of notification wanting to be created. By default there are 4 types which can be used `SUCCESS`, `ERROR`, `WARNING`, `INFO`. These can also be imported as constants `NOTIFICATION_TYPE_${TYPE}`.
+| canDimiss | `boolean` | true | Whether the notification allows the user to close the notification.
+| duration | `number` | 2000 | Duration until the notification automatically closes. If set to 0 the notification will not close automatically.
+| icon | `string`, `element` |  | The text or node to be rendered as the notification icon.
+| customStyles | `object` |   | A custom styles object that gets merged into the default styles and allows for the overriding or creation of individual styles using your own classes.
+| customComponent | `element` |   | A custom component that will be used for notification. It will get passed all these props as well as any custom object properties you choose to add to the notification configuration object.
+| acceptBtn | `object` Requires the following options : `{ handler: function, icon: element or string` |   | A function that will get called upon clicking the rendered accept button.
+| denyButton | `object` Requires the following options : `{ handler: function, icon: element or string` |   | A function that will get called upon clicking the rendered deny button.
+
+#### Notification Component Styles
+This is the default style mapping created. You can choose to override these with your own classes using the `customStyles` prop explained above. You can view what these CSS classes do by default in the `src/components/Notification/` folder for `react-redux-notify` in the `node_modules` directory.
+```javascript
+{
+ add: later
+}
 ```
