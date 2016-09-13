@@ -154,6 +154,7 @@ opn ./examples/index.html
 This is currently just a crude no js server solution for development.
 
 ## To Do
+* Avoid reconciling the DOM when props arent changed. PureRenderMixin and/or Immutable.js?
 * Allow button icons to be configurable.
 * Finishing writing docs (Notification styles).
 * Finish writing tests for Notify and Notification Components.
