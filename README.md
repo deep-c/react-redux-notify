@@ -154,6 +154,7 @@ opn ./examples/index.html
 This is currently just a crude no js server solution for development.
 
 ## To Do
+* Finishing writing docs (Notification styles).
 * Finish writing tests for Notify and Notification Components.
 * Use proper webpack setup for development.
 * Update Gif with example of notifications with buttons.
