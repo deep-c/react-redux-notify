@@ -141,6 +141,7 @@ The default notification component has the following configuration options which
 | canDismiss | `boolean` | true | Yes | Whether the notification allows the user to close the notification.
 | duration | `number` | 2000 | Yes | Duration until the notification automatically closes.
 | icon | `node` |  | Yes | A node to be rendered as the notification icon.
+| styles | `object` | CSSModules created mapping (see below)  | Yes | The default styles created and mapped through CSSModules for the component.
 | customStyles | `object` |  | Yes | A custom styles object that gets merged into the default styles and allows for the overriding or creation of individual styles using your own classes.
 | customComponent | `element` |   | Yes | A custom component that will be used as the Notification. It will get passed all these props as well as any custom object properties you choose to add to the notification configuration object.
 | acceptBtn, denyBtn | `object` : `{` <br/> `handler: function(event, object),` <br> `icon: node,`<br> `title: node` <br> `}` |   | Yes | **`handler`** must be a function, it gets passed the `event` as well as an `object` containing all these notification props.<br> **`icon`** is optional and if passed as a `string` will be used as the button's icon's className else if type is anything else it will get rendered as is.<br> **`title`** is rendered as is.
