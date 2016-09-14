@@ -179,12 +179,12 @@ npm start
 ```
 
 ## To Do
-* Support for use of inline styles.
-* Finish writing tests for Notify and Notification Components.
+* Complete tests for Notify and Notification Components.
 * Implement CI and versioning.
 * Allow mounting reducer at custom key.
-* Refactor Notification css/js to reduce file size.
-* Have an online demo page
+* Have an online demo page.
+* Still not completely happy with CSS custom styles implementation. Get rid of flexibility of merging custom styles since it isnt that flexible anyway?
+* ~~Support for use of inline styles. (Ive decided to not go ahead with this. I have a gut feeling that inline styles are hardly used. If this isnt the case please feel free to open an issue for discussion, create a PR or use a custom notification component. )~~
 
 ## License
 MIT Copyright (c) 2016 Deeptesh Chagan

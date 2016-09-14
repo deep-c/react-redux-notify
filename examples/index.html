@@ -7,6 +7,24 @@
     <link rel="stylesheet" href="../dist/ReactReduxNotify.css"/>
     <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
     <title>React Redux Notify</title>
+    <style>
+    .customContent {
+        background: pink;
+    }
+    .containerTopCenter {
+        z-index: 1;
+        position: fixed;
+        overflow-y: auto;
+        max-height: 100vh;
+        left: 50%;
+        transform: translate3d(-50%, 0, 0);
+        flex-direction: column;
+        top: 0;         
+    }
+    .containerTopCenter::-webkit-scrollbar {
+        display: none;
+    }     
+    </style>
   </head>
   <body>
     <div id="root"></div>
@@ -31,9 +49,19 @@
             [NOTIFICATION_TYPE_SUCCESS]: <i className="fa fa-check" />,
             [NOTIFICATION_TYPE_INFO]: <i className="fa fa-info" />,
             [NOTIFICATION_TYPE_WARNING]: <i className="fa fa-warning" />,
-        }        
+        }
 
-        const MyCustomNotificationComponent = ({notification, isFirst, onDismiss, onDismissAll}) => {
+        //See styles definition in head. 
+        const customNotificationStyles = {
+            'content': 'customContent'
+        }
+        const CUSTOM_POSITION = 'TopCenter';         
+        const customNotifyStyles = {
+            'containerTopCenter': 'containerTopCenter'
+        }       
+
+        const MyCustomNotificationComponent = ({message, type, canDismiss, acceptBtn, denyBtn, 
+            icon, customStyles, id, isFirst, handleDismiss, handleDismissAll}) => {
             let styles = {                  
                 margin:'5px 0', 
                 padding: '2px 5px', 
@@ -43,12 +71,12 @@
                 width: '330px',
                 boxSizing: 'border-box',
             }
-            if (notification.canDismiss) {                
+            if (canDismiss) {                
                 styles = Object.assign({}, styles, {cursor: 'pointer'})
             }
             return (                 
-                <div onClick={(e)=>{if(notification.canDismiss){onDismiss(notification.id)}}} style={styles}>
-                    {notification.message}
+                <div onClick={(e)=>{if(canDismiss){handleDismiss(id)}}} style={styles}>
+                    {message}
                 </div>
             )
         }
@@ -91,8 +119,14 @@
                         this.setState({[field]: e.target.checked});
                     } else if (field == 'customComponent') {
                         const componentToUse = (e.target.checked) ? MyCustomNotificationComponent: undefined
-                        this.setState({[field]: componentToUse});                     
+                        this.setState({[field]: componentToUse});
+                    } else if (field == 'customStyles'){
+                        const styles = (e.target.checked) ? customNotificationStyles : undefined
+                        this.setState({customStyles:styles});
                     } else {
+                        if(field == 'duration'){
+                            return this.setState({[field]: parseInt(e.target.value, 10)});
+                        }
                         if (field == 'type'){
                             this.setState({icon: icons[e.target.value]});
                         }
@@ -114,7 +148,8 @@
                     <div>
                         <Notify 
                             NotificationComponent={NotificationComponentProp}
-                            position={this.state.position} />
+                            position={this.state.position} 
+                            customStyles={customNotifyStyles} />
 
                         <form className="pure-form pure-form-stacked" style={
                             {width: '300px', height: '500px', top:'50%', left:'50%', position: 'relative', transform: 'translate3d(-50%, 50%, 0)', textAlign: 'center'}}>
@@ -144,7 +179,11 @@
                             <input type="radio" value={NOTIFICATIONS_POS_TOP_RIGHT} checked={this.state.position==NOTIFICATIONS_POS_TOP_RIGHT} onChange={this.handleFieldChange('position')} /> Top Right <br />
                             <input type="radio" value={NOTIFICATIONS_POS_BOT_RIGHT} checked={this.state.position==NOTIFICATIONS_POS_BOT_RIGHT} onChange={this.handleFieldChange('position')} /> Bottom Right <br />
                             <input type="radio" value={NOTIFICATIONS_POS_BOT_LEFT} checked={this.state.position==NOTIFICATIONS_POS_BOT_LEFT} onChange={this.handleFieldChange('position')} /> Bottom Left <br />
-                            <input type="radio" value={NOTIFICATIONS_POS_TOP_LEFT} checked={this.state.position==NOTIFICATIONS_POS_TOP_LEFT} onChange={this.handleFieldChange('position')} /> Top Left <br />                            
+                            <input type="radio" value={NOTIFICATIONS_POS_TOP_LEFT} checked={this.state.position==NOTIFICATIONS_POS_TOP_LEFT} onChange={this.handleFieldChange('position')} /> Top Left <br />
+                            <input type="radio" value={CUSTOM_POSITION} checked={this.state.position==CUSTOM_POSITION} onChange={this.handleFieldChange('position')} /> Custom Position - Top Center <br />
+
+                            <label><strong>Custom Notification Styles: </strong></label>
+                            <input type="checkbox" defaultChecked={false} onChange={this.handleFieldChange('customStyles')} />                                                        
                             
 
                             <div style={{paddingTop:'10px'}}>

@@ -30,43 +30,36 @@ $max-height: 150px;
   display: flex;  
   padding: 10px;
   font-size: 1.2em;
-  min-height: 0;       
+  min-height: 0;
+  flex-direction: inherit       
 }
 
 .containerTopRight {
   @include container;
   top: 0;
   right: 0;
-  .wrapper {
-    flex-direction: column;
-  }  
+  flex-direction: column;
 }
 
 .containerBottomRight {
   @include container;
   right: 0;
   bottom: 0;
-  .wrapper {
-    flex-direction: column-reverse;
-  } 
+  flex-direction: column-reverse;
 }
 
 .containerBottomLeft {
   @include container;
   left: 0;
   bottom: 0;
-  .wrapper {
-    flex-direction: column-reverse;
-  } 
+  flex-direction: column-reverse;
 }
 
 .containerTopLeft {
   @include container;
   top: 0;
   left: 0;
-  .wrapper {
-    flex-direction: column;
-  } 
+  flex-direction: column;
 }
 
 .enter {

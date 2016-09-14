@@ -71,7 +71,6 @@
     "precss": "^1.4.0",
     "react-addons-css-transition-group": "^15.3.1",
     "react-addons-pure-render-mixin": "^15.3.1",
-    "react-css-modules": "^3.7.10",
     "timekeeper": "^0.1.1",
     "webpack": "^1.13.2"
   },

@@ -1,11 +1,10 @@
 import React from 'react';
-import CSSModules from 'react-css-modules';
 import classNames from 'classnames/bind';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
-import styleMap from './styles.scss';
+import styleMap from './Notification.scss';
 
 
-export class Notification extends React.Component {
+class Notification extends React.Component {
 
   static propTypes = {
     id: React.PropTypes.number.isRequired,
@@ -43,9 +42,9 @@ export class Notification extends React.Component {
   }
 
   componentDidMount() {
-    const { onDismiss, id, duration } = this.props;
+    const { handleDismiss, id, duration } = this.props;
     if (duration !== 0) {
-      setTimeout(() => { onDismiss(id); }, duration);
+      setTimeout(() => { handleDismiss(id); }, duration);
     }
   }
 
@@ -65,13 +64,13 @@ export class Notification extends React.Component {
 
     return (
       <div key={id} className={containerTypeClass}>
-        {(icon) ? <span styleName="icon">{icon}</span> : false}
-        <div styleName="content">
-          <div styleName="item--message">{message}</div>
+        {(icon) ? <span className={styles.icon}>{icon}</span> : false}
+        <div className={styles.content}>
+          <div className={styles['item--message']}>{message}</div>
           { (!canDismiss && (acceptBtn || denyBtn)) ?
-              <div styleName="item--btnBar">
+              <div className={styles['item--btnBar']}>
                 {(acceptBtn) ?
-                  <div styleName="actionBtn"
+                  <div className={styles.actionBtn}
                     onClick={(e) => {
                       acceptBtn.handler(e, this.props);
                     }}>
@@ -85,7 +84,7 @@ export class Notification extends React.Component {
                   : false
                 }
                 {(denyBtn) ?
-                  <div styleName="actionBtn"
+                  <div className={styles.actionBtn}
                     onClick={(e) => {
                       denyBtn.handler(e, this.props);
                     }}>
@@ -104,11 +103,19 @@ export class Notification extends React.Component {
               false
           }
         </div>
-        { (canDismiss) ? <div styleName="close" onClick={() => handleDismiss(id)}></div> : false }
-        { (isFirst && canDismiss) ? <div styleName="close-all" onClick={() => handleDismissAll()}>Close All</div> : false }
+        {(canDismiss) ?
+          <div className={styles.close} onClick={() => handleDismiss(id)}></div>
+          :
+          false
+        }
+        {(isFirst && canDismiss) ?
+          <div className={styles['close-all']}
+            onClick={() => handleDismissAll()}>Close All</div>
+          : false
+        }
       </div>
     );
   }
 }
 
-export default CSSModules(Notification, styleMap);
+export default Notification;

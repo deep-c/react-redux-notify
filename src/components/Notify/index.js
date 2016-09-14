@@ -1,11 +1,10 @@
 import React from 'react';
-import CSSModules from 'react-css-modules';
 import { connect } from 'react-redux';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import { removeNotification, removeAllNotifications, NOTIFICATIONS_POS_TOP_RIGHT } from 'modules/Notifications';
 import { default as Notification } from 'components/Notification';
-import styleMap from './styles.scss';
+import styleMap from './Notify.scss';
 
 
 export class Notify extends React.Component {
@@ -108,4 +107,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(CSSModules(Notify, styleMap));
+)(Notify);
