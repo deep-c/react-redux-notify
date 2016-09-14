@@ -7,37 +7,17 @@ export const NOTIFICATION_TYPE_SUCCESS = 'SUCCESS';
 export const NOTIFICATION_TYPE_WARNING = 'WARNING';
 export const NOTIFICATION_TYPE_INFO = 'INFO';
 export const NOTIFICATION_TYPE_ERROR = 'ERROR';
-export const NOTIFICATION_DEFAULT_DURATION = 2000;
 export const ADD_NOTIFICATION = 'ADD_NOTIFICATION';
 export const REMOVE_NOTIFICATION = 'REMOVE_NOTIFICATION';
 export const REMOVE_ALL_NOTIFICATIONS = 'REMOVE_ALL_NOTIFICATIONS';
 
 // Action Creators
-export function createNotification({
-  message,
-  type,
-  duration,
-  canDismiss,
-  acceptBtn,
-  denyBtn,
-  customComponent,
-  icon, ...other }) {
-  const id = Date.now();
-  const cleanedDuration = (duration >= 0) ? parseInt(duration, 10) : NOTIFICATION_DEFAULT_DURATION;
-  const cleanedCanDismiss = (canDismiss === false) ? canDismiss : true;
+export function createNotification(notification) {
   return {
     type: ADD_NOTIFICATION,
     notification: {
-      id,
-      message,
-      type,
-      duration: cleanedDuration,
-      canDismiss: cleanedCanDismiss,
-      acceptBtn,
-      denyBtn,
-      customComponent,
-      icon,
-      ...other,
+      ...notification,
+      id: Date.now(),
     },
   };
 }
@@ -49,9 +29,10 @@ export function removeNotification(id) {
   };
 }
 
-export function removeAllNotifications() {
+export function removeAllNotifications(force) {
   return {
     type: REMOVE_ALL_NOTIFICATIONS,
+    force,
   };
 }
 
@@ -64,6 +45,9 @@ export default function (state = initialState, action) {
     case REMOVE_NOTIFICATION:
       return state.filter(item => item.id !== action.id);
     case REMOVE_ALL_NOTIFICATIONS:
+      if (action.force) {
+        return [];
+      }
       return state.filter(item => !item.canDismiss);
     default:
       return state;

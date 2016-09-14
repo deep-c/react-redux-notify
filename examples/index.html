@@ -62,16 +62,17 @@
                     icon: icons[NOTIFICATION_TYPE_ERROR],
                     duration: 0,
                     acceptBtn: {
-                        handler: (e, options) => {
+                        handler: (e, notification) => {
                             alert('Ayyyyy :)');
-                            options.onDismiss(options.notification.id);
+                            notification.handleDismiss(notification.id);
                         },
-                        title: 'Accept'
+                        title: 'Accept',
+                        icon: 'fa fa-thumbs-up'
                     },
                     denyBtn: {
-                        handler: (e, options) => {
+                        handler: (e, notification) => {
                             alert('Get Lost. -.-');
-                            options.onDismiss(options.notification.id);
+                            notification.handleDismiss(notification.id);
                         },
                         title: 'Deny',
                         icon: 'fa fa-thumbs-down'

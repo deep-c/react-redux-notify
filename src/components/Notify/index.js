@@ -3,7 +3,7 @@ import CSSModules from 'react-css-modules';
 import { connect } from 'react-redux';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
-import { removeNotification as remove, removeAllNotifications as removeAll, NOTIFICATIONS_POS_TOP_RIGHT } from 'modules/Notifications';
+import { removeNotification, removeAllNotifications, NOTIFICATIONS_POS_TOP_RIGHT } from 'modules/Notifications';
 import { default as Notification } from 'components/Notification';
 import styleMap from './styles.scss';
 
@@ -12,8 +12,8 @@ export class Notify extends React.Component {
 
   static propTypes = {
     notifications: React.PropTypes.array.isRequired,
-    removeNotification: React.PropTypes.func.isRequired,
-    removeAllNotifications: React.PropTypes.func.isRequired,
+    remove: React.PropTypes.func.isRequired,
+    removeAll: React.PropTypes.func.isRequired,
     styles: React.PropTypes.object.isRequired,
     customStyles: React.PropTypes.object,
     NotficationComponent: React.PropTypes.element,
@@ -37,18 +37,18 @@ export class Notify extends React.Component {
   constructor(props) {
     super(props);
     this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
-    this.handleOnDismiss = this._handleOnDismiss.bind(this);
-    this.handleOnDismissAll = this._handleOnDismissAll.bind(this);
+    this.handleDismiss = this._handleDismiss.bind(this);
+    this.handleDismissAll = this._handleDismissAll.bind(this);
   }
 
-  _handleOnDismiss(id) {
-    const { removeNotification } = this.props;
-    removeNotification(id);
+  _handleDismiss(id) {
+    const { remove } = this.props;
+    remove(id);
   }
 
-  _handleOnDismissAll() {
-    const { removeAllNotifications } = this.props;
-    removeAllNotifications();
+  _handleDismissAll(force) {
+    const { removeAll } = this.props;
+    removeAll(force);
   }
 
   render() {
@@ -78,10 +78,10 @@ export class Notify extends React.Component {
                 return (
                   <NewNotification
                     key={notification.id}
-                    notification={notification}
+                    {...notification}
                     isFirst={(i === 0 && notifications.length > 1)}
-                    onDismiss={this.handleOnDismiss}
-                    onDismissAll={this.handleOnDismissAll}
+                    handleDismiss={this.handleDismiss}
+                    handleDismissAll={this.handleDismissAll}
                   />
                 );
               })
@@ -97,11 +97,11 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  removeNotification: (id) => {
-    dispatch(remove(id));
+  remove: (id) => {
+    dispatch(removeNotification(id));
   },
-  removeAllNotifications: () => {
-    dispatch(removeAll());
+  removeAll: (force) => {
+    dispatch(removeAllNotifications(force));
   },
 });
 

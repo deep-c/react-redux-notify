@@ -25,11 +25,19 @@ describe('actions', () => {
   it('should create an action to remove all notifications', () => {
     const expectedAction = {
       type: REMOVE_ALL_NOTIFICATIONS,
+      force: true,
+    };
+    expect(removeAllNotifications(true)).toEqual(expectedAction);
+  });
+
+  it('should create an action to remove all applicable notifications', () => {
+    const expectedAction = {
+      type: REMOVE_ALL_NOTIFICATIONS,
     };
     expect(removeAllNotifications()).toEqual(expectedAction);
   });
 
-  it('should create an action to create a new notification with true action conditions', () => {
+  it('should create an action to create a new notification', () => {
     const time = Date.now();
     TimeKeeper.freeze(time);
     const config = {
@@ -58,38 +66,12 @@ describe('actions', () => {
     TimeKeeper.reset();
   });
 
-  it('should create an action to create a new notification with false action conditions', () => {
-    const time = Date.now();
-    TimeKeeper.freeze(time);
-    const config = {
-      message: 'Testing, testing 1, 2, 3',
-      type: NOTIFICATION_TYPE_ERROR,
-      duration: -1,
-      acceptBtn: null,
-      denyBtn: null,
-    };
-    const expectedAction = {
-      type: ADD_NOTIFICATION,
-      notification: {
-        id: time,
-        message: config.message,
-        type: config.type,
-        duration: NOTIFICATION_DEFAULT_DURATION,
-        canDismiss: true,
-        acceptBtn: config.acceptBtn,
-        denyBtn: config.denyBtn,
-        customComponent: undefined,
-      },
-    };
-    expect(createNotification(config)).toEqual(expectedAction);
-    TimeKeeper.reset();
-  });
-
   it('should create an action to add remove all notifications', () => {
     const expectedAction = {
       type: REMOVE_ALL_NOTIFICATIONS,
+      force: true,
     };
-    expect(removeAllNotifications()).toEqual(expectedAction);
+    expect(removeAllNotifications(true)).toEqual(expectedAction);
   });
 });
 
@@ -193,6 +175,48 @@ describe('reducer', () => {
             )
         ).toEqual(
             [notification2]
+        );
+  });
+
+  it('should handle REMOVE_ALL_NOTIFICATIONS with force parameter', () => {
+    const notification1 = {
+      id: new Date(1330688329360),
+      message: 'Testing, testing 1, 2, 3',
+      type: NOTIFICATION_TYPE_WARNING,
+      duration: NOTIFICATION_DEFAULT_DURATION,
+      canDismiss: true,
+      acceptBtn: jest.fn(),
+      denyBtn: jest.fn(),
+    };
+    const notification2 = {
+      id: new Date(1267688329388),
+      message: 'Testing2, testing2 1, 2, 3',
+      type: NOTIFICATION_TYPE_SUCCESS,
+      duration: 0,
+      canDismiss: false,
+      acceptBtn: null,
+      denyBtn: null,
+    };
+    const notification3 = {
+      id: new Date(1267623829303),
+      message: 'Testing3, testing3 1, 2, 3',
+      type: NOTIFICATION_TYPE_INFO,
+      duration: NOTIFICATION_DEFAULT_DURATION,
+      canDismiss: true,
+      acceptBtn: jest.fn(),
+      denyBtn: jest.fn(),
+    };
+    const action = {
+      type: REMOVE_ALL_NOTIFICATIONS,
+      force: true,
+    };
+    expect(
+            reducer(
+                [notification1, notification2, notification3],
+                action
+            )
+        ).toEqual(
+            []
         );
   });
 });

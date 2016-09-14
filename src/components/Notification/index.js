@@ -8,15 +8,33 @@ import styleMap from './styles.scss';
 export class Notification extends React.Component {
 
   static propTypes = {
-    notification: React.PropTypes.object.isRequired,
+    id: React.PropTypes.number.isRequired,
+    type: React.PropTypes.string.isRequired,
+    canDismiss: React.PropTypes.bool.isRequired,
+    duration: React.PropTypes.number.isRequired,
+    icon: React.PropTypes.node,
+    customStyles: React.PropTypes.object,
+    customComponent: React.PropTypes.element,
+    acceptBtn: React.PropTypes.shape({
+      handler: React.PropTypes.func.isRequired,
+      icon: React.PropTypes.node,
+      title: React.PropTypes.node,
+    }),
+    denyBtn: React.PropTypes.shape({
+      handler: React.PropTypes.func.isRequired,
+      icon: React.PropTypes.node,
+      title: React.PropTypes.node,
+    }),
     isFirst: React.PropTypes.bool.isRequired,
-    onDismiss: React.PropTypes.func.isRequired,
-    onDismissAll: React.PropTypes.func.isRequired,
+    handleDismiss: React.PropTypes.func.isRequired,
+    handleDismissAll: React.PropTypes.func.isRequired,
     styles: React.PropTypes.object.isRequired,
   }
 
   static defaultProps = {
     styles: styleMap,
+    canDismiss: true,
+    duration: 2000,
   }
 
   constructor(props) {
@@ -25,19 +43,18 @@ export class Notification extends React.Component {
   }
 
   componentDidMount() {
-    const { onDismiss, notification: { id, duration } } = this.props;
+    const { onDismiss, id, duration } = this.props;
     if (duration !== 0) {
       setTimeout(() => { onDismiss(id); }, duration);
     }
   }
 
   render() {
-    const { onDismiss, onDismissAll, notification, isFirst } = this.props;
+    const { handleDismiss, handleDismissAll, isFirst, message, type, canDismiss,
+      acceptBtn, denyBtn, icon, customStyles, id } = this.props;
     let { styles } = this.props;
-    const { message, type, canDismiss, acceptBtn, denyBtn, icon, customStyles } = notification;
     styles = Object.assign({}, styles, customStyles);
     const cx = classNames.bind(styles);
-    const options = { notification, onDismiss, onDismissAll };
     const containerTypeClass = cx({
       'has-close': !isFirst && canDismiss,
       'no-close': !isFirst && !canDismiss,
@@ -47,7 +64,7 @@ export class Notification extends React.Component {
     });
 
     return (
-      <div className={containerTypeClass}>
+      <div key={id} className={containerTypeClass}>
         {(icon) ? <span styleName="icon">{icon}</span> : false}
         <div styleName="content">
           <div styleName="item--message">{message}</div>
@@ -56,7 +73,7 @@ export class Notification extends React.Component {
                 {(acceptBtn) ?
                   <div styleName="actionBtn"
                     onClick={(e) => {
-                      acceptBtn.handler(e, options);
+                      acceptBtn.handler(e, this.props);
                     }}>
                     {(acceptBtn.icon && typeof acceptBtn.icon === 'string') ?
                       <i className={acceptBtn.icon} />
@@ -70,7 +87,7 @@ export class Notification extends React.Component {
                 {(denyBtn) ?
                   <div styleName="actionBtn"
                     onClick={(e) => {
-                      denyBtn.handler(e, options);
+                      denyBtn.handler(e, this.props);
                     }}>
                     {(denyBtn.icon && typeof denyBtn.icon === 'string') ?
                       <i className={denyBtn.icon} />
@@ -87,8 +104,8 @@ export class Notification extends React.Component {
               false
           }
         </div>
-        { (canDismiss) ? <div className="fa fa-close" styleName="close" onClick={() => onDismiss(notification.id)}></div> : false }
-        { (isFirst && canDismiss) ? <div styleName="close-all" onClick={() => onDismissAll()}>Close All</div> : false }
+        { (canDismiss) ? <div styleName="close" onClick={() => handleDismiss(id)}></div> : false }
+        { (isFirst && canDismiss) ? <div styleName="close-all" onClick={() => handleDismissAll()}>Close All</div> : false }
       </div>
     );
   }
