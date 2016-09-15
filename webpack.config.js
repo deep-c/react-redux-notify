@@ -4,7 +4,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const precss = require('precss');
 const autoprefixer = require('autoprefixer');
 
-const env = process.env.NODE_ENV || 'development';
+const env = process.env.NODE_ENV;
 
 const reactExternal = {
   root: 'React',

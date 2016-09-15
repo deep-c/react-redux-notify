@@ -5,7 +5,7 @@
   "main": "./lib/index.js",
   "scripts": {
     "build": "npm run build:lib && npm run build:umd && npm run build:umd:min",
-    "build:umd": "webpack src/index.js dist/ReactReduxNotify.js",
+    "build:umd": "cross-env NODE_ENV=development webpack src/index.js dist/ReactReduxNotify.js",
     "build:umd:min": "cross-env NODE_ENV=production webpack src/index.js dist/ReactReduxNotify.min.js",
     "build:lib": "babel src --out-dir lib",
     "test": "cross-env NODE_ENV=test jest",
