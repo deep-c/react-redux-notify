@@ -1,3 +1,7 @@
+[![CircleCI](https://circleci.com/gh/deep-c/react-redux-notify/tree/master.svg?style=svg&circle-token=49219b4c898fdab7b7d51cb63cdac86d844e635f)](https://circleci.com/gh/deep-c/react-redux-notify/tree/master)
+[![codecov](https://codecov.io/gh/deep-c/react-redux-notify/branch/master/graph/badge.svg?token=JYf7RsPZpo)](https://codecov.io/gh/deep-c/react-redux-notify)
+
+
 # react-redux-notify
 A simple and flexible notifications component built with and for React and Redux, inspired by Atom Editor's Notifications.
 
