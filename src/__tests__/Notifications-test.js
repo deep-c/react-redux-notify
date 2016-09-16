@@ -66,13 +66,6 @@ describe('actions', () => {
     TimeKeeper.reset();
   });
 
-  it('should create an action to add remove all notifications', () => {
-    const expectedAction = {
-      type: REMOVE_ALL_NOTIFICATIONS,
-      force: true,
-    };
-    expect(removeAllNotifications(true)).toEqual(expectedAction);
-  });
 });
 
 describe('reducer', () => {
