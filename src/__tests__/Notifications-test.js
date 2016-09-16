@@ -65,7 +65,6 @@ describe('actions', () => {
     expect(createNotification(config)).toEqual(expectedAction);
     TimeKeeper.reset();
   });
-
 });
 
 describe('reducer', () => {
