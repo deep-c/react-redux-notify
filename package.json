@@ -13,10 +13,11 @@
     "lint:fix": "eslint . --fix",
     "clean": "rimraf dist lib coverage npm-debug.log",
     "prepublish": "npm run clean && npm run build",
-    "start": "opener chrome ./examples/index.html && webpack src/index.js dist/ReactReduxNotify.js --watch",
+    "start": "opener chrome ./examples/index.html && npm run build:umd -- --watch",
     "version:patch": "npm version patch",
     "version:minor": "npm version minor",
-    "version:major": "npm version major"
+    "version:major": "npm version major",
+    "postversion": "git push && git push --tags && npm run clean"
   },
   "pre-commit": [
     "lint",
@@ -27,8 +28,9 @@
     "react-component",
     "notifications",
     "react",
-    "react notifications",
     "reactjs",
+    "react notifications",
+    "notify",
     "redux notifications"
   ],
   "author": "Deeptesh Chagan <deepteshchagan@gmail.com> (http://github.com/deep-c)",
@@ -91,10 +93,6 @@
   "bugs": {
     "url": "https://github.com/deep-c/react-redux-notify/issues"
   },
-  "files": [
-    "lib",
-    "dist"
-  ],
   "jest": {
     "moduleFileExtensions": [
       "js",
