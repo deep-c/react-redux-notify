@@ -184,10 +184,11 @@ npm start
 ```
 
 ## To Do
-* Complete tests for Notify and Notification Components.
+* Complete tests for Notify Component (awaiting react 15.4.0 see [react issue](https://github.com/facebook/react/issues/7386)).
+* Test browser compatibility.
 * Allow mounting reducer at custom key.
 * Have an online demo page.
-* ~~Support for use of inline styles. (Ive decided to not go ahead with this. I have a gut feeling that inline styles are hardly used. If this isnt the case please feel free to open an issue for discussion, create a PR or use a custom notification component. )~~
+* ~~Support for use of inline styles. (Ive decided to not go ahead with this. If you think this is bad decision please feel free to open an issue for discussion, create a PR or use a custom notification component. )~~
 
 ## License
 MIT Copyright (c) 2016 Deeptesh Chagan

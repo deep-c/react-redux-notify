@@ -13,6 +13,7 @@
         "no-underscore-dangle": 0,
         "react/jsx-uses-vars": "error",
         "react/jsx-pascal-case": "error",
+        "react/jsx-uses-react": "error",
         "new-cap": 0
     },
     "settings":{

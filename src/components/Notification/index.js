@@ -4,7 +4,7 @@ import PureRenderMixin from 'react-addons-pure-render-mixin';
 import styleMap from './Notification.scss';
 
 
-class Notification extends React.Component {
+export class Notification extends React.Component {
 
   static propTypes = {
     id: React.PropTypes.number.isRequired,
@@ -33,7 +33,7 @@ class Notification extends React.Component {
   static defaultProps = {
     styles: styleMap,
     canDismiss: true,
-    duration: 2000,
+    duration: 0,
   }
 
   constructor(props) {
