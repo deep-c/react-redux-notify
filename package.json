@@ -14,7 +14,8 @@
     "clean": "rimraf dist lib coverage npm-debug.log",
     "prepublish": "npm run clean && npm run build",
     "start": "opener chrome ./examples/index.html && npm run build:umd -- --watch",
-    "postversion": "git push && git push --tags && npm run clean"
+    "postversion": "git push && git push --tags && npm run clean",
+    "deploy": "publish"
   },
   "pre-commit": [
     "lint",
@@ -61,6 +62,7 @@
     "opener": "^1.4.2",
     "postcss-loader": "^0.13.0",
     "pre-commit": "^1.1.3",
+    "publish": "^0.6.0",
     "react": "^15.3.1",
     "react-dom": "^15.3.1",
     "react-redux": "^4.4.5",

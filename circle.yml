@@ -1,8 +1,14 @@
 machine:
   node:
-    version: 6.4.0
+    version: 6.4.0  
 test:
   override:
     - npm test
   post:
-    - bash <(curl -s https://codecov.io/bash) -t ff1c68d0-41d5-4174-a4ab-ebb1a8d67255    
+    - bash <(curl -s https://codecov.io/bash)
+deployment:
+  npm:
+    branch: master
+    commands:
+      - echo -e "$NPM_USER\n$NPM_PASS\n$NPM_EMAIL" | npm login 
+      - npm run deploy
