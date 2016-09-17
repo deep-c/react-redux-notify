@@ -15,7 +15,7 @@ export class Notify extends React.Component {
     removeAll: React.PropTypes.func.isRequired,
     styles: React.PropTypes.object.isRequired,
     customStyles: React.PropTypes.object,
-    notificationComponent: React.PropTypes.element,
+    notificationComponent: React.PropTypes.func,
     transitionDurations: React.PropTypes.shape({
       enter: React.PropTypes.number,
       leave: React.PropTypes.number,

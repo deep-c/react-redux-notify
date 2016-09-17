@@ -1,13 +1,18 @@
 {
   "name": "react-redux-notify",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A simple notifications component built for use with React and Redux.",
-  "main": "./lib/index.js",
+  "main": "./dist/ReactReduxNotify.js",
+  "files": [
+    "dist",
+    "lib",
+    "src"
+  ],  
   "scripts": {
     "build": "npm run build:lib && npm run build:umd && npm run build:umd:min",
     "build:umd": "cross-env NODE_ENV=development webpack src/index.js dist/ReactReduxNotify.js",
     "build:umd:min": "cross-env NODE_ENV=production webpack src/index.js dist/ReactReduxNotify.min.js",
-    "build:lib": "babel src --out-dir lib",
+    "build:lib": "babel src --out-dir lib && node-sass src -o lib",
     "test": "cross-env NODE_ENV=test jest --verbose",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
