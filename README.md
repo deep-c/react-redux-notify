@@ -90,7 +90,8 @@ There are a number of options that can be used to change the look and behaviour 
 | Property | Type | Default | Default Options | Description |
 | -------- | ---- | ------- | --------------- | ----------- |
 | styles | `object` | CSSModules created mapping (see below) |  | The default styles created and mapped through CSSModules for the component. 
-| customStyles | `object` | undefined |  | A custom styles object that gets merged into the default styles and allows for the overriding or creation of individual styles using your own classes.
+| customStyles | `object` |  |  | A custom styles object that gets merged into the default styles and allows for the overriding or creation of individual styles using your own classes.
+| notificationComponent | `element` | (see Notification Component below)  |   | A custom notification you want to use as the default Notification component to render. 
 | transitionDurations | `object` | `{ enter : 160, leave: 400 }` |  | React CSS Transition Group timeout values for enter and leave events. If you change the transition classes then you can use these to change the timeout values for your animation.
 | position | `string` | 'TopRight' | `'TopRight', 'BottomRight', 'BottomLeft', 'TopLeft'` | Default options for where the Notify container will be positioned to render you components. Again this can be extended/customised through your own classes and this prop.
 

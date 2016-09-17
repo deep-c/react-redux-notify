@@ -24,7 +24,7 @@ export class Notify extends React.Component {
   }
 
   static defaultProps = {
-    NotificationComponent: Notification,
+    notificationComponent: Notification,
     transitionDurations: {
       enter: 160,
       leave: 400,
@@ -54,7 +54,7 @@ export class Notify extends React.Component {
     const {
       notifications,
       customStyles,
-      NotificationComponent,
+      notificationComponent,
       transitionDurations,
       position } = this.props;
     let { styles } = this.props;
@@ -73,7 +73,7 @@ export class Notify extends React.Component {
               transitionLeaveTimeout={transitionDurations.leave}>
             {
               notifications.map((notification, i) => {
-                const NewNotification = notification.customComponent || NotificationComponent;
+                const NewNotification = notification.customComponent || notificationComponent;
                 return (
                   <NewNotification
                     key={notification.id}
