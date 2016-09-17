@@ -13,9 +13,9 @@
     "lint:fix": "eslint . --fix",
     "clean": "rimraf dist lib coverage npm-debug.log",
     "prepublish": "npm run clean && npm run build",
-    "start": "opener chrome ./examples/index.html && npm run build:umd -- --watch",
-    "postversion": "git push && git push --tags && npm run clean",
-    "deploy": "publish"
+    "start": "opener chrome ./examples/index.html && npm run build:umd -- --watch",    
+    "deploy": "publish",
+    "postpublish" : "PACKAGE_VERSION=$(cat package.json | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[\",]//g' | tr -d '[[:space:]]') && git tag v$PACKAGE_VERSION && git push --tags"
   },
   "pre-commit": [
     "lint",
