@@ -1,4 +1,4 @@
-import { default as Notify } from 'components/Notify';
+import { default as Notify } from './components/Notify';
 import reducer,
     { createNotification,
     removeNotification,
@@ -13,7 +13,7 @@ import reducer,
     NOTIFICATIONS_POS_TOP_LEFT,
     ADD_NOTIFICATION,
     REMOVE_NOTIFICATION,
-    REMOVE_ALL_NOTIFICATIONS } from 'modules/Notifications';
+    REMOVE_ALL_NOTIFICATIONS } from './modules/Notifications';
 
 export {
     reducer,
