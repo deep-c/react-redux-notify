@@ -53,10 +53,14 @@ const config = {
     root: [
       path.resolve('./src'),
     ],
+    modules: [
+      path.resolve(__dirname, 'node_modules'),
+      path.resolve(__dirname, 'src'),
+    ],
   },
   output: {
     library: 'ReactReduxNotify',
-    libraryTarget: 'umd',
+    libraryTarget: (env !== 'lib') ? 'umd' : 'commonjs2',
   },
   module: {
     loaders: [
@@ -100,7 +104,7 @@ const config = {
   ],
 };
 
-if (env === 'development') {
+if (env === 'development' || env === 'lib') {
   config.plugins.push(
         new ExtractTextPlugin('ReactReduxNotify.css')
     );

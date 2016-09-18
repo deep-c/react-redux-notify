@@ -1,4 +1,17 @@
 {
   "presets": ["es2015", "react"],
-  "plugins": ["transform-runtime", "transform-class-properties", "transform-es2015-destructuring", "transform-object-rest-spread"]
+  "plugins": ["transform-runtime", "transform-class-properties", "transform-es2015-destructuring", "transform-object-rest-spread"],
+  "env": {
+    "lib": {
+      "plugins": [
+        [
+          "babel-plugin-webpack-loaders",
+          {
+            "config": "./webpack.config.js",
+            "verbose": false,
+          }
+        ]
+      ]
+    }
+  }
 }
