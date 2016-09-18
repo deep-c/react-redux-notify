@@ -1,6 +1,6 @@
 {
   "name": "react-redux-notify",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "A simple notifications component built for use with React and Redux.",
   "main": "./lib/index.js",
   "files": [
