@@ -1,6 +1,6 @@
 {
   "name": "react-redux-notify",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "A simple notifications component built for use with React and Redux.",
   "main": "./lib/index.js",
   "files": [
@@ -57,7 +57,6 @@
     "babel-preset-es2015": "^6.14.0",
     "babel-preset-react": "^6.11.1",
     "babel-runtime": "^6.11.6",
-    "classnames": "^2.2.5",
     "cross-env": "^2.0.1",
     "css-loader": "^0.25.0",
     "eslint": "^3.5.0",
@@ -76,8 +75,6 @@
     "pre-commit": "^1.1.3",
     "publish": "^0.6.0",
     "react": "^15.3.1",
-    "react-addons-css-transition-group": "^15.3.1",
-    "react-addons-pure-render-mixin": "^15.3.1",
     "react-dom": "^15.3.1",
     "react-redux": "^4.4.5",
     "react-test-renderer": "^15.3.1",
@@ -89,6 +86,9 @@
     "webpack": "^1.13.2"    
   },
   "dependencies": {
+    "classnames": "^2.2.5",
+    "react-addons-css-transition-group": "^15.3.1",
+    "react-addons-pure-render-mixin": "^15.3.1"    
   },
   "peerDependencies": {
     "react": ">= 15.0.0 < 16.0.0",
