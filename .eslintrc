@@ -14,7 +14,8 @@
         "react/jsx-uses-vars": "error",
         "react/jsx-pascal-case": "error",
         "react/jsx-uses-react": "error",
-        "new-cap": 0
+        "new-cap": 0,
+        "import/no-extraneous-dependencies": ["error", { "devDependencies": true }]
     },
     "settings":{
         "import/resolver": "webpack"
