@@ -48,7 +48,7 @@ import {Notify} from 'react-redux-notify';
 To create a notification import the `createNotification` action creator and dispatch it with your notification configuration obejct. The notification configuration object is just a plain object whose keys are passed along to the `Notification` component. By default there are 4 types of notifications `SUCCESS`, `WARNING`, `ERROR` and `INFO`. 
 ```javascript
 import { connect } from 'react-redux';
-import {createNotification, NOTIFICATION_TYPE_SUCCESS} from 'react-redux-notifications';
+import {createNotification, NOTIFICATION_TYPE_SUCCESS} from 'react-redux-notify';
 const mySuccessNotification = {
   message: 'You have been logged in!',
   type: NOTIFICATION_TYPE_SUCCESS,
