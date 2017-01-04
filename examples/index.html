@@ -107,7 +107,8 @@
                     },                    
                     canDismiss: true,
                     globalCustomNotification: false,
-                    position: NOTIFICATIONS_POS_TOP_RIGHT, 
+                    position: NOTIFICATIONS_POS_TOP_RIGHT,
+                    forceClose: false,
                 }
                 this.createNotification = this._createNotification.bind(this);
                 this.handleFieldChange =  this._handleFieldChange.bind(this);
@@ -115,7 +116,7 @@
 
             _handleFieldChange(field){
                 return (e) => {
-                    if (field == 'canDismiss' || field == 'globalCustomNotification'){
+                    if (field == 'canDismiss' || field == 'globalCustomNotification' || field == 'forceClose'){
                         this.setState({[field]: e.target.checked});
                     } else if (field == 'customComponent') {
                         const componentToUse = (e.target.checked) ? MyCustomNotificationComponent: undefined
@@ -148,7 +149,8 @@
                     <div>
                         <Notify 
                             notificationComponent={NotificationComponentProp}
-                            position={this.state.position} 
+                            position={this.state.position}
+                            forceClose={this.state.forceClose} 
                             customStyles={customNotifyStyles} />
 
                         <form className="pure-form pure-form-stacked" style={
@@ -183,7 +185,10 @@
                             <input type="radio" value={CUSTOM_POSITION} checked={this.state.position==CUSTOM_POSITION} onChange={this.handleFieldChange('position')} /> Custom Position - Top Center <br />
 
                             <label><strong>Custom Notification Styles: </strong></label>
-                            <input type="checkbox" defaultChecked={false} onChange={this.handleFieldChange('customStyles')} />                                                        
+                            <input type="checkbox" defaultChecked={false} onChange={this.handleFieldChange('customStyles')} />
+
+                            <label><strong>Force Close Notifications: </strong></label>
+                            <input type="checkbox" defaultChecked={this.state.forceClose} onChange={this.handleFieldChange('forceClose')} />                                                                                    
                             
 
                             <div style={{paddingTop:'10px'}}>
