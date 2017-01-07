@@ -21,6 +21,7 @@ export class Notify extends React.Component {
       leave: React.PropTypes.number,
     }),
     position: React.PropTypes.string,
+    forceClose: React.PropTypes.bool,
   }
 
   static defaultProps = {
@@ -31,6 +32,7 @@ export class Notify extends React.Component {
     },
     position: NOTIFICATIONS_POS_TOP_RIGHT,
     styles: styleMap,
+    forceClose: false,
   }
 
   constructor(props) {
@@ -46,8 +48,8 @@ export class Notify extends React.Component {
   }
 
   _handleDismissAll(force) {
-    const { removeAll } = this.props;
-    removeAll(force);
+    const { removeAll, forceClose } = this.props;
+    removeAll(force || forceClose);
   }
 
   render() {
