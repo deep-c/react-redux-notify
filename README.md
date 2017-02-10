@@ -48,7 +48,7 @@ import {Notify} from 'react-redux-notify';
 To create a notification import the `createNotification` action creator and dispatch it with your notification configuration obejct. The notification configuration object is just a plain object whose keys are passed along to the `Notification` component. By default there are 4 types of notifications `SUCCESS`, `WARNING`, `ERROR` and `INFO`. 
 ```javascript
 import { connect } from 'react-redux';
-import {createNotification, NOTIFICATION_TYPE_SUCCESS} from 'react-redux-notifications';
+import {createNotification, NOTIFICATION_TYPE_SUCCESS} from 'react-redux-notify';
 const mySuccessNotification = {
   message: 'You have been logged in!',
   type: NOTIFICATION_TYPE_SUCCESS,
@@ -94,6 +94,7 @@ There are a number of options that can be used to change the look and behaviour 
 | notificationComponent | `func` | (see Notification Component below)  |   | A custom notification you want to use as the default Notification component to render. 
 | transitionDurations | `object` | `{ enter : 160, leave: 400 }` |  | React CSS Transition Group timeout values for enter and leave events. If you change the transition classes then you can use these to change the timeout values for your animation.
 | position | `string` | 'TopRight' | `'TopRight', 'BottomRight', 'BottomLeft', 'TopLeft'` | Default options for where the Notify container will be positioned to render you components. Again this can be extended/customised through your own classes and this prop.
+| forceClose | `boolean` | 'false' |  | If set to true will remove all notifications regardless of the notification's `canDismiss` value.
 
 #### Notify Component Styles
 This is the default style mapping created. You can choose to override these with your own classes using the `customStyles` prop explained above. You can view what these CSS classes do by default in the `src/components/Notify/` folder for `react-redux-notify` in the `node_modules` directory.
@@ -149,7 +150,7 @@ The default notification component has the following configuration options which
 | styles | `object` | CSSModules created mapping (see below)  | Yes | The default styles created and mapped through CSSModules for the component.
 | customStyles | `object` |  | Yes | A custom styles object that gets merged into the default styles and allows for the overriding or creation of individual styles using your own classes.
 | customComponent | `element` |   | Yes | A custom component that will be used as the Notification. It will get passed all these props as well as any custom object properties you choose to add to the notification configuration object.
-| acceptBtn, denyBtn | `object` : `{` <br/> `handler: function(event, object),` <br> `icon: node,`<br> `title: node` <br> `}` |   | Yes | **`handler`** must be a function, it gets passed the `event` as well as an `object` containing all these notification props.<br> **`icon`** is optional and if passed as a `string` will be used as the button's icon's className else if type is anything else it will get rendered as is.<br> **`title`** is rendered as is.
+| acceptBtn, denyBtn | `object` : `{` <br/> `handler: function(event, object),` <br> `icon: node,`<br> `title: node` <br> `}` |   | Yes | **`handler`** must be a function, it gets passed the `event` as well as an `object` containing all these notification props.<br> **`icon`** is optional and if passed as a `string` will be used as the button's icon's className else if type is anything else it will get rendered as is.<br> **`title`** is rendered as is.<br>note: `canDismiss` must be false in order for the accept and deny options to be rendered.
 | isFirst | `boolean` | false | No | Indicates whether the notification is the first.
 | handleDismiss | `function` | bound to `removeNotification`  | No | A function bound to `removeNotification` that is used to dismiss a notification.
 | handleDismissAll | `function` | bound to `removeAllNotifications`  | No | A function bound to `removeAllNotifications` that is used to dismiss all notifications.

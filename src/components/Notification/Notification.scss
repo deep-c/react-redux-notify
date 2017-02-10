@@ -18,7 +18,7 @@ $max-height: 150px;
   background: lighten($bg, 25%);
   padding-left: 30px;
   overflow: hidden;
-  z-index: 200;
+  z-index: 9999;
   margin-bottom: 2px;
   max-height: $max-height;
 
