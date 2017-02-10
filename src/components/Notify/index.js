@@ -69,8 +69,8 @@ export class Notify extends React.Component {
               component="div"
               className={styles.wrapper}
               transitionName={ { enter: styles.enter,
-                                  leave: styles.leave,
-                              } }
+                leave: styles.leave,
+              } }
               transitionEnterTimeout={transitionDurations.enter}
               transitionLeaveTimeout={transitionDurations.leave}>
             {
