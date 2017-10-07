@@ -1,44 +1,39 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
-import PureRenderMixin from 'react-addons-pure-render-mixin';
 import styleMap from './Notification.scss';
 
 
-export class Notification extends React.Component {
+export class Notification extends React.PureComponent {
 
   static propTypes = {
-    id: React.PropTypes.number.isRequired,
-    type: React.PropTypes.string.isRequired,
-    canDismiss: React.PropTypes.bool.isRequired,
-    duration: React.PropTypes.number.isRequired,
-    icon: React.PropTypes.node,
-    customStyles: React.PropTypes.object,
-    customComponent: React.PropTypes.element,
-    acceptBtn: React.PropTypes.shape({
-      handler: React.PropTypes.func.isRequired,
-      icon: React.PropTypes.node,
-      title: React.PropTypes.node,
+    id: PropTypes.number.isRequired,
+    type: PropTypes.string.isRequired,
+    canDismiss: PropTypes.bool.isRequired,
+    duration: PropTypes.number.isRequired,
+    icon: PropTypes.node,
+    customStyles: PropTypes.object,
+    customComponent: PropTypes.element,
+    acceptBtn: PropTypes.shape({
+      handler: PropTypes.func.isRequired,
+      icon: PropTypes.node,
+      title: PropTypes.node,
     }),
-    denyBtn: React.PropTypes.shape({
-      handler: React.PropTypes.func.isRequired,
-      icon: React.PropTypes.node,
-      title: React.PropTypes.node,
+    denyBtn: PropTypes.shape({
+      handler: PropTypes.func.isRequired,
+      icon: PropTypes.node,
+      title: PropTypes.node,
     }),
-    isFirst: React.PropTypes.bool.isRequired,
-    handleDismiss: React.PropTypes.func.isRequired,
-    handleDismissAll: React.PropTypes.func.isRequired,
-    styles: React.PropTypes.object.isRequired,
+    isFirst: PropTypes.bool.isRequired,
+    handleDismiss: PropTypes.func.isRequired,
+    handleDismissAll: PropTypes.func.isRequired,
+    styles: PropTypes.object.isRequired,
   }
 
   static defaultProps = {
     styles: styleMap,
     canDismiss: true,
     duration: 0,
-  }
-
-  constructor(props) {
-    super(props);
-    this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
   }
 
   componentDidMount() {
