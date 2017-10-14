@@ -1,27 +1,27 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-import PureRenderMixin from 'react-addons-pure-render-mixin';
+import ReactCSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
 import { removeNotification, removeAllNotifications, NOTIFICATIONS_POS_TOP_RIGHT } from 'modules/Notifications';
 import { default as Notification } from 'components/Notification';
 import styleMap from './Notify.scss';
 
 
-export class Notify extends React.Component {
+export class Notify extends React.PureComponent {
 
   static propTypes = {
-    notifications: React.PropTypes.array.isRequired,
-    remove: React.PropTypes.func.isRequired,
-    removeAll: React.PropTypes.func.isRequired,
-    styles: React.PropTypes.object.isRequired,
-    customStyles: React.PropTypes.object,
-    notificationComponent: React.PropTypes.func,
-    transitionDurations: React.PropTypes.shape({
-      enter: React.PropTypes.number,
-      leave: React.PropTypes.number,
+    notifications: PropTypes.array.isRequired,
+    remove: PropTypes.func.isRequired,
+    removeAll: PropTypes.func.isRequired,
+    styles: PropTypes.object.isRequired,
+    customStyles: PropTypes.object,
+    notificationComponent: PropTypes.func,
+    transitionDurations: PropTypes.shape({
+      enter: PropTypes.number,
+      leave: PropTypes.number,
     }),
-    position: React.PropTypes.string,
-    forceClose: React.PropTypes.bool,
+    position: PropTypes.string,
+    forceClose: PropTypes.bool,
   }
 
   static defaultProps = {
@@ -37,7 +37,6 @@ export class Notify extends React.Component {
 
   constructor(props) {
     super(props);
-    this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
     this.handleDismiss = this._handleDismiss.bind(this);
     this.handleDismissAll = this._handleDismissAll.bind(this);
   }
