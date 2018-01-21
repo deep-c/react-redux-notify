@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
-import styleMap from './Notification.scss';
+import styles from './Notification.scss';
 
 export class Notification extends React.PureComponent {
   static propTypes = {
@@ -25,7 +25,6 @@ export class Notification extends React.PureComponent {
     isFirst: PropTypes.bool.isRequired,
     handleDismiss: PropTypes.func.isRequired,
     handleDismissAll: PropTypes.func.isRequired,
-    styles: PropTypes.object.isRequired,
     localization: PropTypes.shape({
       closeAllBtnText: PropTypes.string.isRequired,
       acceptBtnText: PropTypes.string.isRequired,
@@ -34,8 +33,8 @@ export class Notification extends React.PureComponent {
   };
 
   static defaultProps = {
-    styles: styleMap,
     canDismiss: true,
+    customStyles: {},
     duration: 0,
   };
 
@@ -46,6 +45,10 @@ export class Notification extends React.PureComponent {
         handleDismiss(id);
       }, duration);
     }
+  }
+
+  getStyle(name) {
+    return this.props.customStyles[name] || styles[name];
   }
 
   render() {
@@ -63,9 +66,7 @@ export class Notification extends React.PureComponent {
       id,
       localization,
     } = this.props;
-    let { styles } = this.props;
-    styles = Object.assign({}, styles, customStyles);
-    const cx = classNames.bind(styles);
+    const cx = classNames.bind(Object.assign({}, styles, customStyles));
     const containerTypeClass = cx({
       'has-close': !isFirst && canDismiss,
       'no-close': !isFirst && !canDismiss,
@@ -75,15 +76,15 @@ export class Notification extends React.PureComponent {
     });
 
     return (
-      <div key={id} className={containerTypeClass}>
+      <div className={containerTypeClass}>
         {icon ? <span className={styles.icon}>{icon}</span> : false}
-        <div className={styles.content}>
-          <div className={styles['item--message']}>{message}</div>
+        <div className={this.getStyle('content')}>
+          <div className={this.getStyle('item__message')}>{message}</div>
           {!canDismiss && (acceptBtn || denyBtn) ? (
-            <div className={styles['item--btnBar']}>
+            <div className={this.getStyle('item__btnBar')}>
               {acceptBtn ? (
                 <div
-                  className={styles.actionBtn}
+                  className={this.getStyle('actionBtn')}
                   onClick={(e) => {
                     acceptBtn.handler(e, this.props);
                   }}
@@ -100,7 +101,7 @@ export class Notification extends React.PureComponent {
               )}
               {denyBtn ? (
                 <div
-                  className={styles.actionBtn}
+                  className={this.getStyle('actionBtn')}
                   onClick={(e) => {
                     denyBtn.handler(e, this.props);
                   }}
@@ -121,13 +122,16 @@ export class Notification extends React.PureComponent {
           )}
         </div>
         {canDismiss ? (
-          <div className={styles.close} onClick={() => handleDismiss(id)} />
+          <div
+            className={this.getStyle('close')}
+            onClick={() => handleDismiss(id)}
+          />
         ) : (
           false
         )}
         {isFirst && canDismiss ? (
           <div
-            className={styles['close-all']}
+            className={this.getStyle('close-all')}
             onClick={() => handleDismissAll()}
           >
             {localization.closeAllBtnText}

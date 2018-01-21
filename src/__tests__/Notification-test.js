@@ -1,5 +1,5 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import { shallow } from 'enzyme';
 import { Notification } from 'components/Notification';
 import { NOTIFICATION_TYPE_SUCCESS } from 'modules/Notifications';
 
@@ -22,27 +22,28 @@ describe('Notification', () => {
     },
   };
 
-  it('it renders with default props', () => {
-    const component = renderer.create(<Notification {...props} />);
-    const tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+  it('renders with default props', () => {
+    const component = shallow(<Notification {...props} />);
+    expect(component).toMatchSnapshot();
   });
 
-  it('it renders with an element for the icon when an element is passed', () => {
+  it('renders with an element for the icon when an element is passed', () => {
     const tProps = { ...props, icon: <i className="fa fa-fire" /> };
-    const component = renderer.create(<Notification {...tProps} />);
-    const tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+    const component = shallow(
+            <Notification {...tProps} />
+        );
+    expect(component).toMatchSnapshot();
   });
 
-  it('it renders with an string for the icon when a string is passed', () => {
+  it('renders with an string for the icon when a string is passed', () => {
     const tProps = { ...props, icon: String.fromCharCode(183) };
-    const component = renderer.create(<Notification {...tProps} />);
-    const tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+    const component = shallow(
+            <Notification {...tProps} />
+        );
+    expect(component).toMatchSnapshot();
   });
 
-  it('it renders an accept button with an a title and an icon className and calls function on click', () => {
+  it('renders an accept button with an a title and an icon className and calls function on click', () => {
     const tProps = {
       ...props,
       canDismiss: false,
@@ -52,12 +53,13 @@ describe('Notification', () => {
         title: 'Accept',
       },
     };
-    const component = renderer.create(<Notification {...tProps} />);
-    const tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+    const component = shallow(
+            <Notification {...tProps} />
+        );
+    expect(component).toMatchSnapshot();
   });
 
-  it('it renders an accept button without a title and an icon element ', () => {
+  it('renders an accept button without a title and an icon element ', () => {
     const tProps = {
       ...props,
       canDismiss: false,
@@ -66,12 +68,13 @@ describe('Notification', () => {
         icon: <i className="fa fa-thumbs-up" />,
       },
     };
-    const component = renderer.create(<Notification {...tProps} />);
-    const tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+    const component = shallow(
+            <Notification {...tProps} />
+        );
+    expect(component).toMatchSnapshot();
   });
 
-  it('it renders a deny button with an a title and an icon className', () => {
+  it('renders a deny button with an a title and an icon className', () => {
     const tProps = {
       ...props,
       canDismiss: false,
@@ -81,12 +84,13 @@ describe('Notification', () => {
         title: 'Deny',
       },
     };
-    const component = renderer.create(<Notification {...tProps} />);
-    const tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+    const component = shallow(
+            <Notification {...tProps} />
+        );
+    expect(component).toMatchSnapshot();
   });
 
-  it('it renders a deny button without a title and an icon element ', () => {
+  it('renders a deny button without a title and an icon element ', () => {
     const tProps = {
       ...props,
       canDismiss: false,
@@ -95,26 +99,29 @@ describe('Notification', () => {
         icon: <i className="fa fa-thumbs-down" />,
       },
     };
-    const component = renderer.create(<Notification {...tProps} />);
-    const tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+    const component = shallow(
+            <Notification {...tProps} />
+        );
+    expect(component).toMatchSnapshot();
   });
 
-  it('it renders with a close all button', () => {
+  it('renders with a close all button', () => {
     const tProps = { ...props, isFirst: true };
-    const component = renderer.create(<Notification {...tProps} />);
-    const tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+    const component = shallow(
+            <Notification {...tProps} />
+        );
+    expect(component).toMatchSnapshot();
   });
 
-  it('it renders when a duration is greater than 0', () => {
+  it('renders when a duration is greater than 0', () => {
     const tProps = { ...props, duration: 2000 };
-    const component = renderer.create(<Notification {...tProps} />);
-    const tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+    const component = shallow(
+            <Notification {...tProps} />
+        );
+    expect(component).toMatchSnapshot();
   });
 
-  it('it calls the button handler function when clicked', () => {
+  it('calls the button handler function when clicked', () => {
     const acceptBtnHandler = jest.fn();
     const denyBtnHandler = jest.fn();
     const tProps = {
@@ -132,9 +139,10 @@ describe('Notification', () => {
       },
       styles: {},
     };
-    const component = renderer.create(<Notification {...tProps} />);
+    const component = shallow(
+            <Notification {...tProps} />
+        );
     const tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
     tree.children[0].children[1].children[0].props.onClick();
     expect(acceptBtnHandler).toBeCalledWith(undefined, tProps);
     tree.children[0].children[1].children[1].props.onClick();
@@ -142,7 +150,9 @@ describe('Notification', () => {
   });
 
   it('calls handleDismiss onclick', () => {
-    const component = renderer.create(<Notification {...props} />);
+    const component = shallow(
+            <Notification {...props} />
+        );
     const tree = component.toJSON();
     tree.children[1].props.onClick();
     expect(handleDismissClick).toBeCalledWith(ID);
@@ -150,13 +160,15 @@ describe('Notification', () => {
 
   it('calls handleDismissAll onclick', () => {
     const tProps = { ...props, isFirst: true };
-    const component = renderer.create(<Notification {...tProps} />);
+    const component = shallow(
+            <Notification {...tProps} />
+        );
     const tree = component.toJSON();
     tree.children[2].props.onClick();
     expect(handleDismissAllClick).toBeCalledWith();
   });
 
-  it('renders localization custom localization text for accept and deny buttons', () => {
+  it('renders custom localization text for accept and deny buttons', () => {
     const acceptBtnHandler = jest.fn();
     const denyBtnHandler = jest.fn();
     const tProps = {
@@ -176,8 +188,7 @@ describe('Notification', () => {
         icon: 'fa fa-thumbs-up',
       },
     };
-    const component = renderer.create(<Notification {...tProps} />);
-    const tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+    const component = shallow(<Notification {...tProps} />);
+    expect(component).toMatchSnapshot();
   });
 });
