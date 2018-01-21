@@ -168,8 +168,8 @@ This is the default style mapping created. You can choose to override these with
   has-close-all--noDismiss:
   icon:
   item:
-  item--btnBar:
-  item--message:
+  item__btnBar:
+  item__message:
   no-close:
   notification--error:
   notification--info:
