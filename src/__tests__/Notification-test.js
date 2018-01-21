@@ -20,6 +20,7 @@ describe('Notification', () => {
       acceptBtnText: 'Accept',
       denyBtnText: 'Deny',
     },
+    customStyles: {},
   };
 
   it('renders with default props', () => {
@@ -29,17 +30,13 @@ describe('Notification', () => {
 
   it('renders with an element for the icon when an element is passed', () => {
     const tProps = { ...props, icon: <i className="fa fa-fire" /> };
-    const component = shallow(
-            <Notification {...tProps} />
-        );
+    const component = shallow(<Notification {...tProps} />);
     expect(component).toMatchSnapshot();
   });
 
   it('renders with an string for the icon when a string is passed', () => {
     const tProps = { ...props, icon: String.fromCharCode(183) };
-    const component = shallow(
-            <Notification {...tProps} />
-        );
+    const component = shallow(<Notification {...tProps} />);
     expect(component).toMatchSnapshot();
   });
 
@@ -53,9 +50,7 @@ describe('Notification', () => {
         title: 'Accept',
       },
     };
-    const component = shallow(
-            <Notification {...tProps} />
-        );
+    const component = shallow(<Notification {...tProps} />);
     expect(component).toMatchSnapshot();
   });
 
@@ -68,9 +63,7 @@ describe('Notification', () => {
         icon: <i className="fa fa-thumbs-up" />,
       },
     };
-    const component = shallow(
-            <Notification {...tProps} />
-        );
+    const component = shallow(<Notification {...tProps} />);
     expect(component).toMatchSnapshot();
   });
 
@@ -84,9 +77,7 @@ describe('Notification', () => {
         title: 'Deny',
       },
     };
-    const component = shallow(
-            <Notification {...tProps} />
-        );
+    const component = shallow(<Notification {...tProps} />);
     expect(component).toMatchSnapshot();
   });
 
@@ -99,26 +90,32 @@ describe('Notification', () => {
         icon: <i className="fa fa-thumbs-down" />,
       },
     };
-    const component = shallow(
-            <Notification {...tProps} />
-        );
+    const component = shallow(<Notification {...tProps} />);
     expect(component).toMatchSnapshot();
   });
 
   it('renders with a close all button', () => {
     const tProps = { ...props, isFirst: true };
-    const component = shallow(
-            <Notification {...tProps} />
-        );
+    const component = shallow(<Notification {...tProps} />);
+    expect(component.find('.close-all').text()).toBe('Close All');
     expect(component).toMatchSnapshot();
   });
 
-  it('renders when a duration is greater than 0', () => {
+  it('renders with a duration greater than 0', () => {
     const tProps = { ...props, duration: 2000 };
-    const component = shallow(
-            <Notification {...tProps} />
-        );
+    const component = shallow(<Notification {...tProps} />);
     expect(component).toMatchSnapshot();
+  });
+
+  it('calls handleDismiss after duration expires', () => {
+    jest.useFakeTimers();
+    const tProps = { ...props, duration: 2000 };
+    // eslint-disable-next-line no-unused-vars
+    const component = shallow(<Notification {...tProps} />);
+    setTimeout(() => {
+      expect(handleDismissClick).toHaveBeenCalled();
+    }, 2000);
+    jest.runAllTimers();
   });
 
   it('calls the button handler function when clicked', () => {
@@ -137,35 +134,28 @@ describe('Notification', () => {
         icon: 'fa fa-thumbs-up',
         title: 'Accept',
       },
-      styles: {},
     };
-    const component = shallow(
-            <Notification {...tProps} />
-        );
-    const tree = component.toJSON();
-    tree.children[0].children[1].children[0].props.onClick();
+    const component = shallow(<Notification {...tProps} />);
+    const buttons = component.find('.actionBtn');
+    const acceptBtn = buttons.first();
+    const denyBtn = buttons.last();
+    acceptBtn.simulate('click');
     expect(acceptBtnHandler).toBeCalledWith(undefined, tProps);
-    tree.children[0].children[1].children[1].props.onClick();
+    denyBtn.simulate('click');
     expect(denyBtnHandler).toBeCalledWith(undefined, tProps);
   });
 
   it('calls handleDismiss onclick', () => {
-    const component = shallow(
-            <Notification {...props} />
-        );
-    const tree = component.toJSON();
-    tree.children[1].props.onClick();
-    expect(handleDismissClick).toBeCalledWith(ID);
+    const component = shallow(<Notification {...props} />);
+    component.find('.close').simulate('click');
+    expect(handleDismissClick).toHaveBeenCalled();
   });
 
   it('calls handleDismissAll onclick', () => {
     const tProps = { ...props, isFirst: true };
-    const component = shallow(
-            <Notification {...tProps} />
-        );
-    const tree = component.toJSON();
-    tree.children[2].props.onClick();
-    expect(handleDismissAllClick).toBeCalledWith();
+    const component = shallow(<Notification {...tProps} />);
+    component.find('.close-all').simulate('click');
+    expect(handleDismissAllClick).toHaveBeenCalled();
   });
 
   it('renders custom localization text for accept and deny buttons', () => {
@@ -174,21 +164,40 @@ describe('Notification', () => {
     const tProps = {
       ...props,
       localization: {
-        closeAllBtnText: 'Close dem all',
+        closeAllBtnText: 'Close All',
         acceptBtnText: 'Yes',
         denyBtnText: 'No',
       },
       canDismiss: false,
       denyBtn: {
         handler: denyBtnHandler,
-        icon: <i className="fa fa-thumbs-down" />,
+        icon: false,
       },
       acceptBtn: {
         handler: acceptBtnHandler,
-        icon: 'fa fa-thumbs-up',
+        icon: false,
       },
+      isFirst: true,
     };
     const component = shallow(<Notification {...tProps} />);
+    const buttons = component.find('.actionBtn');
+    expect(buttons.first().text()).toBe('Yes');
+    expect(buttons.last().text()).toBe('No');
+    expect(component).toMatchSnapshot();
+  });
+
+  it('renders custom localization text for close all', () => {
+    const tProps = {
+      ...props,
+      localization: {
+        closeAllBtnText: 'Close dem all',
+        acceptBtnText: 'Yes',
+        denyBtnText: 'No',
+      },
+      isFirst: true,
+    };
+    const component = shallow(<Notification {...tProps} />);
+    expect(component.find('.close-all').text()).toBe('Close dem all');
     expect(component).toMatchSnapshot();
   });
 });

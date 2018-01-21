@@ -118,7 +118,7 @@ exports[`Notification renders an accept button without a title and an icon eleme
 
 exports[`Notification renders custom localization text for accept and deny buttons 1`] = `
 <div
-  className="no-close notification--success"
+  className="has-close-all--noDismiss notification--success"
 >
   <div
     className="content"
@@ -135,18 +135,12 @@ exports[`Notification renders custom localization text for accept and deny butto
         className="actionBtn"
         onClick={[Function]}
       >
-        <i
-          className="fa fa-thumbs-up"
-        />
         Yes
       </div>
       <div
         className="actionBtn"
         onClick={[Function]}
       >
-        <i
-          className="fa fa-thumbs-down"
-        />
         No
       </div>
     </div>
@@ -154,9 +148,9 @@ exports[`Notification renders custom localization text for accept and deny butto
 </div>
 `;
 
-exports[`Notification renders when a duration is greater than 0 1`] = `
+exports[`Notification renders custom localization text for close all 1`] = `
 <div
-  className="has-close notification--success"
+  className="has-close-all notification--success"
 >
   <div
     className="content"
@@ -171,6 +165,12 @@ exports[`Notification renders when a duration is greater than 0 1`] = `
     className="close"
     onClick={[Function]}
   />
+  <div
+    className="close-all"
+    onClick={[Function]}
+  >
+    Close dem all
+  </div>
 </div>
 `;
 
@@ -197,6 +197,26 @@ exports[`Notification renders with a close all button 1`] = `
   >
     Close All
   </div>
+</div>
+`;
+
+exports[`Notification renders with a duration greater than 0 1`] = `
+<div
+  className="has-close notification--success"
+>
+  <div
+    className="content"
+  >
+    <div
+      className="item__message"
+    >
+      Hello There!
+    </div>
+  </div>
+  <div
+    className="close"
+    onClick={[Function]}
+  />
 </div>
 `;
 
