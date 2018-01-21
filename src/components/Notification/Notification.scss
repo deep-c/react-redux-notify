@@ -71,7 +71,7 @@ $max-height: 150px;
   font-family: 'Lato', sans-serif;
   border-top: 1px solid hsla(0,0%,0%,.1);
   -webkit-font-smoothing: antialiased;
-  &--message {
+  &__message {
     @extend .item;
     font-size: 0.9rem;
     max-height: $max-height;
@@ -81,7 +81,7 @@ $max-height: 150px;
       margin-bottom: 0;
     }
   }
-  &--btnBar {
+  &__btnBar {
     @extend .item;
     margin-top: 10px;
     padding: 0;

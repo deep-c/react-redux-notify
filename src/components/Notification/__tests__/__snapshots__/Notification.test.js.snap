@@ -1,0 +1,293 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Notification renders a deny button with an a title and an icon className 1`] = `
+<div
+  className="no-close notification--success"
+>
+  <div
+    className="content"
+  >
+    <div
+      className="item__message"
+    >
+      Hello There!
+    </div>
+    <div
+      className="item__btnBar"
+    >
+      <div
+        className="actionBtn"
+        onClick={[Function]}
+      >
+        <i
+          className="fa fa-thumbs-down"
+        />
+        Deny
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Notification renders a deny button without a title and an icon element  1`] = `
+<div
+  className="no-close notification--success"
+>
+  <div
+    className="content"
+  >
+    <div
+      className="item__message"
+    >
+      Hello There!
+    </div>
+    <div
+      className="item__btnBar"
+    >
+      <div
+        className="actionBtn"
+        onClick={[Function]}
+      >
+        <i
+          className="fa fa-thumbs-down"
+        />
+        Deny
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Notification renders an accept button with an a title and an icon className and calls function on click 1`] = `
+<div
+  className="no-close notification--success"
+>
+  <div
+    className="content"
+  >
+    <div
+      className="item__message"
+    >
+      Hello There!
+    </div>
+    <div
+      className="item__btnBar"
+    >
+      <div
+        className="actionBtn"
+        onClick={[Function]}
+      >
+        <i
+          className="fa fa-thumbs-up"
+        />
+        Accept
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Notification renders an accept button without a title and an icon element  1`] = `
+<div
+  className="no-close notification--success"
+>
+  <div
+    className="content"
+  >
+    <div
+      className="item__message"
+    >
+      Hello There!
+    </div>
+    <div
+      className="item__btnBar"
+    >
+      <div
+        className="actionBtn"
+        onClick={[Function]}
+      >
+        <i
+          className="fa fa-thumbs-up"
+        />
+        Accept
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Notification renders custom localization text for accept and deny buttons 1`] = `
+<div
+  className="has-close-all--noDismiss notification--success"
+>
+  <div
+    className="content"
+  >
+    <div
+      className="item__message"
+    >
+      Hello There!
+    </div>
+    <div
+      className="item__btnBar"
+    >
+      <div
+        className="actionBtn"
+        onClick={[Function]}
+      >
+        Yes
+      </div>
+      <div
+        className="actionBtn"
+        onClick={[Function]}
+      >
+        No
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Notification renders custom localization text for close all 1`] = `
+<div
+  className="has-close-all notification--success"
+>
+  <div
+    className="content"
+  >
+    <div
+      className="item__message"
+    >
+      Hello There!
+    </div>
+  </div>
+  <div
+    className="close"
+    onClick={[Function]}
+  />
+  <div
+    className="close-all"
+    onClick={[Function]}
+  >
+    Close dem all
+  </div>
+</div>
+`;
+
+exports[`Notification renders with a close all button 1`] = `
+<div
+  className="has-close-all notification--success"
+>
+  <div
+    className="content"
+  >
+    <div
+      className="item__message"
+    >
+      Hello There!
+    </div>
+  </div>
+  <div
+    className="close"
+    onClick={[Function]}
+  />
+  <div
+    className="close-all"
+    onClick={[Function]}
+  >
+    Close All
+  </div>
+</div>
+`;
+
+exports[`Notification renders with a duration greater than 0 1`] = `
+<div
+  className="has-close notification--success"
+>
+  <div
+    className="content"
+  >
+    <div
+      className="item__message"
+    >
+      Hello There!
+    </div>
+  </div>
+  <div
+    className="close"
+    onClick={[Function]}
+  />
+</div>
+`;
+
+exports[`Notification renders with an element for the icon when an element is passed 1`] = `
+<div
+  className="has-close notification--success"
+>
+  <span
+    className="icon"
+  >
+    <i
+      className="fa fa-fire"
+    />
+  </span>
+  <div
+    className="content"
+  >
+    <div
+      className="item__message"
+    >
+      Hello There!
+    </div>
+  </div>
+  <div
+    className="close"
+    onClick={[Function]}
+  />
+</div>
+`;
+
+exports[`Notification renders with an string for the icon when a string is passed 1`] = `
+<div
+  className="has-close notification--success"
+>
+  <span
+    className="icon"
+  >
+    ·
+  </span>
+  <div
+    className="content"
+  >
+    <div
+      className="item__message"
+    >
+      Hello There!
+    </div>
+  </div>
+  <div
+    className="close"
+    onClick={[Function]}
+  />
+</div>
+`;
+
+exports[`Notification renders with default props 1`] = `
+<div
+  className="has-close notification--success"
+>
+  <div
+    className="content"
+  >
+    <div
+      className="item__message"
+    >
+      Hello There!
+    </div>
+  </div>
+  <div
+    className="close"
+    onClick={[Function]}
+  />
+</div>
+`;

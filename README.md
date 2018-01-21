@@ -95,6 +95,7 @@ There are a number of options that can be used to change the look and behaviour 
 | transitionDurations | `object` | `{ enter : 160, leave: 400 }` |  | React CSS Transition Group timeout values for enter and leave events. If you change the transition classes then you can use these to change the timeout values for your animation.
 | position | `string` | 'TopRight' | `'TopRight', 'BottomRight', 'BottomLeft', 'TopLeft'` | Default options for where the Notify container will be positioned to render you components. Again this can be extended/customised through your own classes and this prop.
 | forceClose | `boolean` | 'false' |  | If set to true will remove all notifications regardless of the notification's `canDismiss` value.
+| localization | `object` | `{ closeAllBtnText: 'Close All', acceptBtnText: 'Accept', denyBtnText: 'Deny' }` |  | Text that shows for the mentioned buttons.
 
 #### Notify Component Styles
 This is the default style mapping created. You can choose to override these with your own classes using the `customStyles` prop explained above. You can view what these CSS classes do by default in the `src/components/Notify/` folder for `react-redux-notify` in the `node_modules` directory.
@@ -147,8 +148,7 @@ The default notification component has the following configuration options which
 | canDismiss | `boolean` | true | Yes | Whether the notification allows the user to close the notification.
 | duration | `number` | 2000 | Yes | Duration until the notification automatically closes.
 | icon | `node` |  | Yes | A node to be rendered as the notification icon.
-| styles | `object` | CSSModules created mapping (see below)  | Yes | The default styles created and mapped through CSSModules for the component.
-| customStyles | `object` |  | Yes | A custom styles object that gets merged into the default styles and allows for the overriding or creation of individual styles using your own classes.
+| customStyles | `object` |  | Yes | A custom styles object that can be used to replace default styles.
 | customComponent | `element` |   | Yes | A custom component that will be used as the Notification. It will get passed all these props as well as any custom object properties you choose to add to the notification configuration object.
 | acceptBtn, denyBtn | `object` : `{` <br/> `handler: function(event, object),` <br> `icon: node,`<br> `title: node` <br> `}` |   | Yes | **`handler`** must be a function, it gets passed the `event` as well as an `object` containing all these notification props.<br> **`icon`** is optional and if passed as a `string` will be used as the button's icon's className else if type is anything else it will get rendered as is.<br> **`title`** is rendered as is.<br>note: `canDismiss` must be false in order for the accept and deny options to be rendered.
 | isFirst | `boolean` | false | No | Indicates whether the notification is the first.

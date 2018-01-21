@@ -1,15 +1,16 @@
-import reducer,
-    { createNotification,
-    removeNotification,
-    removeAllNotifications,
-    NOTIFICATION_TYPE_SUCCESS,
-    NOTIFICATION_TYPE_WARNING,
-    NOTIFICATION_TYPE_INFO,
-    NOTIFICATION_TYPE_ERROR,
-    NOTIFICATION_DEFAULT_DURATION,
-    ADD_NOTIFICATION,
-    REMOVE_NOTIFICATION,
-    REMOVE_ALL_NOTIFICATIONS } from 'modules/Notifications';
+import reducer, {
+  createNotification,
+  removeNotification,
+  removeAllNotifications,
+  NOTIFICATION_TYPE_SUCCESS,
+  NOTIFICATION_TYPE_WARNING,
+  NOTIFICATION_TYPE_INFO,
+  NOTIFICATION_TYPE_ERROR,
+  NOTIFICATION_DEFAULT_DURATION,
+  ADD_NOTIFICATION,
+  REMOVE_NOTIFICATION,
+  REMOVE_ALL_NOTIFICATIONS,
+} from 'modules/Notifications';
 import TimeKeeper from 'timekeeper';
 
 describe('actions', () => {
@@ -69,9 +70,7 @@ describe('actions', () => {
 
 describe('reducer', () => {
   it('should return the initial state', () => {
-    expect(
-            reducer(undefined, {})
-        ).toEqual([]);
+    expect(reducer(undefined, {})).toEqual([]);
   });
 
   it('should handle ADD_NOTIFICATION', () => {
@@ -100,11 +99,10 @@ describe('reducer', () => {
       type: ADD_NOTIFICATION,
       notification: notification2,
     };
-    expect(
-            reducer([notification1], action)
-        ).toEqual(
-            [notification1, notification2]
-        );
+    expect(reducer([notification1], action)).toEqual([
+      notification1,
+      notification2,
+    ]);
   });
 
   it('should handle REMOVE_NOTIFICATION', () => {
@@ -122,11 +120,7 @@ describe('reducer', () => {
       type: REMOVE_NOTIFICATION,
       id: notification.id,
     };
-    expect(
-            reducer([notification], action)
-        ).toEqual(
-            []
-        );
+    expect(reducer([notification], action)).toEqual([]);
   });
 
   it('should handle REMOVE_ALL_NOTIFICATIONS', () => {
@@ -161,13 +155,8 @@ describe('reducer', () => {
       type: REMOVE_ALL_NOTIFICATIONS,
     };
     expect(
-            reducer(
-                [notification1, notification2, notification3],
-                action
-            )
-        ).toEqual(
-            [notification2]
-        );
+      reducer([notification1, notification2, notification3], action)
+    ).toEqual([notification2]);
   });
 
   it('should handle REMOVE_ALL_NOTIFICATIONS with force parameter', () => {
@@ -203,12 +192,7 @@ describe('reducer', () => {
       force: true,
     };
     expect(
-            reducer(
-                [notification1, notification2, notification3],
-                action
-            )
-        ).toEqual(
-            []
-        );
+      reducer([notification1, notification2, notification3], action)
+    ).toEqual([]);
   });
 });
