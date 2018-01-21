@@ -1,37 +1,42 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://use.fontawesome.com/13f77c8bf7.js"></script>
-    <link rel="stylesheet" href="../dist/ReactReduxNotify.css"/>
-    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
+    <link rel="stylesheet" href="../dist/ReactReduxNotify.css" />
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w"
+        crossorigin="anonymous">
     <title>React Redux Notify</title>
     <style>
-    .customContent {
-        background: pink;
-    }
-    .containerTopCenter {
-        z-index: 1;
-        position: fixed;
-        overflow-y: auto;
-        max-height: 100vh;
-        left: 50%;
-        transform: translate3d(-50%, 0, 0);
-        flex-direction: column;
-        top: 0;         
-    }
-    .containerTopCenter::-webkit-scrollbar {
-        display: none;
-    }     
+        .customContent {
+            background: pink;
+        }
+
+        .containerTopCenter {
+            z-index: 1;
+            position: fixed;
+            overflow-y: auto;
+            max-height: 100vh;
+            left: 50%;
+            transform: translate3d(-50%, 0, 0);
+            flex-direction: column;
+            top: 0;
+        }
+
+        .containerTopCenter::-webkit-scrollbar {
+            display: none;
+        }
     </style>
-  </head>
-  <body>
+</head>
+
+<body>
     <div id="root"></div>
     <script crossorigin src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
     <script src="../node_modules/redux/dist/redux.js"></script>
-    <script src="../node_modules/react-redux/dist/react-redux.js"></script>    
+    <script src="../node_modules/react-redux/dist/react-redux.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.35.1/es6-sham.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.js"></script>
     <script src="../dist/ReactReduxNotify.js"></script>
@@ -104,7 +109,13 @@
                         },
                         title: 'Deny',
                         icon: 'fa fa-thumbs-down'
-                    },                    
+                    },
+                    localization: {
+                        closeAllBtnText: "Close dem all",
+                        acceptBtnText: "Yes",
+                        denyBtnText: "No",                            
+                    },              
+                    customLocalization: false,                    
                     canDismiss: true,
                     globalCustomNotification: false,
                     position: NOTIFICATIONS_POS_TOP_RIGHT,
@@ -116,8 +127,40 @@
 
             _handleFieldChange(field){
                 return (e) => {
-                    if (field == 'canDismiss' || field == 'globalCustomNotification' || field == 'forceClose'){
-                        this.setState({[field]: e.target.checked});
+                    if (field == 'canDismiss' || field == 'globalCustomNotification' || field == 'forceClose' || field == 'customLocalization'){
+                        const fieldVal = e.target.checked
+                        if(field == 'customLocalization' && e.target.checked){
+                            return this.setState((prevState, props) => {
+                                return {
+                                    ...prevState,
+                                    acceptBtn: {
+                                        ...prevState.acceptBtn,
+                                        title: '',
+                                    },
+                                    denyBtn: {
+                                        ...prevState.denyBtn,
+                                        title: '',
+                                    },
+                                    [field]: fieldVal                                  
+                                }
+                            })
+                        } else if (field == 'customLocalization' && !e.target.checked){
+                            return this.setState((prevState, props) => {
+                                return {
+                                    ...prevState,
+                                    acceptBtn: {
+                                        ...prevState.acceptBtn,
+                                        title: 'Accept',
+                                    },
+                                    denyBtn: {
+                                        ...prevState.denyBtn,
+                                        title: 'Deny',
+                                    },
+                                    [field]: fieldVal                                
+                                }
+                            })
+                        }
+                        return this.setState({[field]: fieldVal});
                     } else if (field == 'customComponent') {
                         const componentToUse = (e.target.checked) ? MyCustomNotificationComponent: undefined
                         this.setState({[field]: componentToUse});
@@ -139,19 +182,26 @@
             _createNotification(e){
                 e.preventDefault();
                 const {createNotification} = this.props;
-                createNotification(this.state);
+                const nProps = Object.assign({}, this.state);
+                delete nProps['localization']
+                createNotification(nProps);
             }
 
             render(){
                 const NotificationComponentProp = this.state.globalCustomNotification ? MyCustomNotificationComponent:undefined;
-
+                let notifyProps = {
+                    notificationComponent: NotificationComponentProp,
+                    position: this.state.position,
+                    forceClose: this.state.forceClose,
+                    customStyles: customNotifyStyles,
+                    localization: this.state.customLocalization ? this.state.localization : undefined
+                }
+                
                 return (
                     <div>
                         <Notify 
-                            notificationComponent={NotificationComponentProp}
-                            position={this.state.position}
-                            forceClose={this.state.forceClose} 
-                            customStyles={customNotifyStyles} />
+                            {...notifyProps}
+                        />
 
                         <form className="pure-form pure-form-stacked" style={
                             {width: '300px', height: '500px', top:'50%', left:'50%', position: 'relative', transform: 'translate3d(-50%, 50%, 0)', textAlign: 'center'}}>
@@ -169,7 +219,10 @@
                             <input type="radio" value={NOTIFICATION_TYPE_INFO} checked={this.state.type==NOTIFICATION_TYPE_INFO} onChange={this.handleFieldChange('type')} /> Info <br />
 
                             <label><strong>Can Dismiss: </strong></label>
-                            <input type="checkbox" defaultChecked={this.state.canDismiss} onChange={this.handleFieldChange('canDismiss')} />                            
+                            <input type="checkbox" defaultChecked={this.state.canDismiss} onChange={this.handleFieldChange('canDismiss')} />   
+                            
+                            <label><strong>Custom Localization Text: </strong></label>
+                            <input type="checkbox" defaultChecked={this.state.customLocalization} onChange={this.handleFieldChange('customLocalization')} />   
 
                             <label><strong>Custom Global Notification Component: </strong></label>
                             <input type="checkbox" defaultChecked={this.state.globalCustomNotification} onChange={this.handleFieldChange('globalCustomNotification')} />
@@ -238,6 +291,7 @@
             <App />,
             document.getElementById('root')
         );
-    </script>        
-  </body>
+    </script>
+</body>
+
 </html>
