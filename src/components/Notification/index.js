@@ -1,7 +1,7 @@
-import React from "react";
-import PropTypes from "prop-types";
-import classNames from "classnames/bind";
-import styleMap from "./Notification.scss";
+import React from 'react';
+import PropTypes from 'prop-types';
+import classNames from 'classnames/bind';
+import styleMap from './Notification.scss';
 
 export class Notification extends React.PureComponent {
   static propTypes = {
@@ -15,12 +15,12 @@ export class Notification extends React.PureComponent {
     acceptBtn: PropTypes.shape({
       handler: PropTypes.func.isRequired,
       icon: PropTypes.node,
-      title: PropTypes.node
+      title: PropTypes.node,
     }),
     denyBtn: PropTypes.shape({
       handler: PropTypes.func.isRequired,
       icon: PropTypes.node,
-      title: PropTypes.node
+      title: PropTypes.node,
     }),
     isFirst: PropTypes.bool.isRequired,
     handleDismiss: PropTypes.func.isRequired,
@@ -29,14 +29,14 @@ export class Notification extends React.PureComponent {
     localization: PropTypes.shape({
       closeAllBtnText: PropTypes.string.isRequired,
       acceptBtnText: PropTypes.string.isRequired,
-      denyBtnText: PropTypes.string.isRequired
-    })
+      denyBtnText: PropTypes.string.isRequired,
+    }),
   };
 
   static defaultProps = {
     styles: styleMap,
     canDismiss: true,
-    duration: 0
+    duration: 0,
   };
 
   componentDidMount() {
@@ -61,34 +61,34 @@ export class Notification extends React.PureComponent {
       icon,
       customStyles,
       id,
-      localization
+      localization,
     } = this.props;
     let { styles } = this.props;
     styles = Object.assign({}, styles, customStyles);
     const cx = classNames.bind(styles);
     const containerTypeClass = cx({
-      "has-close": !isFirst && canDismiss,
-      "no-close": !isFirst && !canDismiss,
-      "has-close-all": isFirst && canDismiss,
-      "has-close-all--noDismiss": isFirst && !canDismiss,
-      [`notification--${type.toLowerCase()}`]: true
+      'has-close': !isFirst && canDismiss,
+      'no-close': !isFirst && !canDismiss,
+      'has-close-all': isFirst && canDismiss,
+      'has-close-all--noDismiss': isFirst && !canDismiss,
+      [`notification--${type.toLowerCase()}`]: true,
     });
 
     return (
       <div key={id} className={containerTypeClass}>
         {icon ? <span className={styles.icon}>{icon}</span> : false}
         <div className={styles.content}>
-          <div className={styles["item--message"]}>{message}</div>
+          <div className={styles['item--message']}>{message}</div>
           {!canDismiss && (acceptBtn || denyBtn) ? (
-            <div className={styles["item--btnBar"]}>
+            <div className={styles['item--btnBar']}>
               {acceptBtn ? (
                 <div
                   className={styles.actionBtn}
-                  onClick={e => {
+                  onClick={(e) => {
                     acceptBtn.handler(e, this.props);
                   }}
                 >
-                  {acceptBtn.icon && typeof acceptBtn.icon === "string" ? (
+                  {acceptBtn.icon && typeof acceptBtn.icon === 'string' ? (
                     <i className={acceptBtn.icon} />
                   ) : (
                     acceptBtn.icon
@@ -101,11 +101,11 @@ export class Notification extends React.PureComponent {
               {denyBtn ? (
                 <div
                   className={styles.actionBtn}
-                  onClick={e => {
+                  onClick={(e) => {
                     denyBtn.handler(e, this.props);
                   }}
                 >
-                  {denyBtn.icon && typeof denyBtn.icon === "string" ? (
+                  {denyBtn.icon && typeof denyBtn.icon === 'string' ? (
                     <i className={denyBtn.icon} />
                   ) : (
                     denyBtn.icon
@@ -127,7 +127,7 @@ export class Notification extends React.PureComponent {
         )}
         {isFirst && canDismiss ? (
           <div
-            className={styles["close-all"]}
+            className={styles['close-all']}
             onClick={() => handleDismissAll()}
           >
             {localization.closeAllBtnText}
