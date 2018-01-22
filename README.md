@@ -23,8 +23,8 @@ import 'react-redux-notify/dist/ReactReduxNotify.css';
 
 You can also use the standalone build by including the following css and js files (both minified and unminified exist). You will need to ensure that you have **react**, **redux**, **react-redux** dependecies also included externally.
 ```javascript
-<script src="dist/ReactReduxNotify.min.js"></script>
-<link rel="stylesheet" href="dist/ReactReduxNotify.min.css">
+<script src="https://unpkg.com/react-redux-notify/dist/ReactReduxNotify.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/react-redux-notify/dist/ReactReduxNotify.min.css">
 ```
 
 ## Demo and Example
