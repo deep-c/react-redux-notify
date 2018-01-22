@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { createPortal } from 'react-dom';
 import { connect } from 'react-redux';
 import ReactCSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
 import {
@@ -8,6 +9,7 @@ import {
   NOTIFICATIONS_POS_TOP_RIGHT,
 } from 'modules/Notifications';
 import { default as Notification } from 'components/Notification';
+import { canUseDOM } from 'utils';
 import styleMap from './Notify.scss';
 
 export class Notify extends React.PureComponent {
@@ -29,6 +31,7 @@ export class Notify extends React.PureComponent {
       acceptBtnText: PropTypes.string,
       denyBtnText: PropTypes.string,
     }),
+    node: PropTypes.any,
   };
 
   static defaultProps = {
@@ -53,6 +56,14 @@ export class Notify extends React.PureComponent {
     this.handleDismissAll = this._handleDismissAll.bind(this);
   }
 
+  componentWillUnmount() {
+    if (this.defaultNode) {
+      // eslint-disable-next-line no-undef
+      document.body.removeChild(this.defaultNode);
+    }
+    this.defaultNode = null;
+  }
+
   _handleDismiss(id) {
     const { remove } = this.props;
     remove(id);
@@ -71,12 +82,21 @@ export class Notify extends React.PureComponent {
       transitionDurations,
       position,
       localization,
+      node,
     } = this.props;
     let { styles } = this.props;
     styles = Object.assign({}, styles, customStyles);
     const notificationsContainerClass = styles[`container${position}`];
+    if (!canUseDOM) {
+      return null;
+    }
+    if (!node && !this.defaultNode) {
+      /* eslint-disable no-undef */
+      this.defaultNode = document.createElement('div');
+      document.body.appendChild(this.defaultNode);
+    }
 
-    return (
+    return createPortal(
       <div className={notificationsContainerClass}>
         <ReactCSSTransitionGroup
           component="div"
@@ -103,7 +123,8 @@ export class Notify extends React.PureComponent {
             );
           })}
         </ReactCSSTransitionGroup>
-      </div>
+      </div>,
+      node || this.defaultNode
     );
   }
 }
