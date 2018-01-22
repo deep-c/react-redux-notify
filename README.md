@@ -96,6 +96,7 @@ There are a number of options that can be used to change the look and behaviour 
 | position | `string` | 'TopRight' | `'TopRight', 'BottomRight', 'BottomLeft', 'TopLeft'` | Default options for where the Notify container will be positioned to render you components. Again this can be extended/customised through your own classes and this prop.
 | forceClose | `boolean` | 'false' |  | If set to true will remove all notifications regardless of the notification's `canDismiss` value.
 | localization | `object` | `{ closeAllBtnText: 'Close All', acceptBtnText: 'Accept', denyBtnText: 'Deny' }` |  | Text that shows for the mentioned buttons.
+| node | `domNode` | `document.createElement('div')` appended to document.body |  | The portal node into which the notification component will get rendered into.
 
 #### Notify Component Styles
 This is the default style mapping created. You can choose to override these with your own classes using the `customStyles` prop explained above. You can view what these CSS classes do by default in the `src/components/Notify/` folder for `react-redux-notify` in the `node_modules` directory.
