@@ -14,6 +14,7 @@ React redux notify is a simple yet flexible component for displaying notificatio
 ```javascript
 npm install react-redux-notify --save
 ```
+**NOTE :Version ^4.0.0 requires react@^16.0.0, versions 3.x.x and below supports react@>=15.3.0 but has no portal support.**
 
 After which you can import the component and the default styles for use:
 ```javascript
