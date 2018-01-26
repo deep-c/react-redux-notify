@@ -7,6 +7,8 @@ A simple and flexible notifications component built with and for React and Redux
 
 ![A quick look.](http://i.giphy.com/l0HlQkInwts6lR1zq.gif)
 
+## Demo
+Live demo: [deep-c.github.io/react-redux-notify](https://deep-c.github.io/react-redux-notify/)
 
 ## Overview and Install
 React redux notify is a simple yet flexible component for displaying notifications. You can simply include the component within your app and use the default settings or you can choose to customize it in many different ways. Easiest way to get up and running is to install it via npm.
