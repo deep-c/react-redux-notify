@@ -54,7 +54,7 @@ const mySuccessNotification = {
   message: 'You have been logged in!',
   type: NOTIFICATION_TYPE_SUCCESS,
   duration: 0,
-  canDimiss: true,
+  canDismiss: true,
   icon: <i className="fa fa-check" />
 }
 
@@ -89,8 +89,7 @@ There are a number of options that can be used to change the look and behaviour 
 
 ### Notify Container Component
 | Property | Type | Default | Default Options | Description |
-| -------- | ---- | ------- | --------------- | ----------- |
-| styles | `object` | CSSModules created mapping (see below) |  | The default styles created and mapped through CSSModules for the component. 
+| -------- | ---- | ------- | --------------- | ----------- | 
 | customStyles | `object` |  |  | A custom styles object that gets merged into the default styles and allows for the overriding or creation of individual styles using your own classes.
 | notificationComponent | `func` | (see Notification Component below)  |   | A custom notification you want to use as the default Notification component to render. 
 | transitionDurations | `object` | `{ enter : 160, leave: 400 }` |  | React CSS Transition Group timeout values for enter and leave events. If you change the transition classes then you can use these to change the timeout values for your animation.
@@ -190,10 +189,10 @@ npm start
 ```
 
 ## To Do
-* Complete tests for Notify Component (awaiting react 15.4.0 see [react issue](https://github.com/facebook/react/issues/7386)).
+* Have an online demo page.
 * Test browser compatibility.
 * Allow mounting reducer at custom key.
-* Have an online demo page.
+* ~~Complete tests for Notify Component (awaiting react 15.4.0 see [react issue](https://github.com/facebook/react/issues/7386)).~~
 * ~~Support for use of inline styles. (Ive decided to not go ahead with this. If you think this is bad decision please feel free to open an issue for discussion, create a PR or use a custom notification component. )~~
 
 ## License

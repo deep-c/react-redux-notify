@@ -47,7 +47,7 @@ export class Notification extends React.PureComponent {
     }
   }
 
-  getStyle(name) {
+  _getStyle(name) {
     return this.props.customStyles[name] || styles[name];
   }
 
@@ -78,13 +78,13 @@ export class Notification extends React.PureComponent {
     return (
       <div className={containerTypeClass}>
         {icon ? <span className={styles.icon}>{icon}</span> : false}
-        <div className={this.getStyle('content')}>
-          <div className={this.getStyle('item__message')}>{message}</div>
+        <div className={this._getStyle('content')}>
+          <div className={this._getStyle('item__message')}>{message}</div>
           {!canDismiss && (acceptBtn || denyBtn) ? (
-            <div className={this.getStyle('item__btnBar')}>
+            <div className={this._getStyle('item__btnBar')}>
               {acceptBtn ? (
                 <div
-                  className={this.getStyle('actionBtn')}
+                  className={this._getStyle('actionBtn')}
                   onClick={(e) => {
                     acceptBtn.handler(e, this.props);
                   }}
@@ -101,7 +101,7 @@ export class Notification extends React.PureComponent {
               )}
               {denyBtn ? (
                 <div
-                  className={this.getStyle('actionBtn')}
+                  className={this._getStyle('actionBtn')}
                   onClick={(e) => {
                     denyBtn.handler(e, this.props);
                   }}
@@ -123,7 +123,7 @@ export class Notification extends React.PureComponent {
         </div>
         {canDismiss ? (
           <div
-            className={this.getStyle('close')}
+            className={this._getStyle('close')}
             onClick={() => handleDismiss(id)}
           />
         ) : (
@@ -131,7 +131,7 @@ export class Notification extends React.PureComponent {
         )}
         {isFirst && canDismiss ? (
           <div
-            className={this.getStyle('close-all')}
+            className={this._getStyle('close-all')}
             onClick={() => handleDismissAll()}
           >
             {localization.closeAllBtnText}
