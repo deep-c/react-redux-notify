@@ -187,11 +187,19 @@ cd react-redux-notify
 npm install
 npm start
 ```
+```html
+# Uncomment these two lines from `./examples/index.html`
+<!-- <link rel="stylesheet" href="../dist/ReactReduxNotify.css" /> -->
+<!-- <script src="../dist/ReactReduxNotify.js"></script> -->
+# Comment out these two lines from `./examples/index.html`
+<link rel="stylesheet" href="https://unpkg.com/react-redux-notify/dist/ReactReduxNotify.min.css" />
+<script src="https://unpkg.com/react-redux-notify/dist/ReactReduxNotify.min.js"></script>
+```
 
 ## To Do
-* Have an online demo page.
 * Test browser compatibility.
 * Allow mounting reducer at custom key.
+* ~~Have an online demo page.~~
 * ~~Complete tests for Notify Component (awaiting react 15.4.0 see [react issue](https://github.com/facebook/react/issues/7386)).~~
 * ~~Support for use of inline styles. (Ive decided to not go ahead with this. If you think this is bad decision please feel free to open an issue for discussion, create a PR or use a custom notification component. )~~
 
