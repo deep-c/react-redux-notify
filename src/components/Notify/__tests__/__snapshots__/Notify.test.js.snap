@@ -1,0 +1,116 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Notify renders custom notifications 1`] = `
+<div
+  className="containerTopRight"
+>
+  <div
+    className="wrapper"
+  >
+    <div
+      onClick={[Function]}
+      style={
+        Object {
+          "border": "1px solid #333",
+          "boxSizing": "border-box",
+          "clear": "right",
+          "cursor": "pointer",
+          "float": "right",
+          "margin": "5px 0",
+          "padding": "2px 5px",
+          "width": "330px",
+        }
+      }
+    >
+      Notification 1!
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Notify renders notifications 1`] = `
+<div
+  className="containerTopRight"
+>
+  <div
+    className="wrapper"
+  >
+    <div
+      className="has-close-all notification--success"
+    >
+      <span
+        className="icon"
+      >
+        <i
+          className="fa fa-check"
+        />
+      </span>
+      <div
+        className="content"
+      >
+        <div
+          className="item__message"
+        >
+          Notification 1!
+        </div>
+      </div>
+      <div
+        className="close"
+        onClick={[Function]}
+      />
+      <div
+        className="close-all"
+        onClick={[Function]}
+      >
+        Close All
+      </div>
+    </div>
+    <div
+      className="has-close notification--info"
+    >
+      <span
+        className="icon"
+      >
+        <i
+          className="fa fa-check"
+        />
+      </span>
+      <div
+        className="content"
+      >
+        <div
+          className="item__message"
+        >
+          Notification 2!
+        </div>
+      </div>
+      <div
+        className="close"
+        onClick={[Function]}
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Notify renders with required props 1`] = `
+<div
+  className="containerTopRight"
+>
+  <div
+    className="wrapper"
+  />
+</div>
+`;
+
+exports[`Notify renders with the correct className when customStyles is used 1`] = `
+<div
+  className="CustomPosition"
+>
+  <div
+    className="wrapper"
+  />
+</div>
+`;
+
+exports[`Notify unmounts without error 1`] = `""`;

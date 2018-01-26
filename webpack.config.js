@@ -13,6 +13,13 @@ const reactExternal = {
   amd: 'react',
 };
 
+const reactDomExternal = {
+  root: 'ReactDOM',
+  commonjs2: 'react-dom',
+  commonjs: 'react-dom',
+  amd: 'react-dom',
+};
+
 const reduxExternal = {
   root: 'Redux',
   commonjs2: 'redux',
@@ -34,11 +41,11 @@ const ReactCSSTransitionGroupExternal = {
   amd: 'react-addons-css-transition-group',
 };
 
-const ReactPureRenderMixinExternal = {
-  root: ['React', 'addons', 'PureRenderMixin'],
-  commonjs2: 'react-addons-pure-render-mixin',
-  commonjs: 'react-addons-pure-render-mixin',
-  amd: 'react-addons-pure-render-mixin',
+const propTypesExternal = {
+  root: 'PropTypes',
+  commonjs2: 'prop-types',
+  commonjs: 'prop-types',
+  amd: 'prop-types',
 };
 
 const config = {
@@ -47,20 +54,16 @@ const config = {
     redux: reduxExternal,
     'react-redux': reactReduxExternal,
     'react-addons-css-transition-group': ReactCSSTransitionGroupExternal,
-    'react-addons-pure-render-mixin': ReactPureRenderMixinExternal,
+    'react-dom': reactDomExternal,
+    'prop-types': propTypesExternal,
   },
   resolve: {
-    root: [
-      path.resolve('./src'),
-    ],
-    modules: [
-      './node_modules',
-      path.resolve(__dirname, 'src'),
-    ],
+    root: [path.resolve('./src')],
+    modules: ['./node_modules', path.resolve(__dirname, 'src')],
   },
   output: {
     library: 'ReactReduxNotify',
-    libraryTarget: (env !== 'lib') ? 'umd' : 'commonjs2',
+    libraryTarget: env !== 'lib' ? 'umd' : 'commonjs2',
   },
   module: {
     loaders: [
@@ -70,7 +73,12 @@ const config = {
         loader: 'babel',
         query: {
           cacheDirectory: true,
-          plugins: ['transform-runtime', 'transform-class-properties', 'transform-es2015-destructuring', 'transform-object-rest-spread'],
+          plugins: [
+            'transform-runtime',
+            'transform-class-properties',
+            'transform-es2015-destructuring',
+            'transform-object-rest-spread',
+          ],
           presets: ['es2015', 'react'],
           env: {
             production: {
@@ -82,13 +90,17 @@ const config = {
       {
         test: /\.scss$/,
         loader: ExtractTextPlugin.extract(
-                    'style-loader',
-                    'css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss-loader!sass?sourceMap'
-                    ),
+          'style-loader',
+          'css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss-loader!sass?sourceMap'
+        ),
       },
       {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract('style-loader', 'postcss-loader', 'css'),
+        loader: ExtractTextPlugin.extract(
+          'style-loader',
+          'postcss-loader',
+          'css'
+        ),
       },
     ],
   },
@@ -105,25 +117,21 @@ const config = {
 };
 
 if (env === 'development' || env === 'lib') {
-  config.plugins.push(
-        new ExtractTextPlugin('ReactReduxNotify.css')
-    );
+  config.plugins.push(new ExtractTextPlugin('ReactReduxNotify.css'));
 }
 
 if (env === 'production') {
   config.plugins.push(
-        new webpack.optimize.UglifyJsPlugin({
-          compressor: {
-            pure_getters: true,
-            unsafe: true,
-            unsafe_comps: true,
-            warnings: false,
-          },
-        })
-    );
-  config.plugins.push(
-        new ExtractTextPlugin('ReactReduxNotify.min.css')
-    );
+    new webpack.optimize.UglifyJsPlugin({
+      compressor: {
+        pure_getters: true,
+        unsafe: true,
+        unsafe_comps: true,
+        warnings: false,
+      },
+    })
+  );
+  config.plugins.push(new ExtractTextPlugin('ReactReduxNotify.min.css'));
 }
 
 module.exports = config;

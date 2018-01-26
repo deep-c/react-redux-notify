@@ -14,6 +14,7 @@ React redux notify is a simple yet flexible component for displaying notificatio
 ```javascript
 npm install react-redux-notify --save
 ```
+**NOTE :Version ^4.0.0 requires react@^16.0.0, versions 3.x.x and below supports react@>=15.3.0 but has no portal support.**
 
 After which you can import the component and the default styles for use:
 ```javascript
@@ -23,8 +24,8 @@ import 'react-redux-notify/dist/ReactReduxNotify.css';
 
 You can also use the standalone build by including the following css and js files (both minified and unminified exist). You will need to ensure that you have **react**, **redux**, **react-redux** dependecies also included externally.
 ```javascript
-<script src="dist/ReactReduxNotify.min.js"></script>
-<link rel="stylesheet" href="dist/ReactReduxNotify.min.css">
+<script src="https://unpkg.com/react-redux-notify/dist/ReactReduxNotify.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/react-redux-notify/dist/ReactReduxNotify.min.css">
 ```
 
 ## Demo and Example
@@ -53,7 +54,7 @@ const mySuccessNotification = {
   message: 'You have been logged in!',
   type: NOTIFICATION_TYPE_SUCCESS,
   duration: 0,
-  canDimiss: true,
+  canDismiss: true,
   icon: <i className="fa fa-check" />
 }
 
@@ -88,14 +89,14 @@ There are a number of options that can be used to change the look and behaviour 
 
 ### Notify Container Component
 | Property | Type | Default | Default Options | Description |
-| -------- | ---- | ------- | --------------- | ----------- |
-| styles | `object` | CSSModules created mapping (see below) |  | The default styles created and mapped through CSSModules for the component. 
+| -------- | ---- | ------- | --------------- | ----------- | 
 | customStyles | `object` |  |  | A custom styles object that gets merged into the default styles and allows for the overriding or creation of individual styles using your own classes.
 | notificationComponent | `func` | (see Notification Component below)  |   | A custom notification you want to use as the default Notification component to render. 
 | transitionDurations | `object` | `{ enter : 160, leave: 400 }` |  | React CSS Transition Group timeout values for enter and leave events. If you change the transition classes then you can use these to change the timeout values for your animation.
 | position | `string` | 'TopRight' | `'TopRight', 'BottomRight', 'BottomLeft', 'TopLeft'` | Default options for where the Notify container will be positioned to render you components. Again this can be extended/customised through your own classes and this prop.
 | forceClose | `boolean` | 'false' |  | If set to true will remove all notifications regardless of the notification's `canDismiss` value.
 | localization | `object` | `{ closeAllBtnText: 'Close All', acceptBtnText: 'Accept', denyBtnText: 'Deny' }` |  | Text that shows for the mentioned buttons.
+| node | `domNode` | `document.createElement('div')` appended to document.body |  | The portal node into which the notification component will get rendered into.
 
 #### Notify Component Styles
 This is the default style mapping created. You can choose to override these with your own classes using the `customStyles` prop explained above. You can view what these CSS classes do by default in the `src/components/Notify/` folder for `react-redux-notify` in the `node_modules` directory.
@@ -188,10 +189,10 @@ npm start
 ```
 
 ## To Do
-* Complete tests for Notify Component (awaiting react 15.4.0 see [react issue](https://github.com/facebook/react/issues/7386)).
+* Have an online demo page.
 * Test browser compatibility.
 * Allow mounting reducer at custom key.
-* Have an online demo page.
+* ~~Complete tests for Notify Component (awaiting react 15.4.0 see [react issue](https://github.com/facebook/react/issues/7386)).~~
 * ~~Support for use of inline styles. (Ive decided to not go ahead with this. If you think this is bad decision please feel free to open an issue for discussion, create a PR or use a custom notification component. )~~
 
 ## License
