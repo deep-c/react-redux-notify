@@ -49,6 +49,7 @@ const propTypesExternal = {
 };
 
 const config = {
+  mode: env == "production" ? 'production' : 'development',
   externals: {
     react: reactExternal,
     redux: reduxExternal,
@@ -58,7 +59,6 @@ const config = {
     'prop-types': propTypesExternal,
   },
   resolve: {
-    root: [path.resolve('./src')],
     modules: ['./node_modules', path.resolve(__dirname, 'src')],
   },
   output: {
@@ -66,11 +66,11 @@ const config = {
     libraryTarget: env !== 'lib' ? 'umd' : 'commonjs2',
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        loader: 'babel',
+        loader: 'babel-loader',
         query: {
           cacheDirectory: true,
           plugins: [
@@ -98,22 +98,13 @@ const config = {
         test: /\.css$/,
         loader: ExtractTextPlugin.extract(
           'style-loader',
-          'postcss-loader',
-          'css'
+          'css-loader',
+          'postcss-loader'          
         ),
       },
     ],
   },
-  postcss() {
-    return [precss, autoprefixer];
-  },
-  plugins: [
-    new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(env),
-    }),
-    new webpack.optimize.DedupePlugin(),
-  ],
+  plugins: [],
 };
 
 if (env === 'development' || env === 'lib') {
@@ -121,16 +112,6 @@ if (env === 'development' || env === 'lib') {
 }
 
 if (env === 'production') {
-  config.plugins.push(
-    new webpack.optimize.UglifyJsPlugin({
-      compressor: {
-        pure_getters: true,
-        unsafe: true,
-        unsafe_comps: true,
-        warnings: false,
-      },
-    })
-  );
   config.plugins.push(new ExtractTextPlugin('ReactReduxNotify.min.css'));
 }
 
