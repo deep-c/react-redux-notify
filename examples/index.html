@@ -123,6 +123,7 @@
                     globalCustomNotification: false,
                     position: NOTIFICATIONS_POS_TOP_RIGHT,
                     forceClose: false,
+                    showCloseAllBtn: false
                 }
                 this.createNotification = this._createNotification.bind(this);
                 this.handleFieldChange =  this._handleFieldChange.bind(this);
@@ -130,7 +131,7 @@
 
             _handleFieldChange(field){
                 return (e) => {
-                    if (field == 'canDismiss' || field == 'globalCustomNotification' || field == 'forceClose' || field == 'customLocalization'){
+                    if (field == 'canDismiss' || field == 'globalCustomNotification' || field == 'forceClose' || field == 'customLocalization' || field == 'showCloseAllBtn'){
                         const fieldVal = e.target.checked
                         if(field == 'customLocalization' && e.target.checked){
                             return this.setState((prevState, props) => {
@@ -187,6 +188,7 @@
                 const {createNotification} = this.props;
                 const nProps = Object.assign({}, this.state);
                 delete nProps['localization']
+                delete nProps['showCloseAllBtn']
                 createNotification(nProps);
             }
 
@@ -197,7 +199,8 @@
                     position: this.state.position,
                     forceClose: this.state.forceClose,
                     customStyles: customNotifyStyles,
-                    localization: this.state.customLocalization ? this.state.localization : undefined
+                    localization: this.state.customLocalization ? this.state.localization : undefined,
+                    showCloseAllBtn: this.state.showCloseAllBtn
                 }
                 
                 return (
@@ -244,7 +247,10 @@
                             <input type="checkbox" defaultChecked={false} onChange={this.handleFieldChange('customStyles')} />
 
                             <label><strong>Force Close Notifications: </strong></label>
-                            <input type="checkbox" defaultChecked={this.state.forceClose} onChange={this.handleFieldChange('forceClose')} />                                                                                    
+                            <input type="checkbox" defaultChecked={this.state.forceClose} onChange={this.handleFieldChange('forceClose')} />   
+                            
+                            <label><strong>Show Close All Button: </strong></label>
+                            <input type="checkbox" defaultChecked={this.state.showCloseAllBtn} onChange={this.handleFieldChange('showCloseAllBtn')} />                               
                             
 
                             <div style={{paddingTop:'10px'}}>
