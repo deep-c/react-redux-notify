@@ -140,9 +140,9 @@ describe('Notification', () => {
     const acceptBtn = buttons.first();
     const denyBtn = buttons.last();
     acceptBtn.simulate('click');
-    expect(acceptBtnHandler).toBeCalledWith(undefined, tProps);
+    expect(acceptBtnHandler).toBeCalledWith(undefined, { ...tProps, showCloseAllBtn: true });
     denyBtn.simulate('click');
-    expect(denyBtnHandler).toBeCalledWith(undefined, tProps);
+    expect(denyBtnHandler).toBeCalledWith(undefined, { ...tProps, showCloseAllBtn: true });
   });
 
   it('calls handleDismiss onclick', () => {

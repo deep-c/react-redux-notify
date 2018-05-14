@@ -31,6 +31,7 @@ export class Notify extends React.PureComponent {
       denyBtnText: PropTypes.string,
     }),
     node: PropTypes.any,
+    showCloseAllBtn: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -47,6 +48,7 @@ export class Notify extends React.PureComponent {
       acceptBtnText: 'Accept',
       denyBtnText: 'Deny',
     },
+    showCloseAllBtn: true,
   };
 
   constructor(props) {
@@ -84,6 +86,7 @@ export class Notify extends React.PureComponent {
       transitionDurations,
       position,
       localization,
+      showCloseAllBtn,
     } = this.props;
     const notificationsContainerClass = this._getStyle(`container${position}`);
 
@@ -106,6 +109,7 @@ export class Notify extends React.PureComponent {
               <NewNotification
                 key={notification.id}
                 localization={localization}
+                showCloseAllBtn={showCloseAllBtn}
                 {...notification}
                 isFirst={i === 0 && notifications.length > 1}
                 handleDismiss={this.handleDismiss}

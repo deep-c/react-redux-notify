@@ -30,12 +30,14 @@ export class Notification extends React.PureComponent {
       acceptBtnText: PropTypes.string.isRequired,
       denyBtnText: PropTypes.string.isRequired,
     }),
+    showCloseAllBtn: PropTypes.bool,
   };
 
   static defaultProps = {
     canDismiss: true,
     customStyles: {},
     duration: 0,
+    showCloseAllBtn: true,
   };
 
   componentDidMount() {
@@ -65,13 +67,14 @@ export class Notification extends React.PureComponent {
       customStyles,
       id,
       localization,
+      showCloseAllBtn,
     } = this.props;
     const cx = classNames.bind(Object.assign({}, styles, customStyles));
     const containerTypeClass = cx({
       'has-close': !isFirst && canDismiss,
       'no-close': !isFirst && !canDismiss,
-      'has-close-all': isFirst && canDismiss,
-      'has-close-all--noDismiss': isFirst && !canDismiss,
+      'has-close-all': isFirst && canDismiss && showCloseAllBtn,
+      'has-close-all--noDismiss': isFirst && !canDismiss && showCloseAllBtn,
       [`notification--${type.toLowerCase()}`]: true,
     });
 
@@ -129,7 +132,7 @@ export class Notification extends React.PureComponent {
         ) : (
           false
         )}
-        {isFirst && canDismiss ? (
+        {isFirst && canDismiss && showCloseAllBtn ? (
           <div
             className={this._getStyle('close-all')}
             onClick={() => handleDismissAll()}
