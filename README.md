@@ -99,6 +99,7 @@ There are a number of options that can be used to change the look and behaviour 
 | forceClose | `boolean` | 'false' |  | If set to true will remove all notifications regardless of the notification's `canDismiss` value.
 | localization | `object` | `{ closeAllBtnText: 'Close All', acceptBtnText: 'Accept', denyBtnText: 'Deny' }` |  | Text that shows for the mentioned buttons.
 | node | `domNode` | `document.createElement('div')` appended to document.body |  | The portal node into which the notification component will get rendered into.
+| showCloseAllBtn | `boolean` | 'true' |  | If set to false the first notification wont ever show the 'Close All' btn.
 
 #### Notify Component Styles
 This is the default style mapping created. You can choose to override these with your own classes using the `customStyles` prop explained above. You can view what these CSS classes do by default in the `src/components/Notify/` folder for `react-redux-notify` in the `node_modules` directory.
@@ -157,6 +158,7 @@ The default notification component has the following configuration options which
 | isFirst | `boolean` | false | No | Indicates whether the notification is the first.
 | handleDismiss | `function` | bound to `removeNotification`  | No | A function bound to `removeNotification` that is used to dismiss a notification.
 | handleDismissAll | `function` | bound to `removeAllNotifications`  | No | A function bound to `removeAllNotifications` that is used to dismiss all notifications.
+| showCloseAllBtn | `boolean` | 'true' |  | If set to false this notification specifically wont ever show the 'Close All' btn.
 
 #### Notification Component Styles
 This is the default style mapping created. You can choose to override these with your own classes using the `customStyles` prop explained above. You can view what these CSS classes do by default in the `src/components/Notification/` folder for `react-redux-notify` in the `node_modules` directory.
