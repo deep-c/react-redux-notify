@@ -28,6 +28,71 @@ exports[`Notify renders custom notifications 1`] = `
 </div>
 `;
 
+exports[`Notify renders first notification with closeAll if showCloseAllBtn is true 1`] = `
+<div
+  className="containerTopRight"
+>
+  <div
+    className="wrapper"
+  >
+    <div
+      className="has-close-all notification--success"
+    >
+      <span
+        className="icon"
+      >
+        <i
+          className="fa fa-check"
+        />
+      </span>
+      <div
+        className="content"
+      >
+        <div
+          className="item__message"
+        >
+          Notification 1!
+        </div>
+      </div>
+      <div
+        className="close"
+        onClick={[Function]}
+      />
+      <div
+        className="close-all"
+        onClick={[Function]}
+      >
+        Close All
+      </div>
+    </div>
+    <div
+      className="has-close notification--info"
+    >
+      <span
+        className="icon"
+      >
+        <i
+          className="fa fa-check"
+        />
+      </span>
+      <div
+        className="content"
+      >
+        <div
+          className="item__message"
+        >
+          Notification 2!
+        </div>
+      </div>
+      <div
+        className="close"
+        onClick={[Function]}
+      />
+    </div>
+  </div>
+</div>
+`;
+
 exports[`Notify renders first notification without closeAll if showCloseAllBtn is false 1`] = `
 <div
   className="containerTopRight"
