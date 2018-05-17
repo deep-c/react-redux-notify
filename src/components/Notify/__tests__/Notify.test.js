@@ -58,6 +58,28 @@ describe('Notify', () => {
     expect(component).toMatchSnapshot();
   });
 
+  it('renders first notification without closeAll if showCloseAllBtn is false', () => {
+    const tProps = {
+      ...props,
+      notifications: [notification1, notification2],
+      showCloseAllBtn: false,
+    };
+    const component = mount(<Notify {...tProps} />);
+    expect(component).toMatchSnapshot();
+    expect(component.find('.close-all')).toHaveLength(0);
+  });
+
+  it('renders first notification with closeAll if showCloseAllBtn is true', () => {
+    const tProps = {
+      ...props,
+      notifications: [notification1, notification2],
+      showCloseAllBtn: true,
+    };
+    const component = mount(<Notify {...tProps} />);
+    expect(component).toMatchSnapshot();
+    expect(component.find('.close-all')).toHaveLength(1);
+  });
+
   it('renders custom notifications', () => {
     const MyCustomNotificationComponent = ({
       message,
