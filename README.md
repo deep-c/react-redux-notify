@@ -20,9 +20,10 @@ npm install react-redux-notify --save
 
 After which you can import the component and the default styles for use:
 ```javascript
-import Notify from 'react-redux-notify';
 import 'react-redux-notify/dist/ReactReduxNotify.css';
 ```
+
+The styles only need to imported once into your project, usually at the highest level component in which you wish to use Notify.
 
 You can also use the standalone build by including the following css and js files (both minified and unminified exist). You will need to ensure that you have **react**, **redux**, **react-redux** dependecies also included externally.
 ```javascript
@@ -34,7 +35,7 @@ You can also use the standalone build by including the following css and js file
 An example can be seen by opening the `examples/index.html` file in your browser.
 
 ## Usage
-Import the reducer and add it to your redux store as key `notifications`.
+Import the reducer, which is the default export from the library, and add it to your redux store as key `notifications`.
 ```javascript
 import notifyReducer from 'react-redux-notify';
 
@@ -43,7 +44,7 @@ const store = createStore(reducers);
 ```
 Add the Notify component to your application. There are a number of props you can pass into the `Notify` component that allow you to customize it (see Options below).
 ```javascript
-import {Notify} from 'react-redux-notify';
+import { Notify } from 'react-redux-notify';
 
 <Notify />
 ```
