@@ -35,6 +35,7 @@ export class Notify extends React.PureComponent {
   };
 
   static defaultProps = {
+    notifications: [],
     notificationComponent: Notification,
     transitionDurations: {
       enter: 160,
