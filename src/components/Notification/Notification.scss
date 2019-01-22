@@ -148,12 +148,23 @@ $max-height: 150px;
   &:hover, &:focus {
     opacity: 1;
   }
+  &:before, &:after {
+    position: absolute;
+    left: 18px;
+    top: 10px;
+    content: ' ';
+    height: 14px;
+    width: 2px;
+    background-color: currentColor;
+  }
   &:active {
     opacity: .2;
   }
   &:before {
-    content: "\274C";
-    margin: 0;
+    transform: rotate(45deg);
+  }
+  &:after {
+    transform: rotate(-45deg);
   }
 }
 
