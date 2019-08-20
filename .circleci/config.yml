@@ -22,7 +22,6 @@ jobs:
           name: Deploying
           command: |
             npm install
-            echo -e "$NPM_USER\n$NPM_PASS\n$NPM_EMAIL" | npm login 
             npm run deploy          
 workflows:
   version: 2
