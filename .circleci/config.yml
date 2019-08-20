@@ -22,6 +22,7 @@ jobs:
           name: Deploying
           command: |
             npm install
+            npm config set '//registry.npmjs.org/:_authToken' "${NPM_TOKEN}"
             npm run deploy          
 workflows:
   version: 2
