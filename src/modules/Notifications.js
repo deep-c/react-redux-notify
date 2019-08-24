@@ -16,8 +16,8 @@ export function createNotification(notification) {
   return {
     type: ADD_NOTIFICATION,
     notification: {
+      id: parseInt(Math.random().toString().split('.')[1], 10),
       ...notification,
-      id: Date.now(),
     },
   };
 }

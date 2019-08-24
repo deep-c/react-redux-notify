@@ -22,7 +22,7 @@ jobs:
           name: Deploying
           command: |
             npm install
-            echo -e "$NPM_USER\n$NPM_PASS\n$NPM_EMAIL" | npm login 
+            npm config set '//registry.npmjs.org/:_authToken' "${NPM_TOKEN}"
             npm run deploy          
 workflows:
   version: 2

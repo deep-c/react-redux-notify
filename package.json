@@ -1,6 +1,6 @@
 {
   "name": "react-redux-notify",
-  "version": "4.1.1",
+  "version": "4.2.0",
   "description": "A simple notifications component built for use with React and Redux.",
   "main": "./lib/index.js",
   "files": [
@@ -62,7 +62,7 @@
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "enzyme-to-json": "^3.3.0",
-    "eslint": "^3.5.0",
+    "eslint": "^4.18.2",
     "eslint-config-airbnb-base": "^7.1.0",
     "eslint-import-resolver-webpack": "^0.5.1",
     "eslint-plugin-import": "^1.14.0",
@@ -84,7 +84,6 @@
     "rimraf": "^2.5.4",
     "sass-loader": "^4.0.1",
     "style-loader": "^0.13.1",
-    "timekeeper": "^0.1.1",
     "webpack": "^1.13.2"
   },
   "dependencies": {

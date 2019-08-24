@@ -11,7 +11,6 @@ import reducer, {
   REMOVE_NOTIFICATION,
   REMOVE_ALL_NOTIFICATIONS,
 } from 'modules/Notifications';
-import TimeKeeper from 'timekeeper';
 
 describe('actions', () => {
   it('should create an action to remove a notification', () => {
@@ -39,8 +38,6 @@ describe('actions', () => {
   });
 
   it('should create an action to create a new notification', () => {
-    const time = Date.now();
-    TimeKeeper.freeze(time);
     const config = {
       message: 'Testing, testing 1, 2, 3',
       type: NOTIFICATION_TYPE_SUCCESS,
@@ -53,7 +50,6 @@ describe('actions', () => {
     const expectedAction = {
       type: ADD_NOTIFICATION,
       notification: {
-        id: time,
         message: config.message,
         type: config.type,
         duration: config.duration,
@@ -63,8 +59,12 @@ describe('actions', () => {
         customComponent: config.customComponent,
       },
     };
-    expect(createNotification(config)).toEqual(expectedAction);
-    TimeKeeper.reset();
+    const action = createNotification(config);
+    expect(action).toMatchObject(expectedAction);
+    expect(action.notification.id).toEqual(expect.any(Number));
+    // make sure its an integer
+    expect(Math.trunc(action.notification.id))
+    .toEqual(action.notification.id);
   });
 });
 
