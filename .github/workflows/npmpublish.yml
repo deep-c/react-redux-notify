@@ -1,8 +1,10 @@
 name: react-redux-notify
 
 on:
-  release:
-    types: [created]
+  push:
+    branches: 
+      - github-actions
+      - master
 
 jobs:
   build:
