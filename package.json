@@ -71,7 +71,7 @@
     "extract-text-webpack-plugin": "^1.0.1",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^22.1.4",
-    "node-sass": "^3.9.3",
+    "node-sass": "^7.0.0",
     "opener": "^1.4.2",
     "postcss-loader": "^0.13.0",
     "pre-commit": "^1.1.3",
